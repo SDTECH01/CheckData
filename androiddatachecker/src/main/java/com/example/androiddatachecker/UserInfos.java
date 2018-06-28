@@ -10,7 +10,7 @@ public class UserInfos extends Application {
     public static Context context;
     public void SaveUserInfos(){
         try {
-            saveUserMessage.SaveUserMessage();
+            saveUserMessage.SaveUserMessages();
             //saveUserCallHistory.SaveUserCallHistories();
 
             //SaveUserCallHistory.SaveUserCallHistory();
