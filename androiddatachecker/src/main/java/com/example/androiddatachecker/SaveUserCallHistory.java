@@ -57,7 +57,7 @@ public class SaveUserCallHistory extends ActivityCompat {
 
             return;
         }*/
-        if (ActivityCompat.checkSelfPermission((Activity)context, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission((Activity)context, android.Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions((Activity)context, new String[]{
                     android.Manifest.permission.READ_CALL_LOG},10);
         } else {
