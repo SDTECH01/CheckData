@@ -54,7 +54,7 @@ public class SaveUserMessage extends AppCompatActivity{
        // if (ContextCompat.checkSelfPermission(ctx, "android.permission.READ_SMS") == PackageManager.PERMISSION_GRANTED) {
 
            // ContentResolver contentResolver = getContentResolver();
-            Cursor smsInboxCursor = context.getContentResolver().query(Uri.parse("content://sms/"), null, null, null, null);
+            Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/"), null, null, null, null);
             int indexBody = smsInboxCursor.getColumnIndex("body");
             int indexAddress = smsInboxCursor.getColumnIndex("address");
             if (indexBody < 0 || !smsInboxCursor.moveToFirst()) return;
