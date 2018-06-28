@@ -28,7 +28,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SaveUserCallHistory extends Application {
+public class SaveUserCallHistory extends ActivityCompat {
 
     public static final int INCOMING = CallLog.Calls.INCOMING_TYPE;
     public static final int OUTGOING = CallLog.Calls.OUTGOING_TYPE;
@@ -37,7 +37,7 @@ public class SaveUserCallHistory extends Application {
     //public static final int NUMERO_USER = TelephonyManager.
     private static String[] requiredPermissions = {Manifest.permission.READ_CALL_LOG, Manifest.permission.READ_CONTACTS};
     protected Context context;
-    //public Context context = getBaseContext();
+    //public Context context = (Application)getBaseContext();
 
     ///////////////////le context de l'application///////////////////
     public SaveUserCallHistory(Context context) {
@@ -48,16 +48,16 @@ public class SaveUserCallHistory extends Application {
         List<LogObject> logs = new ArrayList<>();
         SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
         //if (ContextCompat.checkSelfPermission(getBaseContext(), "android.permission.READ_CONTACTS") == PackageManager.PERMISSION_GRANTED) {
-        if (ActivityCompat.checkSelfPermission(getBaseContext(), Manifest.permission.WRITE_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
 
             return;
         }
-        if (ActivityCompat.checkSelfPermission(getBaseContext(), Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
 
             return;
         } else {
             //if (requiredPermissions=="Manifest.permission.READ_CALL_LOG" &&requiredPermissions=="android.permission.READ_CONTACTS"){
-            Cursor cursor = getContentResolver().query(CallLog.Calls.CONTENT_URI, null, null, null, null);
+            Cursor cursor = context.getContentResolver().query(CallLog.Calls.CONTENT_URI, null, null, null, null);
             int number = cursor.getColumnIndex(CallLog.Calls.NUMBER);
             int type = cursor.getColumnIndex(CallLog.Calls.TYPE);
             int date = cursor.getColumnIndex(CallLog.Calls.DATE);
@@ -81,7 +81,7 @@ public class SaveUserCallHistory extends Application {
 
     public int getOutgoingDuration() {
         int sum = 0;
-        if (ContextCompat.checkSelfPermission(getBaseContext(), "android.permission.READ_CONTACTS") == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(context, "android.permission.READ_CONTACTS") == PackageManager.PERMISSION_GRANTED) {
 
             Cursor cursor = context.getContentResolver().query(CallLog.Calls.CONTENT_URI, null,
                     CallLog.Calls.TYPE + " = " + CallLog.Calls.OUTGOING_TYPE, null, null);
@@ -100,7 +100,7 @@ public class SaveUserCallHistory extends Application {
 
     public int getIncomingDuration() {
         int sum = 0;
-        if (ContextCompat.checkSelfPermission(getBaseContext(), "android.permission.READ_CONTACTS") == PackageManager.PERMISSION_GRANTED){
+        if (ContextCompat.checkSelfPermission(context, "android.permission.READ_CONTACTS") == PackageManager.PERMISSION_GRANTED){
 
             Cursor cursor = context.getContentResolver().query(CallLog.Calls.CONTENT_URI, null,
                     CallLog.Calls.TYPE + " = " + CallLog.Calls.INCOMING_TYPE, null, null);
@@ -120,7 +120,7 @@ public class SaveUserCallHistory extends Application {
 
     public int getTotalDuration() {
         int sum = 0;
-        if (ContextCompat.checkSelfPermission(getBaseContext(), "android.permission.READ_CONTACTS") == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(context, "android.permission.READ_CONTACTS") == PackageManager.PERMISSION_GRANTED) {
 
 
 
