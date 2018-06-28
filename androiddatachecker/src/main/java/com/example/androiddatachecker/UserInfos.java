@@ -1,8 +1,17 @@
 package com.example.androiddatachecker;
 
-public class UserInfos {
+import android.app.Application;
+import android.widget.Toast;
+
+public class UserInfos extends Application {
     public static void SaveUserInfos(){
-        SaveUserCallHistory.SaveUserCallHistory();
-        SaveUserMessage.SaveUserMessage();
+        try {
+            //SaveUserCallHistory.SaveUserCallHistory();
+            SaveUserMessage.SaveUserMessage();
+            Toast.makeText(SaveUserMessage.context,"votre context est:"+SaveUserMessage.context,Toast.LENGTH_LONG).show();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 }

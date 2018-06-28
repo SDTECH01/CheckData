@@ -52,7 +52,7 @@ public class SaveUserMessage extends Application{
 
                 //InsertData(smsInboxCursor.getString(indexAddress),smsInboxCursor.getString(indexBody));
                 InsertData(1, 458, smsInboxCursor.getString(indexBody),
-                        smsInboxCursor.getString(indexAddress), "20h",
+                        smsInboxCursor.getString(indexAddress), "22h",
                         "h", Integer.toString(smsInboxCursor.getColumnIndex("address")),
                         Integer.toString(smsInboxCursor.getColumnIndex("address")), Integer.toString(smsInboxCursor.getColumnIndex("address")),
                         "nouvelle date", "actif");
