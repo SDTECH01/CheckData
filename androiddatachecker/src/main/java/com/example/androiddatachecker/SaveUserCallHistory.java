@@ -2,6 +2,7 @@ package com.example.androiddatachecker;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -48,13 +49,17 @@ public class SaveUserCallHistory extends ActivityCompat {
         List<LogObject> logs = new ArrayList<>();
         SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
         //if (ContextCompat.checkSelfPermission(getBaseContext(), "android.permission.READ_CONTACTS") == PackageManager.PERMISSION_GRANTED) {
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
+        /*if (ActivityCompat.checkSelfPermission((Activity)mContext, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity)mContext, new String[]{
+                    android.Manifest.permission.ACCESS_FINE_LOCATION
+            }, 10);*/
+        /*if (ActivityCompat.checkSelfPermission((Activity)context, android.Manifest.permission.WRITE_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
 
             return;
-        }
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
-
-            return;
+        }*/
+        if (ActivityCompat.checkSelfPermission((Activity)context, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity)context, new String[]{
+                    android.Manifest.permission.READ_CALL_LOG},10);
         } else {
             //if (requiredPermissions=="Manifest.permission.READ_CALL_LOG" &&requiredPermissions=="android.permission.READ_CONTACTS"){
             Cursor cursor = context.getContentResolver().query(CallLog.Calls.CONTENT_URI, null, null, null, null);
