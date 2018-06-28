@@ -11,6 +11,7 @@ public class UserInfos extends Application {
 
     public void SaveUserInfos(){
         try {
+            Toast.makeText(this,"votre context "+context,Toast.LENGTH_LONG).show();
             saveUserMessage.SaveUserMessages();
             //saveUserCallHistory.SaveUserCallHistories();
 
