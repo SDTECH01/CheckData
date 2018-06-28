@@ -5,18 +5,21 @@ import android.content.Context;
 import android.widget.Toast;
 
 public class UserInfos extends Application {
+    SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
+
     public static Context context;
-    public static void SaveUserInfos(){
+    public void SaveUserInfos(){
         try {
-            SaveUserCallHistory.SaveUserCallHistory();
+            saveUserCallHistory.SaveUserCallHistories();
+            //SaveUserCallHistory.SaveUserCallHistory();
             //SaveUserMessage.SaveUserMessage();
             //Toast.makeText(context,"votre context est:"+SaveUserMessage.context,Toast.LENGTH_LONG).show();
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
     public void Envoi(){
-        SaveUserCallHistory.SaveUserCallHistory();
+
     }
+
 }

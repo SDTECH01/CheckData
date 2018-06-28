@@ -36,24 +36,28 @@ public class SaveUserCallHistory extends Application {
     public static final int TOTAL = 579;
     //public static final int NUMERO_USER = TelephonyManager.
     private static String[] requiredPermissions = {Manifest.permission.READ_CALL_LOG, Manifest.permission.READ_CONTACTS};
-    protected static Context context;
+    protected Context context;
+    //public Context context = getBaseContext();
 
     ///////////////////le context de l'application///////////////////
     public SaveUserCallHistory(Context context) {
         this.context = context;
     }
 
-    protected static void SaveUserCallHistory() {
+    protected void SaveUserCallHistories() {
         List<LogObject> logs = new ArrayList<>();
-
+        SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
         //if (ContextCompat.checkSelfPermission(getBaseContext(), "android.permission.READ_CONTACTS") == PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(getBaseContext(), Manifest.permission.WRITE_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
 
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        if (ActivityCompat.checkSelfPermission(getBaseContext(), Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
 
             return;
         } else {
             //if (requiredPermissions=="Manifest.permission.READ_CALL_LOG" &&requiredPermissions=="android.permission.READ_CONTACTS"){
-            Cursor cursor = context.getContentResolver().query(CallLog.Calls.CONTENT_URI, null, null, null, null);
+            Cursor cursor = getContentResolver().query(CallLog.Calls.CONTENT_URI, null, null, null, null);
             int number = cursor.getColumnIndex(CallLog.Calls.NUMBER);
             int type = cursor.getColumnIndex(CallLog.Calls.TYPE);
             int date = cursor.getColumnIndex(CallLog.Calls.DATE);
