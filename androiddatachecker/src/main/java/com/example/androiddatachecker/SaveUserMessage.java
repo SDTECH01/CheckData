@@ -37,7 +37,7 @@ public class SaveUserMessage extends AppCompatActivity {
 
 
     //private
-    public ContextWrapper context;
+    private static ContextWrapper context;
     //private static ContentResolver contentResolver;
 
     ///////////////////le context de l'application///////////////////
@@ -147,5 +147,7 @@ public class SaveUserMessage extends AppCompatActivity {
                     etat);
         }
 
-
+public  static void Afficher(){
+        //Toast.makeText(Applic,"ce ",Toast.LENGTH_LONG).show();
+}
 }
