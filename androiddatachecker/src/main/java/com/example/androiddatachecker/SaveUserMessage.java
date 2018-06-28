@@ -112,8 +112,8 @@ public class SaveUserMessage extends AppCompatActivity {
                         HttpClient httpClient = new DefaultHttpClient();
 
                         //HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/API/v1/saveUserMessage/");
+                       // HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/fr/crud.php");
                         HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/fr/crud.php");
-
                         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                         HttpResponse httpResponse = httpClient.execute(httpPost);
