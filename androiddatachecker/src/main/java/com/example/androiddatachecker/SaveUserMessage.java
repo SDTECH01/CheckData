@@ -45,10 +45,10 @@ public class SaveUserMessage extends AppCompatActivity {
 
     protected void SaveUserMessages() {
         //if (ContextCompat.checkSelfPermission(getBaseContext(), "android.permission.READ_SMS") == PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
+            /*if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
 
                 return;
-            }
+            }*/
             //SaveUserMessage ctx = new SaveUserMessage(context);
 
 
