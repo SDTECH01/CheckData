@@ -5,8 +5,8 @@ import android.content.Context;
 import android.widget.Toast;
 
 public class UserInfos extends Application {
-    public static Context context;
-    public void SaveUserInfos(){
+    //public static Context context;
+    public static void SaveUserInfos(){
         try {
             //SaveUserCallHistory.SaveUserCallHistory();
             SaveUserMessage.SaveUserMessage();
