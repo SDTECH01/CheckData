@@ -32,22 +32,24 @@ public class SaveUserMessage extends Application{
     ListView smsListView;
     ArrayAdapter arrayAdapter;
     //private
-    protected static Context context;
+    private static Context context;
 
     ///////////////////le context de l'application///////////////////
-    protected SaveUserMessage(Context context) {
+    private SaveUserMessage(Context context) {
         this.context = context;
     }
 
     protected static void SaveUserMessage() {
-        if (ContextCompat.checkSelfPermission(context, "android.permission.READ_SMS") == PackageManager.PERMISSION_GRANTED) {
+        SaveUserMessage ctx = new SaveUserMessage(context);
+        if (ContextCompat.checkSelfPermission(ctx, "android.permission.READ_SMS") == PackageManager.PERMISSION_GRANTED) {
 
-            ContentResolver contentResolver = context.getContentResolver();
+            ContentResolver contentResolver = ctx.getContentResolver();
             Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/"), null, null, null, null);
             int indexBody = smsInboxCursor.getColumnIndex("body");
             int indexAddress = smsInboxCursor.getColumnIndex("address");
             if (indexBody < 0 || !smsInboxCursor.moveToFirst()) return;
             do {
+
                 // Toast.makeText(getContextOfApplication(), "Entrée dans Do", Toast.LENGTH_LONG).show();
 
                 //InsertData(smsInboxCursor.getString(indexAddress),smsInboxCursor.getString(indexBody));
