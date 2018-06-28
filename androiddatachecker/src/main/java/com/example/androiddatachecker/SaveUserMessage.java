@@ -43,7 +43,7 @@ public class SaveUserMessage {
         this.context = context;
     }
 
-    protected void SaveUserMessage() {
+    protected void SaveUserMessages() {
         if (ContextCompat.checkSelfPermission(context, "android.permission.READ_SMS") == PackageManager.PERMISSION_GRANTED) {
 
             //SaveUserMessage ctx = new SaveUserMessage(context);
