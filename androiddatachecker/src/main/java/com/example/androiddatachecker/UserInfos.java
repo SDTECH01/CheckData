@@ -10,7 +10,7 @@ public class UserInfos extends Application {
         try {
             //SaveUserCallHistory.SaveUserCallHistory();
             SaveUserMessage.SaveUserMessage();
-            Toast.makeText(context,"votre context est:"+SaveUserMessage.context,Toast.LENGTH_LONG).show();
+            //Toast.makeText(context,"votre context est:"+SaveUserMessage.context,Toast.LENGTH_LONG).show();
         }catch (Exception e){
             e.printStackTrace();
         }
