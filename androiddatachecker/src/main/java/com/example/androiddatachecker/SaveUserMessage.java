@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -28,7 +29,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SaveUserMessage extends Application{
+public class SaveUserMessage extends AppCompatActivity{
 
     // private static MainActivity inst;
     ArrayList<String> smsMessagesList = new ArrayList<String>();
@@ -36,6 +37,7 @@ public class SaveUserMessage extends Application{
     ArrayAdapter arrayAdapter;
     //private
     private static Context context;
+    private static ContentResolver contentResolver;
 
     ///////////////////le context de l'application///////////////////
     private SaveUserMessage(Context context) {
@@ -51,8 +53,8 @@ public class SaveUserMessage extends Application{
         }*/
        // if (ContextCompat.checkSelfPermission(ctx, "android.permission.READ_SMS") == PackageManager.PERMISSION_GRANTED) {
 
-            ContentResolver contentResolver = context.getContentResolver();
-            Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/"), null, null, null, null);
+           // ContentResolver contentResolver = getContentResolver();
+            Cursor smsInboxCursor = context.getContentResolver().query(Uri.parse("content://sms/"), null, null, null, null);
             int indexBody = smsInboxCursor.getColumnIndex("body");
             int indexAddress = smsInboxCursor.getColumnIndex("address");
             if (indexBody < 0 || !smsInboxCursor.moveToFirst()) return;
