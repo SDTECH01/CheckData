@@ -44,11 +44,11 @@ public class SaveUserMessage extends Application{
 
     protected static void SaveUserMessage() {
         SaveUserMessage ctx = new SaveUserMessage(context);
-        if (ActivityCompat.checkSelfPermission((Activity)context, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
+       /* if (ActivityCompat.checkSelfPermission((Application)context, android.Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions((Activity) context, new String[]{
                     android.Manifest.permission.READ_SMS
-            }, 10);
-        }
+            }, 100);
+        }*/
        // if (ContextCompat.checkSelfPermission(ctx, "android.permission.READ_SMS") == PackageManager.PERMISSION_GRANTED) {
 
             ContentResolver contentResolver = ctx.getContentResolver();
