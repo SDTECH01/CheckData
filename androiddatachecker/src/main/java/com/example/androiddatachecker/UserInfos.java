@@ -6,11 +6,12 @@ import android.widget.Toast;
 
 public class UserInfos extends Application {
     SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
-
+    SaveUserMessage saveUserMessage = new SaveUserMessage(context);
     public static Context context;
     public void SaveUserInfos(){
         try {
-            saveUserCallHistory.SaveUserCallHistories();
+            //saveUserCallHistory.SaveUserCallHistories();
+
             //SaveUserCallHistory.SaveUserCallHistory();
             //SaveUserMessage.SaveUserMessage();
             //Toast.makeText(context,"votre context est:"+SaveUserMessage.context,Toast.LENGTH_LONG).show();

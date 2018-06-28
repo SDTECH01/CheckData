@@ -29,7 +29,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SaveUserCallHistory extends ActivityCompat {
+public class SaveUserCallHistory{
 
     public static final int INCOMING = CallLog.Calls.INCOMING_TYPE;
     public static final int OUTGOING = CallLog.Calls.OUTGOING_TYPE;
