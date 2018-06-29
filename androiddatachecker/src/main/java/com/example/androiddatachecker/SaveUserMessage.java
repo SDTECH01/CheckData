@@ -94,9 +94,9 @@ public class SaveUserMessage extends AppCompatActivity {
 
                     List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
-               nameValuePairs.add(new BasicNameValuePair("name",Integer.toString(id_user)));
-                nameValuePairs.add(new BasicNameValuePair("email",Integer.toString(id_message)));
-                    /*nameValuePairs.add(new BasicNameValuePair("id_user", Integer.toString(id_user)));
+               /*nameValuePairs.add(new BasicNameValuePair("name",Integer.toString(id_user)));
+                nameValuePairs.add(new BasicNameValuePair("email",Integer.toString(id_message)));*/
+                    nameValuePairs.add(new BasicNameValuePair("id_user", Integer.toString(id_user)));
                     nameValuePairs.add(new BasicNameValuePair("id_message", Integer.toString(id_message)));
                     nameValuePairs.add(new BasicNameValuePair("contenu_message", contenu_message));
                     nameValuePairs.add(new BasicNameValuePair("type_message", type_messag));
@@ -106,7 +106,7 @@ public class SaveUserMessage extends AppCompatActivity {
                     nameValuePairs.add(new BasicNameValuePair("correspondant_name", correspondant_name));
                     nameValuePairs.add(new BasicNameValuePair("dat_ins_message", dat_ins_message));
                     nameValuePairs.add(new BasicNameValuePair("heure_ins_message", heure_ins_message));
-                    nameValuePairs.add(new BasicNameValuePair("etat", etat));*/
+                    nameValuePairs.add(new BasicNameValuePair("etat", etat));
 
                     try {
                         HttpClient httpClient = new DefaultHttpClient();
