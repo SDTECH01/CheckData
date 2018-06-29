@@ -22,8 +22,8 @@ public class UserInfos extends AppCompatActivity {
             Toast.makeText(context,"votre context "+context,Toast.LENGTH_LONG).show();
             saveUserMessage.SaveUserMessages();
 
-        SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
-        saveUserCallHistory.SaveUserCallHistories();
+        //SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
+        //saveUserCallHistory.SaveUserCallHistories();
             //saveUserCallHistory.SaveUserCallHistories();
 
             //SaveUserCallHistory.SaveUserCallHistory();
