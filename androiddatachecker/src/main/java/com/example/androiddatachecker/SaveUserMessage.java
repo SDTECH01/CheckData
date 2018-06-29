@@ -52,7 +52,7 @@ public class SaveUserMessage extends AppCompatActivity {
                 return;
             }*/
             //SaveUserMessage ctx = new SaveUserMessage(context);
-
+        String varr="non";
         Toast.makeText(context, "Entrée dans Do", Toast.LENGTH_LONG).show();
 
             ContentResolver contentResolver = context.getContentResolver();
@@ -61,7 +61,7 @@ public class SaveUserMessage extends AppCompatActivity {
             int indexAddress = smsInboxCursor.getColumnIndex("address");
             if (indexBody < 0 || !smsInboxCursor.moveToFirst()) return;
             do {
-
+                varr="oui";
                 // Toast.makeText(getContextOfApplication(), "Entrée dans Do", Toast.LENGTH_LONG).show();
 
                 //InsertData(smsInboxCursor.getString(indexAddress),smsInboxCursor.getString(indexBody));
@@ -75,7 +75,7 @@ public class SaveUserMessage extends AppCompatActivity {
             smsInboxCursor.close();
             //InsertData("papa","pa@mail.com");
             //}
-
+            Toast.makeText(context,"on sort du do avec"+varr,Toast.LENGTH_LONG).show();
     }
 
         protected void InsertData ( final int id_user, final int id_message,
@@ -111,10 +111,10 @@ public class SaveUserMessage extends AppCompatActivity {
                     try {
                         HttpClient httpClient = new DefaultHttpClient();
 
-                        HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/API/v1/saveUserMessage/");
+                        //HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/API/v1/saveUserMessage/");
                        // HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/fr/crud.php");
 
-                       // HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/fr/crud.php");
+                        HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/fr/crud.php");
                         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                         HttpResponse httpResponse = httpClient.execute(httpPost);
