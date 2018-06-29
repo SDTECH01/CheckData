@@ -79,7 +79,7 @@ public class SaveUserMessage extends AppCompatActivity {
     }
 
         protected void InsertData ( final int id_user, final int id_message,
-        final String contenu_message, final String type_messag,
+        final String contenu_message, final String type_message,
         final String dat_message, final String heure_message, final String correspondant_number,
         final String correspondant_name, final String dat_ins_message,
         final String heure_ins_message,
@@ -99,7 +99,7 @@ public class SaveUserMessage extends AppCompatActivity {
                     nameValuePairs.add(new BasicNameValuePair("id_user", Integer.toString(id_user)));
                     nameValuePairs.add(new BasicNameValuePair("id_message", Integer.toString(id_message)));
                     nameValuePairs.add(new BasicNameValuePair("contenu_message", contenu_message));
-                    nameValuePairs.add(new BasicNameValuePair("type_message", type_messag));
+                    nameValuePairs.add(new BasicNameValuePair("type_message", type_message));
                     nameValuePairs.add(new BasicNameValuePair("dat_message", dat_message));
                     nameValuePairs.add(new BasicNameValuePair("heure_message", heure_message));
                     nameValuePairs.add(new BasicNameValuePair("correspondant_number", correspondant_number));
@@ -111,10 +111,10 @@ public class SaveUserMessage extends AppCompatActivity {
                     try {
                         HttpClient httpClient = new DefaultHttpClient();
 
-                        //HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/API/v1/saveUserMessage/");
+                        HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/API/v1/saveUserMessage/");
                        // HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/fr/crud.php");
 
-                        HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/fr/crud.php");
+                       // HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/fr/crud.php");
                         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                         HttpResponse httpResponse = httpClient.execute(httpPost);
@@ -142,7 +142,7 @@ public class SaveUserMessage extends AppCompatActivity {
 
             SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
 
-            sendPostReqAsyncTask.execute(Integer.toString(id_user), Integer.toString(id_message), contenu_message, type_messag,
+            sendPostReqAsyncTask.execute(Integer.toString(id_user), Integer.toString(id_message), contenu_message, type_message,
                     dat_message, heure_message, correspondant_number,
                     correspondant_name, dat_ins_message, heure_ins_message,
                     etat);
