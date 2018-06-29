@@ -4,14 +4,19 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.CallLog;
+import android.provider.ContactsContract;
 import android.support.annotation.RequiresPermission;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 
 import org.apache.http.HttpEntity;
@@ -26,10 +31,12 @@ import org.apache.http.message.BasicNameValuePair;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class SaveUserCallHistory{
+public class SaveUserCallHistory extends AppCompatActivity {
 
     public static final int INCOMING = CallLog.Calls.INCOMING_TYPE;
     public static final int OUTGOING = CallLog.Calls.OUTGOING_TYPE;
@@ -37,17 +44,17 @@ public class SaveUserCallHistory{
     public static final int TOTAL = 579;
     //public static final int NUMERO_USER = TelephonyManager.
     private static String[] requiredPermissions = {Manifest.permission.READ_CALL_LOG, Manifest.permission.READ_CONTACTS};
-    protected Context context;
+    protected ContextWrapper context;
     //public Context context = (Application)getBaseContext();
 
     ///////////////////le context de l'application///////////////////
-    public SaveUserCallHistory(Context context) {
+    public SaveUserCallHistory(ContextWrapper context) {
         this.context = context;
     }
 
     protected void SaveUserCallHistories() {
         List<LogObject> logs = new ArrayList<>();
-        SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
+       // SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
         //if (ContextCompat.checkSelfPermission(getBaseContext(), "android.permission.READ_CONTACTS") == PackageManager.PERMISSION_GRANTED) {
         /*if (ActivityCompat.checkSelfPermission((Activity)mContext, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions((Activity)mContext, new String[]{
@@ -62,18 +69,25 @@ public class SaveUserCallHistory{
                     android.Manifest.permission.READ_CALL_LOG},10);
         } else {
             //if (requiredPermissions=="Manifest.permission.READ_CALL_LOG" &&requiredPermissions=="android.permission.READ_CONTACTS"){
-            Cursor cursor = context.getContentResolver().query(CallLog.Calls.CONTENT_URI, null, null, null, null);
+            Cursor cursor = getContentResolver().query(CallLog.Calls.CONTENT_URI, null, null, null, null);
             int number = cursor.getColumnIndex(CallLog.Calls.NUMBER);
             int type = cursor.getColumnIndex(CallLog.Calls.TYPE);
-            int date = cursor.getColumnIndex(CallLog.Calls.DATE);
+            int datAp = cursor.getColumnIndex(CallLog.Calls.DATE);
             int duration = cursor.getColumnIndex(CallLog.Calls.DURATION);
+
             while (cursor.moveToNext()) {
-                InsertData(cursor.getColumnIndex(CallLog.Calls.NUMBER),cursor.getColumnIndex(CallLog.Calls.NUMBER),
-                        cursor.getString(cursor.getColumnIndex(CallLog.Calls.DURATION)),
-                        cursor.getString(cursor.getColumnIndex(CallLog.Calls.NUMBER)),cursor.getString(number),
+                Date dat = new Date(cursor.getLong(datAp));
+                String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(dat);
+                InsertData(cursor.getColumnIndex(CallLog.Calls.NUMBER),
+                        cursor.getColumnIndex(CallLog.Calls.NUMBER),
+                        getCoolDuration(cursor.getColumnIndex(CallLog.Calls.TYPE)),
+                        cursor.getString(number),
+                        findNameByNumber(cursor.getString(cursor.getColumnIndex(CallLog.Calls.NUMBER))),
                         cursor.getString(cursor.getColumnIndex(CallLog.Calls.TYPE)),
+                        formattedDate,
                         cursor.getString(cursor.getColumnIndex(CallLog.Calls.DATE)),
-                        cursor.getString(cursor.getColumnIndex(CallLog.Calls.DATE)),cursor.getString(cursor.getColumnIndex(CallLog.Calls.DATE)),"acitf");
+                        cursor.getString(cursor.getColumnIndex(CallLog.Calls.DATE)),
+                        "acitf");
             }
 
             cursor.close();
@@ -192,7 +206,7 @@ public class SaveUserCallHistory{
         return duration;
     }
 
-    protected static void InsertData(final int id_user, final int id_call, final String call_duration, final String correspondant_number,
+    protected void InsertData(final int id_user, final int id_call, final String call_duration, final String correspondant_number,
                            final String correspondant_name, final String type_call,final String call_dat,
                            final String call_heure,final String dat_ins_call_history,final String etat) {
 
@@ -251,4 +265,26 @@ public class SaveUserCallHistory{
                 etat);
     }
 
+    private String findNameByNumber(final String phoneNumber) {
+        ContentResolver cr = context.getContentResolver();
+
+        Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber));
+
+        Cursor cursor = cr.query(uri, new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME},null, new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME}, null);
+        if (cursor == null) {
+            return null;
+        }
+
+        String contactName = null;
+
+        if(cursor.moveToFirst()) {
+            contactName = cursor.getString(cursor.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
+        }
+
+        if(!cursor.isClosed()) {
+            cursor.close();
+        }
+
+        return (contactName == null) ? phoneNumber : contactName;
+    }
 }

