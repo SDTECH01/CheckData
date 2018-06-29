@@ -7,9 +7,9 @@ import android.content.ContextWrapper;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-public class UserInfos extends AppCompatActivity {
+public class SaveUserInfos extends AppCompatActivity {
     private ContextWrapper context;
-    public UserInfos(ContextWrapper context) {
+    public SaveUserInfos(ContextWrapper context) {
         this.context = context;
     }
 
@@ -32,11 +32,6 @@ public class UserInfos extends AppCompatActivity {
        /* }catch (Exception e){
             e.printStackTrace();
         }*/
-    }
-    static ContextWrapper contextWrappers;
-    public static void Envoi(){
-
-        System.out.println("hummmm"+contextWrappers);
     }
 
 }
