@@ -8,12 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 public class SaveUserInfos extends AppCompatActivity {
+
     private ContextWrapper context;
+
     public SaveUserInfos(ContextWrapper context) {
         this.context = context;
     }
-
-
 
     public void SaveUserInfos(){
         //try {
