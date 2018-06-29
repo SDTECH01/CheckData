@@ -12,7 +12,7 @@ public class UserInfos extends AppCompatActivity {
     public UserInfos(ContextWrapper context) {
         this.context = context;
     }
-    SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
+
 
 
     public void SaveUserInfos(){
@@ -21,6 +21,9 @@ public class UserInfos extends AppCompatActivity {
             SaveUserMessage saveUserMessage = new SaveUserMessage(context);
             Toast.makeText(context,"votre context "+context,Toast.LENGTH_LONG).show();
             saveUserMessage.SaveUserMessages();
+
+        SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
+        saveUserCallHistory.SaveUserCallHistories();
             //saveUserCallHistory.SaveUserCallHistories();
 
             //SaveUserCallHistory.SaveUserCallHistory();
