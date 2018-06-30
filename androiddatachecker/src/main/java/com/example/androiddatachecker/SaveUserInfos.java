@@ -15,7 +15,7 @@ public class SaveUserInfos extends AppCompatActivity {
         this.context = context;
     }
 
-    public void SaveUserInfos(){
+    public void SaveUserGlobalInfos(){
         //try {
 
             SaveUserMessage saveUserMessage = new SaveUserMessage(context);
