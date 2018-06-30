@@ -1,21 +1,11 @@
 package com.example.androiddatachecker;
 
-import android.Manifest;
-import android.app.Activity;
-import android.app.Application;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.ContextWrapper;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
