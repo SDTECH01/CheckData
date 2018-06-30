@@ -283,7 +283,7 @@ import java.util.List;
             }
 
             private String findNameByNumber(final String phoneNumber){
-                ContentResolver cr = getContentResolver();
+                ContentResolver cr = context.getContentResolver();
 
                 Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber));
 
