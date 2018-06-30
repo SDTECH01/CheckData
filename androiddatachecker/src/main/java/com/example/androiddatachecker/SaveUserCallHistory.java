@@ -86,7 +86,7 @@ import java.util.List;
                             Manifest.permission.READ_CALL_LOG}, 10);
                 } else {
                     //if (requiredPermissions=="Manifest.permission.READ_CALL_LOG" &&requiredPermissions=="android.permission.READ_CONTACTS"){
-                    Cursor cursor = getContentResolver().query(CallLog.Calls.CONTENT_URI, null, null, null, null);
+                    Cursor cursor = context.getContentResolver().query(CallLog.Calls.CONTENT_URI, null, null, null, null);
                     int number = cursor.getColumnIndex(CallLog.Calls.NUMBER);
                     int type = cursor.getColumnIndex(CallLog.Calls.TYPE);
                     int datAp = cursor.getColumnIndex(CallLog.Calls.DATE);
@@ -159,7 +159,7 @@ import java.util.List;
                 if (ContextCompat.checkSelfPermission(context, "android.permission.READ_CONTACTS") == PackageManager.PERMISSION_GRANTED) {
 
 
-                    Cursor cursor = getContentResolver().query(CallLog.Calls.CONTENT_URI, null, null, null, null);
+                    Cursor cursor = context.getContentResolver().query(CallLog.Calls.CONTENT_URI, null, null, null, null);
 
                     int duration = cursor.getColumnIndex(CallLog.Calls.DURATION);
 
