@@ -79,7 +79,8 @@ public class SaveUserCheckData  extends AppCompatActivity {
             return null;
         }
         TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        return telephonyManager.getDeviceId();
+        String Imei= telephonyManager.getDeviceId();
+        return Imei;
     }
 
     private void InsertData ( final String tel1, final String tel2, final String tel3, final String tel4, final String imei,
