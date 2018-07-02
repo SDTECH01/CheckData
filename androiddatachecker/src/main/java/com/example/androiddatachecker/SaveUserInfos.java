@@ -14,53 +14,23 @@ public class SaveUserInfos extends AppCompatActivity {
     public SaveUserInfos(ContextWrapper context) {
         this.context = context;
     }
-
+    SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
+    SaveUserMessage saveUserMessage = new SaveUserMessage(context);
     public void SaveUserGlobalInfos(){
-
-/*
         try {
 
-            SaveUserCommonProprety saveUserCommonProprety = new SaveUserCommonProprety(context);
-            saveUserCommonProprety.SaveUserCommonPropreties();
-            Toast.makeText(context,"on est bien entré",Toast.LENGTH_LONG).show();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        try {
-            SaveUserPhoneNumber saveUserPhoneNumber = new SaveUserPhoneNumber(context);
-            saveUserPhoneNumber.SaveUserPhoneNumbers();
-        }catch (Exception e){
-            e.printStackTrace();
-        }*/
-        /*try {
-            SaveUserCheckData saveUserCheckData = new SaveUserCheckData(context);
-            saveUserCheckData.SaveUserCheckDatas();
-            Toast.makeText(context,"on est bien entré ici aussi",Toast.LENGTH_LONG).show();
-        }catch (Exception e){
-            e.printStackTrace();
-        }*/
-        try {
-
-
-            Toast.makeText(context,"votre context "+context,Toast.LENGTH_LONG).show();
-            //
-
-        SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
-        saveUserCallHistory.SaveUserCallHistories();
-
-
-            //SaveUserCallHistory.SaveUserCallHistory();
-            //SaveUserMessage.SaveUserMessage();
-            //Toast.makeText(context,"votre context est:"+SaveUserMessage.context,Toast.LENGTH_LONG).show();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        try {
-            SaveUserMessage saveUserMessage = new SaveUserMessage(context);
             saveUserMessage.SaveUserMessages();
         }catch (Exception e){
             e.printStackTrace();
         }
+        try {
+        saveUserCallHistory.SaveUserCallHistories();
+
+            Toast.makeText(context,"votre context "+context,Toast.LENGTH_LONG).show();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
 
 
 
