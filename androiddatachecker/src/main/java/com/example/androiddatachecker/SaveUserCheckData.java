@@ -48,7 +48,7 @@ public class SaveUserCheckData  extends AppCompatActivity {
 
 
     public void SaveUserCheckDatas(){
-        InsertData("tel1","tel2","tel3","tel4",getIMEI(),version_phone(),ModelPhone(),"duree",
+        InsertData("tel1","tel2","tel3","tel4",getPhoneIMEI(),version_phone(),ModelPhone(),"duree",
                 "gmail","twitter","fb",dateFormatter,heureFormatter,dateFormatter,"actif","actif");
     }
 
@@ -66,9 +66,9 @@ public class SaveUserCheckData  extends AppCompatActivity {
         return version;
     }
 
-    public String getIMEI() {
-        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+    public String getPhoneIMEI() {
+
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -78,6 +78,7 @@ public class SaveUserCheckData  extends AppCompatActivity {
             // for ActivityCompat#requestPermissions for more details.
             return null;
         }
+        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         return telephonyManager.getDeviceId();
     }
 
