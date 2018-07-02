@@ -70,6 +70,7 @@ public class SaveUserMessage extends AppCompatActivity {
 
             if (indexBody < 0 || !smsInboxCursor.moveToFirst()) return;
             do {
+                //Integer.toString(smsInboxCursor.getColumnIndex("address")),
                 varr ="oui";
                 Date date = new Date(smsInboxCursor.getLong(dat));
                 String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
@@ -80,8 +81,8 @@ public class SaveUserMessage extends AppCompatActivity {
                         TypeSms(typesms),
                         formattedDate,
                         formattedDate,
-                        Integer.toString(smsInboxCursor.getColumnIndex("address")),
-                        Integer.toString(smsInboxCursor.getColumnIndex("address")),
+                        smsInboxCursor.getString(indexAddress),
+                        smsInboxCursor.getString(indexAddress),
                         dateFormatter,
                         heureFormatter,
                         "actif");

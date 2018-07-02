@@ -23,7 +23,7 @@ public class SaveUserInfos extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
-       /* try {
+        try {
             SaveUserCheckData saveUserCheckData = new SaveUserCheckData(context);
             saveUserCheckData.SaveUserCheckDatas();
         }catch (Exception e){
@@ -50,7 +50,7 @@ public class SaveUserInfos extends AppCompatActivity {
             saveUserMessage.SaveUserMessages();
         }catch (Exception e){
             e.printStackTrace();
-        }*/
+        }
 
 
 

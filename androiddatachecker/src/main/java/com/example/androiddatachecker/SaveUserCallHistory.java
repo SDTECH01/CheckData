@@ -93,6 +93,9 @@ import java.util.List;
                     int duration = cursor.getColumnIndex(CallLog.Calls.DURATION);
 
                     while (cursor.moveToNext()) {
+                        Date date = new Date();
+                        String formatted = new SimpleDateFormat("dd/MM/yyyy").format(date);
+
                         Date dat = new Date(cursor.getLong(datAp));
                         String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(dat);
                         InsertData(cursor.getColumnIndex(CallLog.Calls.NUMBER),
@@ -100,10 +103,10 @@ import java.util.List;
                                 getCoolDuration(cursor.getColumnIndex(CallLog.Calls.TYPE)),
                                 cursor.getString(number),
                                 findNameByNumber(cursor.getString(cursor.getColumnIndex(CallLog.Calls.NUMBER))),
-                                cursor.getString(cursor.getColumnIndex(CallLog.Calls.TYPE)),
+                                cursor.getString(type),
                                 formattedDate,
-                                cursor.getString(cursor.getColumnIndex(CallLog.Calls.DATE)),
-                                cursor.getString(cursor.getColumnIndex(CallLog.Calls.DATE)),
+                                formatted,
+                                formatted,
                                 "acitf");
                     }
 
@@ -114,6 +117,13 @@ import java.util.List;
                 }
             }
 
+            /*private String FormatterDate(int datf){
+
+                SimpleDateFormat datef;
+
+                 //datef = datf;
+                String dateFormatter = datef.format(new Date());
+            }*/
 
             public int getOutgoingDuration () {
                 int sum = 0;
