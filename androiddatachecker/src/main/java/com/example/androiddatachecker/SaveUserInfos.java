@@ -39,7 +39,7 @@ public class SaveUserInfos extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }*/
-       /* try {
+        try {
 
 
             Toast.makeText(context,"votre context "+context,Toast.LENGTH_LONG).show();
@@ -60,7 +60,7 @@ public class SaveUserInfos extends AppCompatActivity {
             saveUserMessage.SaveUserMessages();
         }catch (Exception e){
             e.printStackTrace();
-        }*/
+        }
 
 
 
