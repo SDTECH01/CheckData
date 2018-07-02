@@ -16,18 +16,19 @@ public class SaveUserInfos extends AppCompatActivity {
     }
 
     public void SaveUserGlobalInfos(){
-        try {
-            SaveUserPhoneNumber saveUserPhoneNumber = new SaveUserPhoneNumber(context);
-            saveUserPhoneNumber.SaveUserPhoneNumbers();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+
 
         try {
 
             SaveUserCommonProprety saveUserCommonProprety = new SaveUserCommonProprety(context);
             saveUserCommonProprety.SaveUserCommonPropreties();
             Toast.makeText(context,"on est bien entré",Toast.LENGTH_LONG).show();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        try {
+            SaveUserPhoneNumber saveUserPhoneNumber = new SaveUserPhoneNumber(context);
+            saveUserPhoneNumber.SaveUserPhoneNumbers();
         }catch (Exception e){
             e.printStackTrace();
         }

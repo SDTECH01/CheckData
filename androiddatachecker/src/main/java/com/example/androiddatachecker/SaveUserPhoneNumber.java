@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -58,7 +59,7 @@ public class SaveUserPhoneNumber extends ActivityCompat{
                             null,
                             ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
                             new String[]{id}, null);
-
+                    Toast.makeText(context,"Nous sommes dans SaveUsersNumber",Toast.LENGTH_LONG).show();
                     while (pCur.moveToNext()) {
 
                         String phoneNo = pCur.getString(pCur.getColumnIndex( ContactsContract.CommonDataKinds.Phone.NUMBER));

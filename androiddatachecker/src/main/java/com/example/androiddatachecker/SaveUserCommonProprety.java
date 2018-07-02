@@ -23,6 +23,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -77,6 +78,7 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
     }
 
     public void SaveUserCommonPropreties(){
+        Toast.makeText(context,"Nous sommes dans commonsProperties",Toast.LENGTH_LONG).show();
         InsertData(1,getBatteryPercentage(),getLongitude(),getLatitude(),dateFormatter,heureFormatter,"liberty1","liberty2","liberty3",
                 "liberty4","liberty5","liberty6","liberty7",dateFormatter,"actif");
     }
