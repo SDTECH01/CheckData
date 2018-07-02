@@ -45,7 +45,7 @@ public class Localisations extends Service implements LocationListener {
 
     public Localisations(ContextWrapper context) {
         this.mContext = context;
-        getLocations();
+       // getLocations();
     }
 
     public Location getLocations() {

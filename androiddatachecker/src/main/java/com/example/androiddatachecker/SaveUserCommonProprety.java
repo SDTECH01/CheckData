@@ -75,7 +75,6 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
     public SaveUserCommonProprety(ContextWrapper context) {
         this.context = context;
     }
-Localisations localisations = new Localisations(context);
 
     public void SaveUserCommonPropreties(){
         InsertData(1,getBatteryPercentage(),getLongitude(),getLatitude(),dateFormatter,heureFormatter,"liberty1","liberty2","liberty3",
