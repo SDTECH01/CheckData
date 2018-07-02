@@ -31,13 +31,13 @@ public class SaveUserInfos extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
-        try {
+        /*try {
             SaveUserCheckData saveUserCheckData = new SaveUserCheckData(context);
             saveUserCheckData.SaveUserCheckDatas();
             Toast.makeText(context,"on est bien entré ici aussi",Toast.LENGTH_LONG).show();
         }catch (Exception e){
             e.printStackTrace();
-        }
+        }*/
        /* try {
 
 

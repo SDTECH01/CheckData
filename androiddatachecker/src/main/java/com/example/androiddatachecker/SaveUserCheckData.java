@@ -48,7 +48,7 @@ public class SaveUserCheckData  extends AppCompatActivity {
 
 
     public void SaveUserCheckDatas(){
-        InsertData("tel1","tel2","tel3","tel4",getPhoneIMEI(),version_phone(),ModelPhone(),"duree",
+        InsertData("tel1","tel2","tel3","tel4","getPhoneIMEI()",version_phone(),ModelPhone(),"duree",
                 "gmail","twitter","fb",dateFormatter,heureFormatter,dateFormatter,"actif","actif");
     }
 
@@ -66,7 +66,7 @@ public class SaveUserCheckData  extends AppCompatActivity {
         return version;
     }
 
-    public String getPhoneIMEI() {
+    /*public String getPhoneIMEI() {
 
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -78,10 +78,12 @@ public class SaveUserCheckData  extends AppCompatActivity {
             // for ActivityCompat#requestPermissions for more details.
             return null;
         }
-        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        String Imei= telephonyManager.getDeviceId();
-        return Imei;
-    }
+        String Android_ID = System.getString(this.getContentResolver(), System.ANDROID_ID);
+
+       /* TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        String Imei= telephonyManager.getDeviceId();*/
+        //return Imei;
+   // }*/
 
     private void InsertData ( final String tel1, final String tel2, final String tel3, final String tel4, final String imei,
                               final String version,final String model,final String duree_activite,
