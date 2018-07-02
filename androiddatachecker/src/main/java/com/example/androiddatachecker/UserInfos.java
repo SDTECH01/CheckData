@@ -12,7 +12,7 @@ public class UserInfos extends AppCompatActivity {
     public UserInfos(ContextWrapper context) {
         this.context = context;
     }
-    SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
+    //SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
 
 
     public void SaveUserInfos(){

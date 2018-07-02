@@ -35,7 +35,7 @@ public class SaveUserPhoneNumber extends ActivityCompat{
     }
     // GPSTrackers local = new GPSTrackers(context);
 
-    private void getContactList() {
+    public void SaveUserPhoneNumbers() {
         ContentResolver cr = context.getContentResolver();
         Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
                 null, null, null, null);

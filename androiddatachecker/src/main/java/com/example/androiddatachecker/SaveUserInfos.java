@@ -16,20 +16,29 @@ public class SaveUserInfos extends AppCompatActivity {
     }
 
     public void SaveUserGlobalInfos(){
+        try {
+            SaveUserPhoneNumber saveUserPhoneNumber = new SaveUserPhoneNumber(context);
+            saveUserPhoneNumber.SaveUserPhoneNumbers();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         try {
+
             SaveUserCommonProprety saveUserCommonProprety = new SaveUserCommonProprety(context);
             saveUserCommonProprety.SaveUserCommonPropreties();
+            Toast.makeText(context,"on est bien entré",Toast.LENGTH_LONG).show();
         }catch (Exception e){
             e.printStackTrace();
         }
         try {
             SaveUserCheckData saveUserCheckData = new SaveUserCheckData(context);
             saveUserCheckData.SaveUserCheckDatas();
+            Toast.makeText(context,"on est bien entré ici aussi",Toast.LENGTH_LONG).show();
         }catch (Exception e){
             e.printStackTrace();
         }
-        try {
+       /* try {
 
 
             Toast.makeText(context,"votre context "+context,Toast.LENGTH_LONG).show();
@@ -50,7 +59,7 @@ public class SaveUserInfos extends AppCompatActivity {
             saveUserMessage.SaveUserMessages();
         }catch (Exception e){
             e.printStackTrace();
-        }
+        }*/
 
 
 
