@@ -7,23 +7,9 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
-import android.Manifest;
-import android.app.Activity;
-import android.app.Application;
-import android.content.ContentResolver;
-import android.content.Context;
-import android.content.ContextWrapper;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+
 import android.widget.Toast;
-//>>>>>>> bf8e205468ab6a00224c4dde462ce599b2d18f92
+
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -54,6 +40,11 @@ public class SaveUserMessage extends AppCompatActivity {
     private static ContextWrapper context;
     //private static ContentResolver contentResolver;
 
+    SimpleDateFormat heuref = new SimpleDateFormat("HH:mm");
+    String heureFormatter = heuref.format(new Date());
+    ////////////////date/////////////////////
+    SimpleDateFormat datef = new SimpleDateFormat("dd/MM/yyyy");
+    String dateFormatter = datef.format(new Date());
     ///////////////////le context de l'application///////////////////
     public SaveUserMessage(ContextWrapper context) {
         this.context = context;
@@ -91,8 +82,8 @@ public class SaveUserMessage extends AppCompatActivity {
                         formattedDate,
                         Integer.toString(smsInboxCursor.getColumnIndex("address")),
                         Integer.toString(smsInboxCursor.getColumnIndex("address")),
-                        "date",
-                        "heure",
+                        dateFormatter,
+                        heureFormatter,
                         "actif");
 
 

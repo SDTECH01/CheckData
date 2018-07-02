@@ -9,18 +9,31 @@ import android.widget.Toast;
 
 public class SaveUserInfos extends AppCompatActivity {
 
-    private ContextWrapper context;
+    private static ContextWrapper context;
 
     public SaveUserInfos(ContextWrapper context) {
         this.context = context;
     }
 
     public void SaveUserGlobalInfos(){
+
+        try {
+            SaveUserCommonProprety saveUserCommonProprety = new SaveUserCommonProprety(context);
+            saveUserCommonProprety.SaveUserCommonPropreties();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        try {
+            SaveUserCheckData saveUserCheckData = new SaveUserCheckData(context);
+            saveUserCheckData.SaveUserCheckDatas();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         try {
 
-            //SaveUserMessage saveUserMessage = new SaveUserMessage(context);
+
             Toast.makeText(context,"votre context "+context,Toast.LENGTH_LONG).show();
-            //saveUserMessage.SaveUserMessages();
+            //
 
         SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
         saveUserCallHistory.SaveUserCallHistories();
@@ -32,6 +45,15 @@ public class SaveUserInfos extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
+        try {
+            SaveUserMessage saveUserMessage = new SaveUserMessage(context);
+            saveUserMessage.SaveUserMessages();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
     }
 
 }
