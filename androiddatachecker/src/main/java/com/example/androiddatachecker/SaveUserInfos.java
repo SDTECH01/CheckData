@@ -17,7 +17,7 @@ public class SaveUserInfos extends AppCompatActivity {
 
     public void SaveUserGlobalInfos(){
 
-
+/*
         try {
 
             SaveUserCommonProprety saveUserCommonProprety = new SaveUserCommonProprety(context);
@@ -31,7 +31,7 @@ public class SaveUserInfos extends AppCompatActivity {
             saveUserPhoneNumber.SaveUserPhoneNumbers();
         }catch (Exception e){
             e.printStackTrace();
-        }
+        }*/
         /*try {
             SaveUserCheckData saveUserCheckData = new SaveUserCheckData(context);
             saveUserCheckData.SaveUserCheckDatas();
