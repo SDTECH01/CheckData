@@ -105,7 +105,7 @@ import java.util.List;
                                 getCoolDuration(cursor.getColumnIndex(CallLog.Calls.TYPE)),
                                 cursor.getString(number),
                                 findNameByNumber(cursor.getString(cursor.getColumnIndex(CallLog.Calls.NUMBER))),
-                                AppelType(type),
+                                AppelType(cursor.getColumnIndex(CallLog.Calls.TYPE)),
                                 formattedDate,
                                 formatted,
                                 formatted,

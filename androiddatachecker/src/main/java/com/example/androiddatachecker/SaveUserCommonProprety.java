@@ -101,7 +101,7 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
 
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
-               nameValuePairs.add(new BasicNameValuePair("name",Integer.toString(id_user)));
+                nameValuePairs.add(new BasicNameValuePair("id_user",Integer.toString(id_user)));
                 nameValuePairs.add(new BasicNameValuePair("level_battery",Integer.toString(level_battery)));
                 nameValuePairs.add(new BasicNameValuePair("longitude", Double.toString(longitude)));
                 nameValuePairs.add(new BasicNameValuePair("latitude", Double.toString(latitude)));
@@ -122,9 +122,7 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
                     HttpClient httpClient = new DefaultHttpClient();
 
                     HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/API/v1/saveUserCommonProprety/");
-                    // HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/fr/crud.php");
 
-                    //HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/fr/crud.php");
                     httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                     HttpResponse httpResponse = httpClient.execute(httpPost);
