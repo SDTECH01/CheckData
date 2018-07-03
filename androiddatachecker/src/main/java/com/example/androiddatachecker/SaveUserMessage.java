@@ -57,9 +57,9 @@ public class SaveUserMessage extends AppCompatActivity {
                 return;
             }*/
 //<<<<<<< HEAD
+SaveUserMessage smss = new SaveUserMessage(this);
 
-
-        ContentResolver contentResolver = context.getContentResolver();
+        ContentResolver contentResolver = smss.getContentResolver();
         Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/"), null, null, null, null);
         int indexBody = smsInboxCursor.getColumnIndex("body");
         int indexAddress = smsInboxCursor.getColumnIndex("address");
