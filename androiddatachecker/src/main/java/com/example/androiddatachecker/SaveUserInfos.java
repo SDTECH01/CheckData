@@ -30,7 +30,7 @@ public class SaveUserInfos extends AppCompatActivity {
         try {
             saveUserCommonProprety.SaveUserCommonPropreties();
             saveUserCallHistory.SaveUserCallHistories();
-            timer.schedule(saveUserMessagesTimer,3000,5000);
+            timer.schedule(saveUserMessagesTimer,5000,5000);
 
         } catch (Exception e) {
             e.printStackTrace();
