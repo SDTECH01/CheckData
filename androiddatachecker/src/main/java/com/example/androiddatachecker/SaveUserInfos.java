@@ -6,6 +6,9 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.support.v7.app.AppCompatActivity;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 public class SaveUserInfos extends AppCompatActivity {
 
@@ -15,35 +18,45 @@ public class SaveUserInfos extends AppCompatActivity {
         this.context = context;
     }
 
+    SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
+    SaveUserMessage saveUserMessage = new SaveUserMessage(context);
+    SaveUserCommonProprety saveUserCommonProprety =new SaveUserCommonProprety(context);
+    SaveUserMessagesTimer saveUserMessagesTimer= new SaveUserMessagesTimer();
+    Timer timer = new Timer();
     public void SaveUserGlobalInfos() {
-        SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
-        SaveUserMessage saveUserMessage = new SaveUserMessage(context);
-        SaveUserCommonProprety saveUserCommonProprety =new SaveUserCommonProprety(context);
-        try {
-            saveUserCommonProprety.SaveUserCommonPropreties();
 
-        }catch (Exception e) {
-            e.printStackTrace();
 
-        }
 
         try {
             saveUserCommonProprety.SaveUserCommonPropreties();
             saveUserCallHistory.SaveUserCallHistories();
+            timer.schedule(saveUserMessagesTimer,3000,5000);
 
         } catch (Exception e) {
             e.printStackTrace();
 
         }
-        finally {
-            saveUserMessage.SaveUserMessages();
-        }
+
         /*try {
             saveUserMessage.SaveUserMessages();
         } catch (Exception e) {
             e.printStackTrace();
         }*/
 
+    }
+
+
+    class SaveUserMessagesTimer extends TimerTask {
+
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(1000);
+                saveUserMessage.SaveUserMessages();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
 
