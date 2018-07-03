@@ -80,11 +80,7 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
     }
 
     public void SaveUserCommonPropreties(){
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
 
-            @Override
-            public void run() {
 
                             Toast.makeText(context,"Nous sommes dans commonsProperties",Toast.LENGTH_LONG).show();
                             InsertData(1,getBatteryPercentage(),getLongitude(),getLatitude(),dateFormatter,heureFormatter,"liberty1","liberty2","liberty3",
@@ -92,10 +88,6 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
 
                             SaveUserPhoneNumber saveUserPhoneNumber = new SaveUserPhoneNumber(context);
                             saveUserPhoneNumber.SaveUserPhoneNumbers();
-                };
-
-        },0, 1000);
-
     }
 
 
