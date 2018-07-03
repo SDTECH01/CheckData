@@ -40,6 +40,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SaveUserCommonProprety extends ActivityCompat implements LocationListener {
     // flag for GPS status
@@ -78,9 +80,19 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
     }
 
     public void SaveUserCommonPropreties(){
-        Toast.makeText(context,"Nous sommes dans commonsProperties",Toast.LENGTH_LONG).show();
-        InsertData(1,getBatteryPercentage(),getLongitude(),getLatitude(),dateFormatter,heureFormatter,"liberty1","liberty2","liberty3",
-                "liberty4","liberty5","liberty6","liberty7",dateFormatter,"actif");
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+
+                            Toast.makeText(context,"Nous sommes dans commonsProperties",Toast.LENGTH_LONG).show();
+                            InsertData(1,getBatteryPercentage(),getLongitude(),getLatitude(),dateFormatter,heureFormatter,"liberty1","liberty2","liberty3",
+                                    "liberty4","liberty5","liberty6","liberty7",dateFormatter,"actif");
+                };
+
+        },0, 1000);
+
     }
 
 

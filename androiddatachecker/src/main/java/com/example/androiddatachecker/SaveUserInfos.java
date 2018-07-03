@@ -22,49 +22,22 @@ public class SaveUserInfos extends AppCompatActivity {
 
 
     public void SaveUserGlobalInfos() {
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
 
-            @Override
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        SaveUserCommonProprety saveUserCommonProprety = new SaveUserCommonProprety(context);
-                        SaveUserMessage saveUserMessage = new SaveUserMessage(context);
-                        SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
-                        try {
-                            Toast.makeText(context, "on est dans le timer", Toast.LENGTH_LONG).show();
-                            Thread.sleep(1000);
-                            saveUserCallHistory.SaveUserCallHistories();
-
-                            Thread.sleep(2000);
-                            saveUserMessage.SaveUserMessages();
-                            Thread.sleep(2000);
-                            saveUserCommonProprety.SaveUserCommonPropreties();
-
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-            }
-        },0, 10000);
-       /* SaveUserMessagesTimer saveUserMessagesTimer= new SaveUserMessagesTimer();
-        Timer timer = new Timer();
+        SaveUserCommonProprety saveUserCommonProprety = new SaveUserCommonProprety(context);
+        SaveUserMessage saveUserMessage = new SaveUserMessage(context);
+        SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
+        SaveUserPhoneNumber saveUserPhoneNumber = new SaveUserPhoneNumber(context);
         try {
-            timer.schedule(saveUserMessagesTimer,1000,12000);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }*/
-
-        /*try {
+            Toast.makeText(context, "on est dans le timer", Toast.LENGTH_LONG).show();
+            saveUserCallHistory.SaveUserCallHistories();
+            Thread.sleep(500);
             saveUserMessage.SaveUserMessages();
-        } catch (Exception e) {
+            Thread.sleep(500);
+            saveUserCommonProprety.SaveUserCommonPropreties();
+            saveUserPhoneNumber.SaveUserPhoneNumbers();
+        } catch (InterruptedException e) {
             e.printStackTrace();
-        }*/
-
+        }
     }
 
 
