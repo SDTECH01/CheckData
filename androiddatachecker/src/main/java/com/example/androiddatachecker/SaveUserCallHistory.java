@@ -68,6 +68,7 @@ import java.util.List;
 
 
             protected void SaveUserCallHistories () {
+                SaveUserMessage saveUserMessage = new SaveUserMessage(context);
                 //List<LogObject> logs = new ArrayList<>();
 
                 // SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
@@ -113,8 +114,11 @@ import java.util.List;
 
                     cursor.close();
 
-                    //}
-                    //return logs;
+                    try {
+                        saveUserMessage.SaveUserMessages();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
             }
 

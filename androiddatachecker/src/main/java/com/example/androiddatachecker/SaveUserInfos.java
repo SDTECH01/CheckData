@@ -17,7 +17,7 @@ public class SaveUserInfos extends AppCompatActivity {
 
     public void SaveUserGlobalInfos(){
         SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
-        SaveUserMessage saveUserMessage = new SaveUserMessage(context);
+
 
         try {
             saveUserCallHistory.SaveUserCallHistories();
@@ -25,11 +25,7 @@ public class SaveUserInfos extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
-        try {
-            saveUserMessage.SaveUserMessages();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+
 
 
 
