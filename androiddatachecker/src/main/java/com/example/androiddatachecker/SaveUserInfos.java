@@ -18,18 +18,27 @@ public class SaveUserInfos extends AppCompatActivity {
     public void SaveUserGlobalInfos() {
         SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
         SaveUserMessage saveUserMessage = new SaveUserMessage(context);
-
+        SaveUserCommonProprety saveUserCommonProprety =new SaveUserCommonProprety(context);
         try {
-            saveUserMessage.SaveUserMessages();
-        } catch (Exception e) {
+            saveUserCommonProprety.SaveUserCommonPropreties();
+
+        }catch (Exception e) {
             e.printStackTrace();
+
         }
+
         try {
             saveUserCallHistory.SaveUserCallHistories();
         } catch (Exception e) {
             e.printStackTrace();
 
         }
+        try {
+            saveUserMessage.SaveUserMessages();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }
 
