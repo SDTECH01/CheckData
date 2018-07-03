@@ -56,7 +56,7 @@ import java.util.List;
         //public static final int NUMERO_USER = TelephonyManager.
         private static String[] requiredPermissions = {Manifest.permission.READ_CALL_LOG, Manifest.permission.READ_CONTACTS};
 
-        private ContextWrapper context;
+        private static ContextWrapper context;
         //public Context context = (Application)getBaseContext();
 
         ///////////////////le context de l'application///////////////////

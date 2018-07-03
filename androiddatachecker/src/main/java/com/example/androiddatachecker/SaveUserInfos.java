@@ -5,33 +5,31 @@ import android.app.Application;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
+
 
 public class SaveUserInfos extends AppCompatActivity {
 
-    protected ContextWrapper context;
+    protected static ContextWrapper context;
 
     public SaveUserInfos(ContextWrapper context) {
         this.context = context;
     }
 
-    public void SaveUserGlobalInfos(){
+    public void SaveUserGlobalInfos() {
         SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
         SaveUserMessage saveUserMessage = new SaveUserMessage(context);
 
         try {
             saveUserMessage.SaveUserMessages();
-            saveUserCallHistory.SaveUserCallHistories();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
+        try {
+            saveUserCallHistory.SaveUserCallHistories();
+        } catch (Exception e) {
+            e.printStackTrace();
 
-
-
-
-
-
-
+        }
     }
-
 }
+

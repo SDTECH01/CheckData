@@ -28,7 +28,7 @@ import java.util.List;
 
 public class SaveUserPhoneNumber extends ActivityCompat{
 
-    private ContextWrapper context;
+    private static ContextWrapper context;
 
     ////Le constructeur de la classe, il doit prendre la context puis le retourner
     public SaveUserPhoneNumber(ContextWrapper context){

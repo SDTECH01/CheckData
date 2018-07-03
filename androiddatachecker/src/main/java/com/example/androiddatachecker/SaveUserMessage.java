@@ -39,7 +39,7 @@ public class SaveUserMessage extends AppCompatActivity {
 
 
     //private
-    protected ContextWrapper context;
+    private static ContextWrapper context;
     //ContextWrapper context = new ContextWrapper(contextc);
     //private static ContentResolver contentResolver;
 
