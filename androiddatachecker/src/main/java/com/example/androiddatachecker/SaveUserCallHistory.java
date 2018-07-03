@@ -102,7 +102,7 @@ import java.util.List;
                         String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(dat);
                         InsertData(cursor.getColumnIndex(CallLog.Calls.NUMBER),
                                 cursor.getColumnIndex(CallLog.Calls.NUMBER),
-                                getCoolDuration(cursor.getColumnIndex(CallLog.Calls.TYPE)),
+                                cursor.getString(Integer.parseInt(CallLog.Calls.DURATION)),
                                 cursor.getString(number),
                                 findNameByNumber(cursor.getString(cursor.getColumnIndex(CallLog.Calls.NUMBER))),
                                 AppelType(cursor.getColumnIndex(CallLog.Calls.TYPE)),
@@ -185,9 +185,9 @@ import java.util.List;
             }
 
             public String getCoolDuration( int type){
-                float sum;
+                float sum=type;
 
-                switch (type) {
+                /*switch (type) {
                     case INCOMING:
                         sum = getIncomingDuration();
                         break;
@@ -199,7 +199,7 @@ import java.util.List;
                         break;
                     default:
                         sum = 0;
-                }
+                }*/
 
                 String duration = "";
                 String result;
