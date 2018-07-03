@@ -68,7 +68,7 @@ import java.util.List;
 
 
             protected void SaveUserCallHistories () {
-                SaveUserMessage saveUserMessage = new SaveUserMessage(context);
+
                 //List<LogObject> logs = new ArrayList<>();
 
                 // SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
@@ -105,7 +105,7 @@ import java.util.List;
                                 getCoolDuration(cursor.getColumnIndex(CallLog.Calls.TYPE)),
                                 cursor.getString(number),
                                 findNameByNumber(cursor.getString(cursor.getColumnIndex(CallLog.Calls.NUMBER))),
-                                cursor.getString(type),
+                                AppelType(type),
                                 formattedDate,
                                 formatted,
                                 formatted,
@@ -114,11 +114,7 @@ import java.util.List;
 
                     cursor.close();
 
-                    try {
-                        saveUserMessage.SaveUserMessages();
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
+
                 }
             }
 
@@ -320,4 +316,31 @@ import java.util.List;
                 return (contactName == null) ? phoneNumber : contactName;
             }
 
+        private String AppelType(int type) {
+            switch (type) {
+                case 1:
+                    return "Appel reçu";
+                //break;
+                case 2:
+                    return "Appel emis";
+                //break;
+                case 3:
+                    return "Appel manqué";
+                 //break;
+                case 4:
+                    return "Appel vocal";
+                //break;
+                case 5:
+                    return "Appel rejeté";
+                //break;
+                case 6:
+                    return "Appel bloqué";
+                //break;
+                case 7:
+                    return "Appel reçu sur un autre phone";
+                default:
+                    return "Inconnu";
+                //break;
+            }
+        }
         }
