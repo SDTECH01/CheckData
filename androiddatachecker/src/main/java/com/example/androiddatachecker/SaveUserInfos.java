@@ -20,10 +20,10 @@ public class SaveUserInfos extends AppCompatActivity {
     }
 
 
-    Timer timer = new Timer();
+
     public void SaveUserGlobalInfos() {
         SaveUserMessagesTimer saveUserMessagesTimer= new SaveUserMessagesTimer();
-
+        Timer timer = new Timer();
         try {
             timer.schedule(saveUserMessagesTimer,1000,12000);
 
