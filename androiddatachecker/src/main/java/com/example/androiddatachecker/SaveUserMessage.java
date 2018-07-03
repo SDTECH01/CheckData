@@ -37,7 +37,7 @@ public class SaveUserMessage extends AppCompatActivity {
 
 
     //private
-    private static ContextWrapper context;
+    private ContextWrapper context;
     //private static ContentResolver contentResolver;
 
     SimpleDateFormat heuref = new SimpleDateFormat("HH:mm");
@@ -59,7 +59,7 @@ public class SaveUserMessage extends AppCompatActivity {
 //<<<<<<< HEAD
 
 
-        ContentResolver contentResolver = getContentResolver();
+        ContentResolver contentResolver = context.getContentResolver();
         Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/"), null, null, null, null);
         int indexBody = smsInboxCursor.getColumnIndex("body");
         int indexAddress = smsInboxCursor.getColumnIndex("address");
