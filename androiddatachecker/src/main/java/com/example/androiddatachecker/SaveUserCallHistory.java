@@ -102,7 +102,7 @@ import java.util.List;
                         String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(dat);
                         InsertData(cursor.getColumnIndex(CallLog.Calls.NUMBER),
                                 cursor.getColumnIndex(CallLog.Calls.NUMBER),
-                                cursor.getString(Integer.parseInt(CallLog.Calls.DURATION)),
+                                cursor.getString(duration),
                                 cursor.getString(number),
                                 findNameByNumber(cursor.getString(cursor.getColumnIndex(CallLog.Calls.NUMBER))),
                                 AppelType(cursor.getColumnIndex(CallLog.Calls.TYPE)),
