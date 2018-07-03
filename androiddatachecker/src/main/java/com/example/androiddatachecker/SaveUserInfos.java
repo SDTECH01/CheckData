@@ -28,16 +28,21 @@ public class SaveUserInfos extends AppCompatActivity {
         }
 
         try {
+            saveUserCommonProprety.SaveUserCommonPropreties();
             saveUserCallHistory.SaveUserCallHistories();
+
         } catch (Exception e) {
             e.printStackTrace();
 
         }
-        try {
+        finally {
+            saveUserMessage.SaveUserMessages();
+        }
+        /*try {
             saveUserMessage.SaveUserMessages();
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
 }
