@@ -9,14 +9,15 @@ import android.widget.Toast;
 
 public class SaveUserInfos extends AppCompatActivity {
 
-    private static ContextWrapper context;
+    protected ContextWrapper context;
 
     public SaveUserInfos(ContextWrapper context) {
         this.context = context;
     }
-    SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
-    SaveUserMessage saveUserMessage = new SaveUserMessage(context);
+
     public void SaveUserGlobalInfos(){
+        SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
+        SaveUserMessage saveUserMessage = new SaveUserMessage(context);
         try {
 
             saveUserMessage.SaveUserMessages();

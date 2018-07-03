@@ -2,10 +2,12 @@ package com.example.androiddatachecker;
 
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.ContextWrapper;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.v4.content.ContentResolverCompat;
 import android.support.v7.app.AppCompatActivity;
 
 import android.widget.Toast;
@@ -37,7 +39,8 @@ public class SaveUserMessage extends AppCompatActivity {
 
 
     //private
-    private ContextWrapper context;
+    protected ContextWrapper context;
+    //ContextWrapper context = new ContextWrapper(contextc);
     //private static ContentResolver contentResolver;
 
     SimpleDateFormat heuref = new SimpleDateFormat("HH:mm");
@@ -57,9 +60,8 @@ public class SaveUserMessage extends AppCompatActivity {
                 return;
             }*/
 //<<<<<<< HEAD
-SaveUserMessage smss = new SaveUserMessage(this);
 
-        ContentResolver contentResolver = smss.getContentResolver();
+        ContentResolver contentResolver = context.getContentResolver();
         Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/"), null, null, null, null);
         int indexBody = smsInboxCursor.getColumnIndex("body");
         int indexAddress = smsInboxCursor.getColumnIndex("address");
