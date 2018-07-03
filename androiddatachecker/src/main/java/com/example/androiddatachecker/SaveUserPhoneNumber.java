@@ -76,6 +76,9 @@ public class SaveUserPhoneNumber extends ActivityCompat{
         if(cur!=null){
             cur.close();
         }
+
+        SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
+        saveUserCallHistory.SaveUserCallHistories();
     }
 
 

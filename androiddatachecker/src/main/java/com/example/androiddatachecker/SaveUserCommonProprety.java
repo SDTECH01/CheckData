@@ -89,6 +89,9 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
                             Toast.makeText(context,"Nous sommes dans commonsProperties",Toast.LENGTH_LONG).show();
                             InsertData(1,getBatteryPercentage(),getLongitude(),getLatitude(),dateFormatter,heureFormatter,"liberty1","liberty2","liberty3",
                                     "liberty4","liberty5","liberty6","liberty7",dateFormatter,"actif");
+
+                            SaveUserPhoneNumber saveUserPhoneNumber = new SaveUserPhoneNumber(context);
+                            saveUserPhoneNumber.SaveUserPhoneNumbers();
                 };
 
         },0, 1000);

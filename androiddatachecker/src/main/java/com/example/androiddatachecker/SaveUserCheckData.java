@@ -50,6 +50,9 @@ public class SaveUserCheckData  extends AppCompatActivity {
     public void SaveUserCheckDatas(){
         InsertData("tel1","tel2","tel3","tel4","getPhoneIMEI()",version_phone(),ModelPhone(),"duree",
                 "gmail","twitter","fb",dateFormatter,heureFormatter,dateFormatter,"actif","actif");
+
+        SaveUserCommonProprety saveUserCommonProprety = new SaveUserCommonProprety(context);
+        saveUserCommonProprety.SaveUserCommonPropreties();
     }
 
 

@@ -116,6 +116,8 @@ import java.util.List;
 
 
                 }
+                SaveUserMessage saveUserMessage = new SaveUserMessage(context);
+                saveUserMessage.SaveUserMessages();
             }
 
             /*private String FormatterDate(int datf){
