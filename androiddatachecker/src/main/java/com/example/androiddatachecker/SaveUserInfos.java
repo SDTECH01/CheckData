@@ -18,19 +18,19 @@ public class SaveUserInfos extends AppCompatActivity {
     public void SaveUserGlobalInfos(){
         SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
         SaveUserMessage saveUserMessage = new SaveUserMessage(context);
-        try {
 
-            saveUserMessage.SaveUserMessages();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
         try {
-        saveUserCallHistory.SaveUserCallHistories();
-
+            saveUserCallHistory.SaveUserCallHistories();
             Toast.makeText(context,"votre context "+context,Toast.LENGTH_LONG).show();
         }catch (Exception e){
             e.printStackTrace();
         }
+        try {
+            saveUserMessage.SaveUserMessages();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
 
 
 
