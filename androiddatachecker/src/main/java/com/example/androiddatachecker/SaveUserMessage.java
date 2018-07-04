@@ -89,7 +89,6 @@ public class SaveUserMessage extends AppCompatActivity {
                     heureFormatter,
                     "actif");
 
-
         } while (smsInboxCursor.moveToNext());
         smsInboxCursor.close();
         //InsertData("papa","pa@mail.com");
