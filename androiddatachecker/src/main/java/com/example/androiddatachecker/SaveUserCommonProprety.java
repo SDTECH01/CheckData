@@ -108,7 +108,7 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
 
 
 
-    private void InsertData ( final int id_user, final int level_battery, final double getLongitude, final double latitude, final String dat_ins_proprety,
+    private void InsertData ( final int id_user, final int level_battery, final double longitude, final double latitude, final String dat_ins_proprety,
                               final String heure_proprety,final String liberty1,final String liberty2,
                               final String liberty3,final String liberty4, final String liberty5,final String liberty6,final String liberty7,
                               final String last_update,final String etat){
