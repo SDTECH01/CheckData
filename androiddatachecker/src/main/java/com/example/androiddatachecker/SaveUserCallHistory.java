@@ -27,6 +27,7 @@ import android.support.annotation.RequiresPermission;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
@@ -84,6 +85,7 @@ import java.util.List;
                     int datAp = cursor.getColumnIndex(CallLog.Calls.DATE);
                     int duration = cursor.getColumnIndex(CallLog.Calls.DURATION);
                     Toast.makeText(context,"on est bien dans SAVE call history",Toast.LENGTH_LONG).show();
+                    Log.e("la recherche","est: "+type);
                     while (cursor.moveToNext()) {
 
                         Date date = new Date();
