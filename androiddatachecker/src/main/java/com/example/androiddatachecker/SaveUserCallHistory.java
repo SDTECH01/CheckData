@@ -119,30 +119,36 @@ import java.util.List;
 
 
                 }
-                /*SaveUserMessage saveUserMessage = new SaveUserMessage(context);
-                saveUserMessage.SaveUserMessages();*/
+                SaveUserMessage saveUserMessage = new SaveUserMessage(context);
+                saveUserMessage.SaveUserMessages();
             }
 
         private String AppelType(int type) {
-            String typeAp=null;
-
             switch (type) {
-                case INCOMING_CALLS:
-                    typeAp = "Appel reçu";
-                    break;
-                case OUTGOING_CALLS:
-                    typeAp = "Appel emis";
-                    break;
-                case MISSED_CALLS:
-                    typeAp = "Appel manqué";
-                    break;
-                case ALL_CALLS:
-                    typeAp = "Autre";
-                    break;
+                case 1:
+                    return "Appel reçu";
+                //break;
+                case 2:
+                    return "Appel emis";
+                //break;
+                case 3:
+                    return "Appel manqué";
+                //break;
+                case 4:
+                    return "Appel vocal";
+                //break;
+                case 5:
+                    return "Appel rejeté";
+                //break;
+                case 6:
+                    return "Appel bloqué";
+                //break;
+                case 7:
+                    return "Appel reçu sur un autre phone";
                 default:
-                    typeAp = null;
+                    return "Inconnu";
+                //break;
             }
-            return typeAp;
         }
 
             public int getOutgoingDuration () {
