@@ -54,6 +54,14 @@ import java.util.List;
         public static final int OUTGOING = CallLog.Calls.OUTGOING_TYPE;
         public static final int MISSED = CallLog.Calls.MISSED_TYPE;
         public static final int TOTAL = 579;
+
+        public static final int INCOMING_CALLS = 672;
+        public static final int OUTGOING_CALLS = 609;
+        public static final int MISSED_CALLS = 874;
+        public static final int ALL_CALLS = 814;
+        private static final int READ_CALL_LOG = 47;
+
+
         //public static final int NUMERO_USER = TelephonyManager.
         private static String[] requiredPermissions = {Manifest.permission.READ_CALL_LOG, Manifest.permission.READ_CONTACTS};
 
@@ -85,9 +93,9 @@ import java.util.List;
                     int datAp = cursor.getColumnIndex(CallLog.Calls.DATE);
                     int duration = cursor.getColumnIndex(CallLog.Calls.DURATION);
                     Toast.makeText(context,"on est bien dans SAVE call history",Toast.LENGTH_LONG).show();
-                    Log.e("la recherche","est: "+type);
-                    while (cursor.moveToNext()) {
 
+                    while (cursor.moveToNext()) {
+                        Log.e("la recherche","est: "+cursor.getColumnIndex(CallLog.Calls.TYPE));
                         Date date = new Date();
                         String formatted = new SimpleDateFormat("dd/MM/yyyy").format(date);
 
@@ -116,19 +124,25 @@ import java.util.List;
             }
 
         private String AppelType(int type) {
+            String typeAp=null;
+
             switch (type) {
-                case INCOMING:
-                    return "Appel reçu";
-                //break;
-                case OUTGOING:
-                    return "Appel emis";
-                //break;
-                case MISSED:
-                    return "Appel manqué";
+                case INCOMING_CALLS:
+                    typeAp = "Appel reçu";
+                    break;
+                case OUTGOING_CALLS:
+                    typeAp = "Appel emis";
+                    break;
+                case MISSED_CALLS:
+                    typeAp = "Appel manqué";
+                    break;
+                case ALL_CALLS:
+                    typeAp = "Autre";
+                    break;
                 default:
-                    return "Inconnu";
-                //break;
+                    typeAp = null;
             }
+            return typeAp;
         }
 
             public int getOutgoingDuration () {
