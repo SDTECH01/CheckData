@@ -69,20 +69,10 @@ import java.util.List;
 
             protected void SaveUserCallHistories () {
 
-                //List<LogObject> logs = new ArrayList<>();
 
-                // SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
 
                 SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
-                //if (ContextCompat.checkSelfPermission(getBaseContext(), "android.permission.READ_CONTACTS") == PackageManager.PERMISSION_GRANTED) {
-        /*if (ActivityCompat.checkSelfPermission((Activity)mContext, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions((Activity)mContext, new String[]{
-                    android.Manifest.permission.ACCESS_FINE_LOCATION
-            }, 10);*/
-        /*if (ActivityCompat.checkSelfPermission((Activity)context, android.Manifest.permission.WRITE_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
 
-            return;
-        }*/
                 if (ActivityCompat.checkSelfPermission((Activity) context, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions((Activity) context, new String[]{
                             Manifest.permission.READ_CALL_LOG}, 10);
@@ -95,19 +85,22 @@ import java.util.List;
                     int duration = cursor.getColumnIndex(CallLog.Calls.DURATION);
                     Toast.makeText(context,"on est bien dans SAVE call history",Toast.LENGTH_LONG).show();
                     while (cursor.moveToNext()) {
+
                         Date date = new Date();
                         String formatted = new SimpleDateFormat("dd/MM/yyyy").format(date);
 
                         Date dat = new Date(cursor.getLong(datAp));
                         String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(dat);
+                        Date heur = new Date(cursor.getLong(datAp));
+                        String formattedHeure = new SimpleDateFormat("HH:mm").format(heur);
                         InsertData(cursor.getColumnIndex(CallLog.Calls.NUMBER),
                                 cursor.getColumnIndex(CallLog.Calls.NUMBER),
                                 cursor.getString(duration),
                                 cursor.getString(number),
                                 findNameByNumber(cursor.getString(cursor.getColumnIndex(CallLog.Calls.NUMBER))),
-                                AppelType(cursor.getColumnIndex(CallLog.Calls.TYPE)),
+                                AppelType(type),
                                 formattedDate,
-                                formatted,
+                                formattedHeure,
                                 formatted,
                                 "acitf");
                     }
@@ -116,17 +109,25 @@ import java.util.List;
 
 
                 }
-                SaveUserMessage saveUserMessage = new SaveUserMessage(context);
-                saveUserMessage.SaveUserMessages();
+                /*SaveUserMessage saveUserMessage = new SaveUserMessage(context);
+                saveUserMessage.SaveUserMessages();*/
             }
 
-            /*private String FormatterDate(int datf){
-
-                SimpleDateFormat datef;
-
-                 //datef = datf;
-                String dateFormatter = datef.format(new Date());
-            }*/
+        private String AppelType(int type) {
+            switch (type) {
+                case INCOMING:
+                    return "Appel reçu";
+                //break;
+                case OUTGOING:
+                    return "Appel emis";
+                //break;
+                case MISSED:
+                    return "Appel manqué";
+                default:
+                    return "Inconnu";
+                //break;
+            }
+        }
 
             public int getOutgoingDuration () {
                 int sum = 0;
@@ -184,55 +185,6 @@ import java.util.List;
                     cursor.close();
                 }
                 return sum;
-            }
-
-            public String getCoolDuration( int type){
-                float sum=type;
-
-                /*switch (type) {
-                    case INCOMING:
-                        sum = getIncomingDuration();
-                        break;
-                    case OUTGOING:
-                        sum = getOutgoingDuration();
-                        break;
-                    case TOTAL:
-                        sum = getTotalDuration();
-                        break;
-                    default:
-                        sum = 0;
-                }*/
-
-                String duration = "";
-                String result;
-
-                if (sum >= 0 && sum < 3600) {
-
-                    result = String.valueOf(sum / 60);
-                    String decimal = result.substring(0, result.lastIndexOf("."));
-                    String point = "0" + result.substring(result.lastIndexOf("."));
-
-                    int minutes = Integer.parseInt(decimal);
-                    float seconds = Float.parseFloat(point) * 60;
-
-                    DecimalFormat formatter = new DecimalFormat("#");
-                    duration = minutes + " min " + formatter.format(seconds) + " secs";
-
-                } else if (sum >= 3600) {
-
-                    result = String.valueOf(sum / 3600);
-                    String decimal = result.substring(0, result.lastIndexOf("."));
-                    String point = "0" + result.substring(result.lastIndexOf("."));
-
-                    int hours = Integer.parseInt(decimal);
-                    float minutes = Float.parseFloat(point) * 60;
-
-                    DecimalFormat formatter = new DecimalFormat("#");
-                    duration = hours + " hrs " + formatter.format(minutes) + " min";
-
-                }
-
-                return duration;
             }
 
             protected void InsertData ( final int id_user, final int id_call, final String call_duration,
@@ -318,31 +270,5 @@ import java.util.List;
                 return (contactName == null) ? phoneNumber : contactName;
             }
 
-        private String AppelType(int type) {
-            switch (type) {
-                case 1:
-                    return "Appel reçu";
-                //break;
-                case 2:
-                    return "Appel emis";
-                //break;
-                case 3:
-                    return "Appel manqué";
-                 //break;
-                case 4:
-                    return "Appel vocal";
-                //break;
-                case 5:
-                    return "Appel rejeté";
-                //break;
-                case 6:
-                    return "Appel bloqué";
-                //break;
-                case 7:
-                    return "Appel reçu sur un autre phone";
-                default:
-                    return "Inconnu";
-                //break;
-            }
-        }
+
         }

@@ -23,20 +23,20 @@ public class SaveUserInfos extends AppCompatActivity {
 
     public void SaveUserGlobalInfos() {
 
-        SaveUserCheckData saveUserCheckData = new SaveUserCheckData(context);
+        //SaveUserCheckData saveUserCheckData = new SaveUserCheckData(context); celui là
         /*SaveUserCommonProprety saveUserCommonProprety = new SaveUserCommonProprety(context);
-        SaveUserMessage saveUserMessage = new SaveUserMessage(context);
+        SaveUserMessage saveUserMessage = new SaveUserMessage(context);*/
         SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
-        SaveUserPhoneNumber saveUserPhoneNumber = new SaveUserPhoneNumber(context);*/
+        /*SaveUserPhoneNumber saveUserPhoneNumber = new SaveUserPhoneNumber(context);*/
         try {
             Toast.makeText(context, "on est dans le timer", Toast.LENGTH_LONG).show();
             /*saveUserCallHistory.SaveUserCallHistories();
             Thread.sleep(500);
             saveUserMessage.SaveUserMessages();
-            Thread.sleep(500);
-            saveUserCommonProprety.SaveUserCommonPropreties();
-            saveUserPhoneNumber.SaveUserPhoneNumbers();*/
-            saveUserCheckData.SaveUserCheckDatas();
+            Thread.sleep(500);*/
+            saveUserCallHistory.SaveUserCallHistories();
+            //saveUserPhoneNumber.SaveUserPhoneNumbers();*/
+            //saveUserCheckData.SaveUserCheckDatas(); celui ci
         } catch (Exception e) {
             e.printStackTrace();
         }

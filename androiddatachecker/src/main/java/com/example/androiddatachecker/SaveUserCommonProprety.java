@@ -1,11 +1,10 @@
 package com.example.androiddatachecker;
 
 import android.Manifest;
-import android.app.AlertDialog;
-import android.app.Service;
+
 import android.content.Context;
 import android.content.ContextWrapper;
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -15,15 +14,11 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.BatteryManager;
-import android.os.Build;
+
 import android.os.Bundle;
-import android.os.IBinder;
-import android.provider.Settings;
-import android.support.annotation.Nullable;
+
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.telephony.TelephonyManager;
-import android.util.Log;
+
 import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
@@ -41,10 +36,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class SaveUserCommonProprety extends ActivityCompat implements LocationListener {
+
     // flag for GPS status
     boolean isGPSEnabled = false;
 
@@ -193,8 +187,7 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
 
     @Override
     public void onLocationChanged(Location location) {
-        Log.e("votre longitude","est "+location.getLongitude());
-        Log.e("votre latitude","est "+location.getLatitude());
+
         Toast.makeText(context,"Nous sommes dans commonsProperties",Toast.LENGTH_LONG).show();
         InsertData(1,getBatteryPercentage(),location.getLongitude(),location.getLatitude(),dateFormatter,heureFormatter,"liberty1","liberty2","liberty3",
                 "liberty4","liberty5","liberty6","liberty7",dateFormatter,"actif");
@@ -218,6 +211,9 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
     public void onProviderDisabled(String s) {
 
     }
+
+
+
 
 
 }
