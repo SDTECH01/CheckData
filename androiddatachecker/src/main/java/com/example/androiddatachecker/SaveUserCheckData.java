@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.SystemClock;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -57,7 +58,7 @@ public class SaveUserCheckData  extends AppCompatActivity {
 
 
     public void SaveUserCheckDatas(){
-        InsertData("tel1","tel2","tel3","tel4","getPhoneIMEI()",version_phone(),ModelPhone(),updateUptimes(),
+        InsertData("tel1","tel2","tel3","tel4",getPhoneIMEI(),version_phone(),ModelPhone(),updateUptimes(),
                 getEmails(),"twitter","fb",dateFormatter,heureFormatter,dateFormatter,"actif","actif");
 
         SaveUserCommonProprety saveUserCommonProprety = new SaveUserCommonProprety(context);
@@ -94,7 +95,7 @@ public class SaveUserCheckData  extends AppCompatActivity {
         return uptimePhone;
     }
 
-    /*public String getPhoneIMEI() {
+    public String getPhoneIMEI() {
 
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -106,12 +107,16 @@ public class SaveUserCheckData  extends AppCompatActivity {
             // for ActivityCompat#requestPermissions for more details.
             return null;
         }
-        String Android_ID = System.getString(this.getContentResolver(), System.ANDROID_ID);
-
-       /* TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        String Imei= telephonyManager.getDeviceId();*/
-        //return Imei;
-   // }*/
+        String deviceUniqueIdentifier = null;
+        TelephonyManager tm = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+        if (null != tm) {
+            deviceUniqueIdentifier = tm.getDeviceId();
+        }
+        if (null == deviceUniqueIdentifier || 0 == deviceUniqueIdentifier.length()) {
+            deviceUniqueIdentifier = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+        }
+        return deviceUniqueIdentifier;
+    }
 
     private void InsertData ( final String tel1, final String tel2, final String tel3, final String tel4, final String imei,
                               final String version,final String model,final String duree_activite,
