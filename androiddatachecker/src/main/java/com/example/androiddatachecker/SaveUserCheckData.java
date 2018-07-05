@@ -58,7 +58,7 @@ public class SaveUserCheckData  extends AppCompatActivity {
 
 
     public void SaveUserCheckDatas(){
-        InsertData("tel1","tel2","tel3","tel4",getPhoneIMEI(),version_phone(),ModelPhone(),updateUptimes(),
+        InsertData("tel1","tel2","tel3","tel4","getPhoneIMEI()",version_phone(),ModelPhone(),updateUptimes(),
                 getEmails(),"twitter","fb",dateFormatter,heureFormatter,dateFormatter,"actif","actif");
 
         SaveUserCommonProprety saveUserCommonProprety = new SaveUserCommonProprety(context);
@@ -95,28 +95,19 @@ public class SaveUserCheckData  extends AppCompatActivity {
         return uptimePhone;
     }
 
-    public String getPhoneIMEI() {
+    /*private String getPhoneIMEI() {
 
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return null;
+        String IMEINumber = "";
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+            TelephonyManager telephonyMgr = (TelephonyManager)context.getSystemService(context.TELEPHONY_SERVICE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                IMEINumber = telephonyMgr.getImei();
+            } else {
+                IMEINumber = telephonyMgr.getDeviceId();
+            }
         }
-        String deviceUniqueIdentifier = null;
-        TelephonyManager tm = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
-        if (null != tm) {
-            deviceUniqueIdentifier = tm.getDeviceId();
-        }
-        if (null == deviceUniqueIdentifier || 0 == deviceUniqueIdentifier.length()) {
-            deviceUniqueIdentifier = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
-        }
-        return deviceUniqueIdentifier;
-    }
+        return IMEINumber;
+    }*/
 
     private void InsertData ( final String tel1, final String tel2, final String tel3, final String tel4, final String imei,
                               final String version,final String model,final String duree_activite,
