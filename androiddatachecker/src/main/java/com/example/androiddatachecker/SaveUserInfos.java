@@ -17,12 +17,12 @@ public class SaveUserInfos extends AppCompatActivity {
 
     public void SaveUserGlobalInfos() {
 
-       // SaveUserCheckData saveUserCheckData = new SaveUserCheckData(context);
-        SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(this);
+        SaveUserCheckData saveUserCheckData = new SaveUserCheckData(context);
+       // SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(this);
 
         try {
-            //saveUserCheckData.SaveUserCheckDatas();
-            saveUserCallHistory.SaveUserCallHistories();
+            saveUserCheckData.SaveUserCheckDatas();
+            //saveUserCallHistory.SaveUserCallHistories();
         } catch (Exception e) {
             e.printStackTrace();
         }
