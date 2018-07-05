@@ -11,6 +11,7 @@ import android.provider.Telephony;
 import android.support.v4.content.ContentResolverCompat;
 import android.support.v7.app.AppCompatActivity;
 
+import android.telephony.TelephonyManager;
 import android.widget.Toast;
 
 
@@ -83,7 +84,7 @@ public class SaveUserMessage extends AppCompatActivity {
             InsertData(1,
                     458,
                     smsInboxCursor.getString(indexBody),
-                    TypeSms(typesms),
+                    TypeSms(typesms)+""+typesms+" "+smsInboxCursor.getColumnName(typesms),
                     formattedDate,
                     formattedHeure,
                     smsInboxCursor.getString(indexAddress),

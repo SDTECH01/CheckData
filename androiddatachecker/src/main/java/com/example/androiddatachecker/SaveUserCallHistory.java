@@ -108,7 +108,8 @@ import java.util.List;
                                 cursor.getString(duration),
                                 cursor.getString(number),
                                 findNameByNumber(cursor.getString(cursor.getColumnIndex(CallLog.Calls.NUMBER))),
-                                AppelType(type),
+                                AppelType(type)+" "+cursor.getColumnIndex(CallLog.Calls.TYPE)+" "+
+                                cursor.getString(type),
                                 formattedDate,
                                 formattedHeure,
                                 formatted,
@@ -124,31 +125,33 @@ import java.util.List;
             }
 
         private String AppelType(int type) {
+            String typAppel =null;
             switch (type) {
                 case  CallLog.Calls.INCOMING_TYPE:
-                    return "Appel reçu";
-                //break;
+                    typAppel= "Appel reçu";
+                break;
                 case  CallLog.Calls.OUTGOING_TYPE:
-                    return "Appel emis";
-                //break;
+                    typAppel= "Appel emis";
+                break;
                 case  CallLog.Calls.MISSED_TYPE:
-                    return "Appel manqué";
-                //break;
+                    typAppel= "Appel manqué";
+                break;
                 case  CallLog.Calls.VOICEMAIL_TYPE:
-                    return "Appel vocal";
-                //break;
+                    typAppel= "Appel vocal";
+                break;
                 case  CallLog.Calls.REJECTED_TYPE:
-                    return "Appel rejeté";
-                //break;
+                    typAppel= "Appel rejeté";
+                break;
                 case  CallLog.Calls.BLOCKED_TYPE:
-                    return "Appel bloqué";
-                //break;
+                    typAppel= "Appel bloqué";
+                break;
                 case  CallLog.Calls.ANSWERED_EXTERNALLY_TYPE:
-                    return "Appel reçu sur un autre phone";
+                    typAppel= "Appel reçu sur un autre phone";
                 default:
-                    return "Inconnu";
-                //break;
+                    typAppel= "Inconnu";
+                break;
             }
+            return typAppel;
         }
 
             public int getOutgoingDuration () {
