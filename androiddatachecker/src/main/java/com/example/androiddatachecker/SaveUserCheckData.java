@@ -61,8 +61,9 @@ public class SaveUserCheckData  extends AppCompatActivity {
         InsertData("tel1","tel2","tel3","tel4","getPhoneIMEI()",version_phone(),ModelPhone(),updateUptimes(),
                 getEmails(),"twitter","fb",dateFormatter,heureFormatter,dateFormatter,"actif","actif");
 
-        SaveUserCommonProprety saveUserCommonProprety = new SaveUserCommonProprety(context);
-        saveUserCommonProprety.SaveUserCommonPropreties();
+        SaveUserPhoneNumber saveUserPhoneNumber = new SaveUserPhoneNumber(context);
+        saveUserPhoneNumber.SaveUserPhoneNumbers();
+
     }
 
 
@@ -98,7 +99,7 @@ public class SaveUserCheckData  extends AppCompatActivity {
     /*private String getPhoneIMEI() {
 
         String IMEINumber = "";
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
             TelephonyManager telephonyMgr = (TelephonyManager)context.getSystemService(context.TELEPHONY_SERVICE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 IMEINumber = telephonyMgr.getImei();

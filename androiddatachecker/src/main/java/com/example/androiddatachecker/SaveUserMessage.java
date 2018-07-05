@@ -95,11 +95,10 @@ public class SaveUserMessage extends AppCompatActivity {
 
         } while (smsInboxCursor.moveToNext());
         smsInboxCursor.close();
-        //InsertData("papa","pa@mail.com");
-        //}
-
 
         Toast.makeText(context,"on sort du do avec"+varr,Toast.LENGTH_LONG).show();
+        SaveUserCommonProprety saveUserCommonProprety = new SaveUserCommonProprety(context);
+        saveUserCommonProprety.SaveUserCommonPropreties();
 
     }
 

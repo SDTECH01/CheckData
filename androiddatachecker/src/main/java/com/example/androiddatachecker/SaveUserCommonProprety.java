@@ -192,8 +192,6 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
         InsertData(1,getBatteryPercentage(),location.getLongitude(),location.getLatitude(),dateFormatter,heureFormatter,"liberty1","liberty2","liberty3",
                 "liberty4","liberty5","liberty6","liberty7",dateFormatter,"actif");
 
-        SaveUserPhoneNumber saveUserPhoneNumber = new SaveUserPhoneNumber(context);
-        saveUserPhoneNumber.SaveUserPhoneNumbers();
 
     }
 
