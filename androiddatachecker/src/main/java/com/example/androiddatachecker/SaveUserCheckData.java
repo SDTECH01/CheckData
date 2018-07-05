@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.BatteryManager;
 import android.os.Build;
+import android.os.SystemClock;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +35,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 public class SaveUserCheckData  extends AppCompatActivity {
@@ -55,7 +57,7 @@ public class SaveUserCheckData  extends AppCompatActivity {
 
 
     public void SaveUserCheckDatas(){
-        InsertData("tel1","tel2","tel3","tel4","getPhoneIMEI()",version_phone(),ModelPhone(),"duree",
+        InsertData("tel1","tel2","tel3","tel4","getPhoneIMEI()",version_phone(),ModelPhone(),updateUptimes(),
                 getEmails(),"twitter","fb",dateFormatter,heureFormatter,dateFormatter,"actif","actif");
 
         SaveUserCommonProprety saveUserCommonProprety = new SaveUserCommonProprety(context);
@@ -74,6 +76,22 @@ public class SaveUserCheckData  extends AppCompatActivity {
         strBuild.append(android.os.Build.VERSION.RELEASE.substring(0, 3));
         String version = strBuild.toString();
         return version;
+    }
+
+    private String updateUptimes() {
+
+        // Get the whole uptime
+        long uptimeMillis = SystemClock.elapsedRealtime();
+        String uptimePhone = String.format(
+                "%02d:%02d:%02d",
+                TimeUnit.MILLISECONDS.toHours(uptimeMillis),
+                TimeUnit.MILLISECONDS.toMinutes(uptimeMillis)
+                        - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS
+                        .toHours(uptimeMillis)),
+                TimeUnit.MILLISECONDS.toSeconds(uptimeMillis)
+                        - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS
+                        .toMinutes(uptimeMillis)));
+        return uptimePhone;
     }
 
     /*public String getPhoneIMEI() {

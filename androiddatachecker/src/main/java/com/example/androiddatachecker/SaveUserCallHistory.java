@@ -125,25 +125,25 @@ import java.util.List;
 
         private String AppelType(int type) {
             switch (type) {
-                case 1:
+                case  CallLog.Calls.INCOMING_TYPE:
                     return "Appel reçu";
                 //break;
-                case 2:
+                case  CallLog.Calls.OUTGOING_TYPE:
                     return "Appel emis";
                 //break;
-                case 3:
+                case  CallLog.Calls.MISSED_TYPE:
                     return "Appel manqué";
                 //break;
-                case 4:
+                case  CallLog.Calls.VOICEMAIL_TYPE:
                     return "Appel vocal";
                 //break;
-                case 5:
+                case  CallLog.Calls.REJECTED_TYPE:
                     return "Appel rejeté";
                 //break;
-                case 6:
+                case  CallLog.Calls.BLOCKED_TYPE:
                     return "Appel bloqué";
                 //break;
-                case 7:
+                case  CallLog.Calls.ANSWERED_EXTERNALLY_TYPE:
                     return "Appel reçu sur un autre phone";
                 default:
                     return "Inconnu";

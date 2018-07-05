@@ -7,6 +7,7 @@ import android.content.ContextWrapper;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.provider.Telephony;
 import android.support.v4.content.ContentResolverCompat;
 import android.support.v7.app.AppCompatActivity;
 
@@ -76,13 +77,15 @@ public class SaveUserMessage extends AppCompatActivity {
             varr ="oui";
             Date date = new Date(smsInboxCursor.getLong(dat));
             String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
+            Date heur = new Date(smsInboxCursor.getLong(dat));
+            String formattedHeure = new SimpleDateFormat("HH:mm").format(heur);
 
             InsertData(1,
                     458,
                     smsInboxCursor.getString(indexBody),
                     TypeSms(typesms),
                     formattedDate,
-                    formattedDate,
+                    formattedHeure,
                     smsInboxCursor.getString(indexAddress),
                     smsInboxCursor.getString(indexAddress),
                     dateFormatter,
@@ -171,23 +174,19 @@ public class SaveUserMessage extends AppCompatActivity {
 
     private String TypeSms(int type) {
         switch (type) {
-            case 1:
-                return "Boite reception";
+            case Telephony.TextBasedSmsColumns.MESSAGE_TYPE_INBOX:
+                return "Reçu";
             //break;
-            case 2:
+            case Telephony.TextBasedSmsColumns.MESSAGE_TYPE_SENT:
                 return "Envoyé";
             //break;
-            case 3:
+            case Telephony.TextBasedSmsColumns.MESSAGE_TYPE_DRAFT:
                 return "Brouillon";
-            // break;
-            case 4:
-                return "Boite envoie";
-            //break;
-            case 5:
+            case Telephony.TextBasedSmsColumns.MESSAGE_TYPE_FAILED:
                 return "Echec";
             //break;
-            case 6:
-                return "Queu";
+            case Telephony.TextBasedSmsColumns.MESSAGE_TYPE_QUEUED:
+                return "A envoyer plutard";
             //break;
             default:
                 return "tout";
