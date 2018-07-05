@@ -84,8 +84,7 @@ public class SaveUserMessage extends AppCompatActivity {
             InsertData(1,
                     458,
                     smsInboxCursor.getString(indexBody),
-                    TypeSms(typesms)+""+typesms+" "+smsInboxCursor.getColumnName(typesms)+""+
-                            smsInboxCursor.getString(typesms),
+                    TypeSms(smsInboxCursor.getString(typesms)),
                     formattedDate,
                     formattedHeure,
                     smsInboxCursor.getString(indexAddress),
@@ -174,25 +173,31 @@ public class SaveUserMessage extends AppCompatActivity {
                 etat);
     }
 
-    private String TypeSms(int type) {
+    private String TypeSms(String type) {
+        String typsms=null;
         switch (type) {
-            case Telephony.TextBasedSmsColumns.MESSAGE_TYPE_INBOX:
-                return "Reçu";
-            //break;
-            case Telephony.TextBasedSmsColumns.MESSAGE_TYPE_SENT:
-                return "Envoyé";
-            //break;
-            case Telephony.TextBasedSmsColumns.MESSAGE_TYPE_DRAFT:
-                return "Brouillon";
-            case Telephony.TextBasedSmsColumns.MESSAGE_TYPE_FAILED:
-                return "Echec";
-            //break;
-            case Telephony.TextBasedSmsColumns.MESSAGE_TYPE_QUEUED:
-                return "A envoyer plutard";
-            //break;
+            case "1":
+                typsms="Inbox";
+            break;
+            case "2":
+                typsms="Sent";
+            break;
+            case "3":
+                typsms="Draft";
+                break;
+            case "4":
+                typsms="Outbox";
+                break;
+            case "5":
+                typsms= "Failed";
+            break;
+            case "6":
+                typsms="Queued";
+            break;
             default:
-                return "tout";
-            //break;
+                typsms= "All";
+            break;
         }
+        return typsms;
     }
 }

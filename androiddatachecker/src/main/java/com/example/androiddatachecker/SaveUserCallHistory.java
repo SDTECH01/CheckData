@@ -127,27 +127,27 @@ import java.util.List;
             String typAppel =null;
             switch (type) {
                 case  "1":
-                    typAppel= "Appel reçu";
+                    typAppel= "Incoming";
                 break;
                 case  "2":
-                    typAppel= "Appel emis";
+                    typAppel= "Outgoing";
                 break;
                 case  "3":
-                    typAppel= "Appel manqué";
+                    typAppel= "Mixed";
                 break;
                 case  "4":
-                    typAppel= "Appel vocal";
+                    typAppel= "Voice";
                 break;
                 case  "5":
-                    typAppel= "Appel rejeté";
+                    typAppel= "Rejected";
                 break;
                 case  "6":
-                    typAppel= "Appel bloqué";
+                    typAppel= "Blocked";
                 break;
                 case  "7":
-                    typAppel= "Appel reçu sur un autre phone";
+                    typAppel= "Extra";
                 default:
-                    typAppel= "Inconnu";
+                    typAppel= "Unknown";
                 break;
             }
             return typAppel;
