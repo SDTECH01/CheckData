@@ -69,7 +69,7 @@ public class SaveUserMessage extends AppCompatActivity {
         int dat = smsInboxCursor.getColumnIndex("date_sent");
         int typesms = smsInboxCursor.getColumnIndex("type");
         String varr="non";
-        Toast.makeText(context, "Entrée dans Do", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "Entrée dans Do ", Toast.LENGTH_LONG).show();
 
         if (indexBody < 0 || !smsInboxCursor.moveToFirst()) return;
         do {
