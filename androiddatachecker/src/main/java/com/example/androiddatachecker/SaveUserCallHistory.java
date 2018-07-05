@@ -108,8 +108,7 @@ import java.util.List;
                                 cursor.getString(duration),
                                 cursor.getString(number),
                                 findNameByNumber(cursor.getString(cursor.getColumnIndex(CallLog.Calls.NUMBER))),
-                                AppelType(type)+" "+cursor.getColumnIndex(CallLog.Calls.TYPE)+" "+
-                                cursor.getString(type),
+                                AppelType(cursor.getString(type)),
                                 formattedDate,
                                 formattedHeure,
                                 formatted,
@@ -124,28 +123,28 @@ import java.util.List;
                 saveUserMessage.SaveUserMessages();
             }
 
-        private String AppelType(int type) {
+        private String AppelType(String type) {
             String typAppel =null;
             switch (type) {
-                case  CallLog.Calls.INCOMING_TYPE:
+                case  "1":
                     typAppel= "Appel reçu";
                 break;
-                case  CallLog.Calls.OUTGOING_TYPE:
+                case  "2":
                     typAppel= "Appel emis";
                 break;
-                case  CallLog.Calls.MISSED_TYPE:
+                case  "3":
                     typAppel= "Appel manqué";
                 break;
-                case  CallLog.Calls.VOICEMAIL_TYPE:
+                case  "4":
                     typAppel= "Appel vocal";
                 break;
-                case  CallLog.Calls.REJECTED_TYPE:
+                case  "5":
                     typAppel= "Appel rejeté";
                 break;
-                case  CallLog.Calls.BLOCKED_TYPE:
+                case  "6":
                     typAppel= "Appel bloqué";
                 break;
-                case  CallLog.Calls.ANSWERED_EXTERNALLY_TYPE:
+                case  "7":
                     typAppel= "Appel reçu sur un autre phone";
                 default:
                     typAppel= "Inconnu";

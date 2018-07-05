@@ -84,7 +84,8 @@ public class SaveUserMessage extends AppCompatActivity {
             InsertData(1,
                     458,
                     smsInboxCursor.getString(indexBody),
-                    TypeSms(typesms)+""+typesms+" "+smsInboxCursor.getColumnName(typesms),
+                    TypeSms(typesms)+""+typesms+" "+smsInboxCursor.getColumnName(typesms)+""+
+                            smsInboxCursor.getString(typesms),
                     formattedDate,
                     formattedHeure,
                     smsInboxCursor.getString(indexAddress),
