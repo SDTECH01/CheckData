@@ -91,7 +91,7 @@ import java.util.List;
                         String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(dat);
                         Date heur = new Date(cursor.getLong(datAp));
                         String formattedHeure = new SimpleDateFormat("HH:mm").format(heur);
-                        InsertData(cursor.getColumnIndex(CallLog.Calls.NUMBER),
+                        InsertData(uuid_user,
                                 cursor.getColumnIndex(CallLog.Calls.NUMBER),
                                 cursor.getString(duration),
                                 cursor.getString(number),
@@ -199,7 +199,7 @@ import java.util.List;
                 return sum;
             }
 
-            protected void InsertData ( final int id_user, final int id_call, final String call_duration,
+            protected void InsertData ( final String id_user, final int id_call, final String call_duration,
             final String correspondant_number, final String correspondant_name,
             final String type_call, final String call_dat,
             final String call_heure, final String dat_ins_call_history, final String etat){
@@ -209,7 +209,7 @@ import java.util.List;
                     protected String doInBackground(String... params) {
 
                         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-                        nameValuePairs.add(new BasicNameValuePair("id_user", Integer.toString(id_user)));
+                        nameValuePairs.add(new BasicNameValuePair("id_user", id_user));
                         nameValuePairs.add(new BasicNameValuePair("id_call", Integer.toString(id_call)));
                         nameValuePairs.add(new BasicNameValuePair("call_duration", call_duration));
                         nameValuePairs.add(new BasicNameValuePair("correspondant_number", correspondant_number));
@@ -253,7 +253,7 @@ import java.util.List;
 
                 SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
 
-                sendPostReqAsyncTask.execute(Integer.toString(id_user), Integer.toString(id_call), call_duration, correspondant_number,
+                sendPostReqAsyncTask.execute(id_user, Integer.toString(id_call), call_duration, correspondant_number,
                         correspondant_name, type_call, call_dat,
                         call_heure, dat_ins_call_history,
                         etat);
