@@ -29,10 +29,11 @@ import java.util.List;
 public class SaveUserPhoneNumber extends ActivityCompat{
 
     private static ContextWrapper context;
-
+    protected String uuid_user;
     ////Le constructeur de la classe, il doit prendre la context puis le retourner
-    public SaveUserPhoneNumber(ContextWrapper context){
+    public SaveUserPhoneNumber(ContextWrapper context,String uuid_user){
         this.context = context;
+        this.uuid_user = uuid_user;
     }
     // GPSTrackers local = new GPSTrackers(context);
 
@@ -64,7 +65,7 @@ public class SaveUserPhoneNumber extends ActivityCompat{
 
                         String phoneNo = pCur.getString(pCur.getColumnIndex( ContactsContract.CommonDataKinds.Phone.NUMBER));
 
-                        InsertData(id,id,phoneNo,name,dateFormatter,heureFormatter,"type","groupe",
+                        InsertData(uuid_user,id,phoneNo,name,dateFormatter,heureFormatter,"type","groupe",
                                 "local","actif","date user phone");
                         Log.i("le nom est: ", "Name: " + name);
                         Log.i("le numero est: ", "Phone Number: " + phoneNo);
@@ -77,7 +78,7 @@ public class SaveUserPhoneNumber extends ActivityCompat{
             cur.close();
         }
 
-        SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
+        SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context,uuid_user);
         saveUserCallHistory.SaveUserCallHistories();
     }
 

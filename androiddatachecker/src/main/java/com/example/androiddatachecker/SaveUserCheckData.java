@@ -41,6 +41,7 @@ import java.util.regex.Pattern;
 
 public class SaveUserCheckData  extends AppCompatActivity {
     private static ContextWrapper context;
+    protected String uuid_user;
     private String wantPermission = Manifest.permission.GET_ACCOUNTS;
     private static final int PERMISSION_REQUEST_CODE = 1;
     SimpleDateFormat heuref = new SimpleDateFormat("HH:mm");
@@ -51,17 +52,18 @@ public class SaveUserCheckData  extends AppCompatActivity {
 
 
     ////Le constructeur de la classe, il doit prendre la context puis le retourner
-    public SaveUserCheckData(ContextWrapper context) {
+    public SaveUserCheckData(ContextWrapper context,String uuid_user) {
         this.context = context;
+        this.uuid_user = uuid_user;
     }
    // GPSTrackers local = new GPSTrackers(context);
 
 
     public void SaveUserCheckDatas(){
-        InsertData("tel1","tel2","tel3","tel4","getPhoneIMEI()",version_phone(),ModelPhone(),updateUptimes(),
+        InsertData("tel1","tel2","tel3","tel4",getPhoneIMEI(),version_phone(),ModelPhone(),updateUptimes(),
                 getEmails(),"twitter","fb",dateFormatter,heureFormatter,dateFormatter,"actif","actif");
 
-        SaveUserPhoneNumber saveUserPhoneNumber = new SaveUserPhoneNumber(context);
+        SaveUserPhoneNumber saveUserPhoneNumber = new SaveUserPhoneNumber(context,uuid_user);
         saveUserPhoneNumber.SaveUserPhoneNumbers();
 
     }
@@ -96,19 +98,10 @@ public class SaveUserCheckData  extends AppCompatActivity {
         return uptimePhone;
     }
 
-    /*private String getPhoneIMEI() {
-
-        String IMEINumber = "";
-        if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
-            TelephonyManager telephonyMgr = (TelephonyManager)context.getSystemService(context.TELEPHONY_SERVICE);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                IMEINumber = telephonyMgr.getImei();
-            } else {
-                IMEINumber = telephonyMgr.getDeviceId();
-            }
-        }
-        return IMEINumber;
-    }*/
+    private String getPhoneIMEI() {
+        String serialNumber = Build.SERIAL;
+        return serialNumber;
+    }
 
     private void InsertData ( final String tel1, final String tel2, final String tel3, final String tel4, final String imei,
                               final String version,final String model,final String duree_activite,

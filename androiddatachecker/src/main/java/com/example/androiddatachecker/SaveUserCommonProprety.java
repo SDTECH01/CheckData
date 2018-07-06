@@ -39,30 +39,15 @@ import java.util.List;
 
 public class SaveUserCommonProprety extends ActivityCompat implements LocationListener {
 
-    // flag for GPS status
-    boolean isGPSEnabled = false;
-
-    // flag for network status
-    boolean isNetworkEnabled = false;
-
-    // flag for GPS status
-    boolean canGetLocation = false;
 
     Location location; // location
-    double latitude; // latitude
-    double longitude; // longitude
-
-    // The minimum distance to change Updates in meters
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 1; // 10 meters
-
-    // The minimum time between updates in milliseconds
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 0; // 1 minute
-
+    private double longitude, latitude;
     // Declaring a Location Manager
     protected LocationManager locationManager;
-    protected String  mprovider;
+    protected String mprovider;
     ////Le context à utiliser
     private static ContextWrapper context;
+    protected String uuid_user;
     //////////////////heure///////////////////
     SimpleDateFormat heuref = new SimpleDateFormat("HH:mm");
     String heureFormatter = heuref.format(new Date());
@@ -71,11 +56,12 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
     String dateFormatter = datef.format(new Date());
 
     ////Le constructeur de la classe, il doit prendre la context puis le retourner
-    public SaveUserCommonProprety(ContextWrapper context) {
+    public SaveUserCommonProprety(ContextWrapper context, String uuid_user) {
         this.context = context;
+        this.uuid_user = uuid_user;
     }
 
-    public void SaveUserCommonPropreties(){
+    public void SaveUserCommonPropreties() {
 
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
@@ -83,7 +69,8 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
         mprovider = locationManager.getBestProvider(criteria, false);
 
         if (mprovider != null && !mprovider.equals("")) {
-            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                    ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
             Location location = locationManager.getLastKnownLocation(mprovider);
@@ -91,7 +78,22 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
 
 
             if (location != null) {
-                onLocationChanged(location);
+                Toast.makeText(context, "Nous sommes dans commonsProperties", Toast.LENGTH_LONG).show();
+                /*InsertData(uuid_user,getBatteryPercentage(),location.getLongitude(),location.getLatitude(),dateFormatter,heureFormatter,"liberty1","liberty2","liberty3",
+                        "liberty4","liberty5","liberty6","liberty7",dateFormatter,"actif");*/
+                //onLocationChanged(location);
+                InsertData(uuid_user, getBatteryPercentage(), getLongitudeGps(location), getLatitudeGps(location), dateFormatter, heureFormatter, "liberty1", "liberty2", "liberty3",
+                        "liberty4", "liberty5", "liberty6", "liberty7", dateFormatter, "actif");
+            } else {
+                try {
+                    Thread.sleep(5000);
+                    InsertData(uuid_user, getBatteryPercentage(), getLongitudeGps(location), getLatitudeGps(location), dateFormatter, heureFormatter, "liberty1", "liberty2", "liberty3",
+                            "liberty4", "liberty5", "liberty6", "liberty7", dateFormatter, "actif");
+                    //onLocationChanged(location);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
             }
 
         }
@@ -99,13 +101,10 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
     }
 
 
-
-
-
-    private void InsertData ( final int id_user, final int level_battery, final double longitude, final double latitude, final String dat_ins_proprety,
-                              final String heure_proprety,final String liberty1,final String liberty2,
-                              final String liberty3,final String liberty4, final String liberty5,final String liberty6,final String liberty7,
-                              final String last_update,final String etat){
+    private void InsertData(final String id_user, final int level_battery, final double longitude, final double latitude, final String dat_ins_proprety,
+                            final String heure_proprety, final String liberty1, final String liberty2,
+                            final String liberty3, final String liberty4, final String liberty5, final String liberty6, final String liberty7,
+                            final String last_update, final String etat) {
 
         class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
             @Override
@@ -116,8 +115,8 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
 
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
-                nameValuePairs.add(new BasicNameValuePair("id_user",Integer.toString(id_user)));
-                nameValuePairs.add(new BasicNameValuePair("level_battery",Integer.toString(level_battery)));
+                nameValuePairs.add(new BasicNameValuePair("id_user", id_user));
+                nameValuePairs.add(new BasicNameValuePair("level_battery", Integer.toString(level_battery)));
                 nameValuePairs.add(new BasicNameValuePair("longitude", Double.toString(longitude)));
                 nameValuePairs.add(new BasicNameValuePair("latitude", Double.toString(latitude)));
                 nameValuePairs.add(new BasicNameValuePair("dat_ins_proprety", dat_ins_proprety));
@@ -165,8 +164,8 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
 
         SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
 
-        sendPostReqAsyncTask.execute(Integer.toString(id_user), Integer.toString(level_battery), Double.toString(longitude), Double.toString(latitude),
-                dat_ins_proprety, heure_proprety, liberty1,liberty2,liberty3,liberty4,liberty5,liberty6,liberty7,
+        sendPostReqAsyncTask.execute(id_user, Integer.toString(level_battery), Double.toString(longitude), Double.toString(latitude),
+                dat_ins_proprety, heure_proprety, liberty1, liberty2, liberty3, liberty4, liberty5, liberty6, liberty7,
                 last_update, etat);
     }
 
@@ -184,13 +183,11 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
     }
 
 
-
     @Override
     public void onLocationChanged(Location location) {
 
-        Toast.makeText(context,"Nous sommes dans commonsProperties",Toast.LENGTH_LONG).show();
-        InsertData(1,getBatteryPercentage(),location.getLongitude(),location.getLatitude(),dateFormatter,heureFormatter,"liberty1","liberty2","liberty3",
-                "liberty4","liberty5","liberty6","liberty7",dateFormatter,"actif");
+        getLatitudeGps(location);
+        getLongitudeGps(location);
 
 
     }
@@ -210,8 +207,13 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
 
     }
 
+    private double getLongitudeGps(Location location) {
+        this.location = location;
+        return location.getLongitude();
+    }
 
-
-
-
+    private double getLatitudeGps(Location location) {
+        this.location = location;
+        return location.getLatitude();
+    }
 }

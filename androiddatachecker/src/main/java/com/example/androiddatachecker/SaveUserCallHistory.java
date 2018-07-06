@@ -50,27 +50,18 @@ import java.util.List;
 
     public class SaveUserCallHistory extends AppCompatActivity {
 
-        public static final int INCOMING = CallLog.Calls.INCOMING_TYPE;
-        public static final int OUTGOING = CallLog.Calls.OUTGOING_TYPE;
-        public static final int MISSED = CallLog.Calls.MISSED_TYPE;
-        public static final int TOTAL = 579;
-
-        public static final int INCOMING_CALLS = 672;
-        public static final int OUTGOING_CALLS = 609;
-        public static final int MISSED_CALLS = 874;
-        public static final int ALL_CALLS = 814;
-        private static final int READ_CALL_LOG = 47;
-
 
         //public static final int NUMERO_USER = TelephonyManager.
         private static String[] requiredPermissions = {Manifest.permission.READ_CALL_LOG, Manifest.permission.READ_CONTACTS};
 
         private static ContextWrapper context;
+        protected String uuid_user;
         //public Context context = (Application)getBaseContext();
 
         ///////////////////le context de l'application///////////////////
-        public SaveUserCallHistory(ContextWrapper context) {
+        public SaveUserCallHistory(ContextWrapper context,String uuid_user) {
                 this.context = context;
+            this.uuid_user = uuid_user;
             }
             //public Context context = (Application)getBaseContext();
 
@@ -78,9 +69,6 @@ import java.util.List;
 
             protected void SaveUserCallHistories () {
 
-
-
-                SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context);
 
                 if (ActivityCompat.checkSelfPermission((Activity) context, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions((Activity) context, new String[]{
@@ -119,7 +107,7 @@ import java.util.List;
 
 
                 }
-                SaveUserMessage saveUserMessage = new SaveUserMessage(context);
+                SaveUserMessage saveUserMessage = new SaveUserMessage(context,uuid_user);
                 saveUserMessage.SaveUserMessages();
             }
 

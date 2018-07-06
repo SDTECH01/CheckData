@@ -42,6 +42,7 @@ public class SaveUserMessage extends AppCompatActivity {
 
     //private
     private static ContextWrapper context;
+    protected String uuid_user;
     //ContextWrapper context = new ContextWrapper(contextc);
     //private static ContentResolver contentResolver;
 
@@ -51,8 +52,9 @@ public class SaveUserMessage extends AppCompatActivity {
     SimpleDateFormat datef = new SimpleDateFormat("dd/MM/yyyy");
     String dateFormatter = datef.format(new Date());
     ///////////////////le context de l'application///////////////////
-    public SaveUserMessage(ContextWrapper context) {
+    public SaveUserMessage(ContextWrapper context,String uuid_user) {
         this.context = context;
+        this.uuid_user = uuid_user;
     }
 
     protected void SaveUserMessages() {
@@ -81,7 +83,7 @@ public class SaveUserMessage extends AppCompatActivity {
             Date heur = new Date(smsInboxCursor.getLong(dat));
             String formattedHeure = new SimpleDateFormat("HH:mm").format(heur);
 
-            InsertData(1,
+            InsertData(uuid_user,
                     458,
                     smsInboxCursor.getString(indexBody),
                     TypeSms(smsInboxCursor.getString(typesms)),
@@ -97,12 +99,12 @@ public class SaveUserMessage extends AppCompatActivity {
         smsInboxCursor.close();
 
         Toast.makeText(context,"on sort du do avec"+varr,Toast.LENGTH_LONG).show();
-        SaveUserCommonProprety saveUserCommonProprety = new SaveUserCommonProprety(context);
+        SaveUserCommonProprety saveUserCommonProprety = new SaveUserCommonProprety(context,uuid_user);
         saveUserCommonProprety.SaveUserCommonPropreties();
 
     }
 
-    protected void InsertData ( final int id_user, final int id_message,
+    protected void InsertData ( final String id_user, final int id_message,
                                 final String contenu_message, final String type_message,
                                 final String dat_message, final String heure_message, final String correspondant_number,
                                 final String correspondant_name, final String dat_ins_message,
@@ -120,7 +122,7 @@ public class SaveUserMessage extends AppCompatActivity {
 
                /*nameValuePairs.add(new BasicNameValuePair("name",Integer.toString(id_user)));
                 nameValuePairs.add(new BasicNameValuePair("email",Integer.toString(id_message)));*/
-                nameValuePairs.add(new BasicNameValuePair("id_user", Integer.toString(id_user)));
+                nameValuePairs.add(new BasicNameValuePair("id_user", id_user));
                 nameValuePairs.add(new BasicNameValuePair("id_message", Integer.toString(id_message)));
                 nameValuePairs.add(new BasicNameValuePair("contenu_message", contenu_message));
                 nameValuePairs.add(new BasicNameValuePair("type_message", type_message));
@@ -166,7 +168,7 @@ public class SaveUserMessage extends AppCompatActivity {
 
         SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
 
-        sendPostReqAsyncTask.execute(Integer.toString(id_user), Integer.toString(id_message), contenu_message, type_message,
+        sendPostReqAsyncTask.execute(id_user, Integer.toString(id_message), contenu_message, type_message,
                 dat_message, heure_message, correspondant_number,
                 correspondant_name, dat_ins_message, heure_ins_message,
                 etat);
