@@ -19,7 +19,6 @@ import android.os.Bundle;
 
 import android.support.v4.app.ActivityCompat;
 
-import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -78,7 +77,7 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
 
 
             if (location != null) {
-                Toast.makeText(context, "Nous sommes dans commonsProperties", Toast.LENGTH_LONG).show();
+
                 /*InsertData(uuid_user,getBatteryPercentage(),location.getLongitude(),location.getLatitude(),dateFormatter,heureFormatter,"liberty1","liberty2","liberty3",
                         "liberty4","liberty5","liberty6","liberty7",dateFormatter,"actif");*/
                 //onLocationChanged(location);
@@ -86,7 +85,7 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
                         "liberty4", "liberty5", "liberty6", "liberty7", dateFormatter, "actif");
             } else {
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(3000);
                     InsertData(uuid_user, getBatteryPercentage(), getLongitudeGps(location), getLatitudeGps(location), dateFormatter, heureFormatter, "liberty1", "liberty2", "liberty3",
                             "liberty4", "liberty5", "liberty6", "liberty7", dateFormatter, "actif");
                     //onLocationChanged(location);
@@ -157,7 +156,6 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
 
                 super.onPostExecute(result);
 
-                //Toast.makeText(MainActivity.this, "Data Submit Successfully", Toast.LENGTH_LONG).show();
 
             }
         }

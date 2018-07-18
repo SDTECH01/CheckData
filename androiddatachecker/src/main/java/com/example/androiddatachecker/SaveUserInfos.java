@@ -2,7 +2,7 @@ package com.example.androiddatachecker;
 
 import android.content.ContextWrapper;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
+
 
 
 public class SaveUserInfos extends AppCompatActivity {
@@ -20,11 +20,11 @@ public class SaveUserInfos extends AppCompatActivity {
     public void SaveUserGlobalInfos() {
 
         SaveUserCheckData saveUserCheckData = new SaveUserCheckData(context,uuid_user);
-       // SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(this);
+
 
         try {
             saveUserCheckData.SaveUserCheckDatas();
-            //saveUserCallHistory.SaveUserCallHistories();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

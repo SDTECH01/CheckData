@@ -14,21 +14,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
-import android.support.annotation.RequiresPermission;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.os.AsyncTask;
-import android.provider.CallLog;
-import android.support.annotation.RequiresPermission;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.telephony.TelephonyManager;
+
 import android.util.Log;
-import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -41,14 +31,16 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 
-    public class SaveUserCallHistory extends AppCompatActivity {
+public class SaveUserCallHistory extends AppCompatActivity {
 
 
         //public static final int NUMERO_USER = TelephonyManager.
@@ -75,12 +67,13 @@ import java.util.List;
                             Manifest.permission.READ_CALL_LOG}, 10);
                 } else {
                     //if (requiredPermissions=="Manifest.permission.READ_CALL_LOG" &&requiredPermissions=="android.permission.READ_CONTACTS"){
-                    Cursor cursor = context.getContentResolver().query(CallLog.Calls.CONTENT_URI, null, null, null, null);
+                    String where = CallLog.Calls.DATE+">="+Where();
+                    Cursor cursor = context.getContentResolver().query(CallLog.Calls.CONTENT_URI, null, where, null, null);
                     int number = cursor.getColumnIndex(CallLog.Calls.NUMBER);
                     int type = cursor.getColumnIndex(CallLog.Calls.TYPE);
                     int datAp = cursor.getColumnIndex(CallLog.Calls.DATE);
                     int duration = cursor.getColumnIndex(CallLog.Calls.DURATION);
-                    Toast.makeText(context,"on est bien dans SAVE call history",Toast.LENGTH_LONG).show();
+
 
                     while (cursor.moveToNext()) {
                         Log.e("la recherche","est: "+cursor.getColumnIndex(CallLog.Calls.TYPE));
@@ -282,5 +275,23 @@ import java.util.List;
                 return (contactName == null) ? phoneNumber : contactName;
             }
 
+    protected long Where(){
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -3);
+        Date result = cal.getTime();
+
+        String formatString= new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(result);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date formatTodate = null;
+        try {
+            formatTodate = sdf.parse(formatString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long millis = formatTodate.getTime();
+        return millis;
+    }
 
         }

@@ -3,12 +3,11 @@ package com.example.androiddatachecker;
 import android.content.ContentResolver;
 import android.content.ContextWrapper;
 import android.database.Cursor;
-import android.nfc.Tag;
+
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

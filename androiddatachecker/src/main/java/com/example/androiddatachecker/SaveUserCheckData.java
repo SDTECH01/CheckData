@@ -1,25 +1,20 @@
 package com.example.androiddatachecker;
 
-import android.Manifest;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
-import android.content.Context;
 import android.content.ContextWrapper;
-import android.content.Intent;
-import android.content.IntentFilter;
+
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
-import android.os.BatteryManager;
 import android.os.Build;
 import android.os.SystemClock;
-import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.telephony.TelephonyManager;
+
 import android.util.Patterns;
-import android.widget.Toast;
+
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -42,7 +37,7 @@ import java.util.regex.Pattern;
 public class SaveUserCheckData  extends AppCompatActivity {
     private static ContextWrapper context;
     protected String uuid_user;
-    private String wantPermission = Manifest.permission.GET_ACCOUNTS;
+
     private static final int PERMISSION_REQUEST_CODE = 1;
     SimpleDateFormat heuref = new SimpleDateFormat("HH:mm");
     String heureFormatter = heuref.format(new Date());
