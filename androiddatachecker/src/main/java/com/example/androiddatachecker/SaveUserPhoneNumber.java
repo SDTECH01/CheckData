@@ -62,6 +62,7 @@ public class SaveUserPhoneNumber extends ActivityCompat{
                             new String[]{id}, null);
 
                     while (pCur.moveToNext()) {
+
                         numberContact+=1;
                         String phoneNo = pCur.getString(pCur.getColumnIndex( ContactsContract.CommonDataKinds.Phone.NUMBER));
 
@@ -69,11 +70,12 @@ public class SaveUserPhoneNumber extends ActivityCompat{
                                 "local","actif","date user phone");*/
 
                     }
-                    InsertData(uuid_user,"0",Integer.toString(numberContact),"nom",dateFormatter,heureFormatter,"type","groupe",
-                            "local","actif","date user phone");
+
                     pCur.close();
                 }
             }
+            InsertData(uuid_user,"0",Integer.toString(numberContact),"nom",dateFormatter,heureFormatter,"type","groupe",
+                    "local","actif","date user phone");
         }
         if(cur!=null){
             cur.close();
