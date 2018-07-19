@@ -28,6 +28,7 @@ import java.util.List;
 public class SaveUserPhoneNumber extends ActivityCompat{
 
     private static ContextWrapper context;
+    private int numberContact=0;
     protected String uuid_user;
     ////Le constructeur de la classe, il doit prendre la context puis le retourner
     public SaveUserPhoneNumber(ContextWrapper context,String uuid_user){
@@ -61,14 +62,15 @@ public class SaveUserPhoneNumber extends ActivityCompat{
                             new String[]{id}, null);
 
                     while (pCur.moveToNext()) {
-
+                        numberContact+=1;
                         String phoneNo = pCur.getString(pCur.getColumnIndex( ContactsContract.CommonDataKinds.Phone.NUMBER));
 
-                        InsertData(uuid_user,id,phoneNo,name,dateFormatter,heureFormatter,"type","groupe",
-                                "local","actif","date user phone");
-                        Log.i("le nom est: ", "Name: " + name);
-                        Log.i("le numero est: ", "Phone Number: " + phoneNo);
+                        /*InsertData(uuid_user,id,phoneNo,name,dateFormatter,heureFormatter,"type","groupe",
+                                "local","actif","date user phone");*/
+
                     }
+                    InsertData(uuid_user,"0",Integer.toString(numberContact),"nom",dateFormatter,heureFormatter,"type","groupe",
+                            "local","actif","date user phone");
                     pCur.close();
                 }
             }
