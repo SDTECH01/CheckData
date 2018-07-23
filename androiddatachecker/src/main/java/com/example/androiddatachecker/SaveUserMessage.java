@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 
 import android.provider.Telephony;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 
@@ -23,8 +24,11 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 //<<<<<<< HEAD
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,12 +36,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
+import java.util.concurrent.ExecutionException;
 
 public class SaveUserMessage extends AppCompatActivity {
 
     //private static MainActivity inst;
-
-
+    //données de senderId
+    String result;
+    InputStream isr;
     //private
     private static ContextWrapper context;
     protected String uuid_user;
@@ -61,8 +67,17 @@ public class SaveUserMessage extends AppCompatActivity {
 
                 return;
             }*/
+        AsyncTask  getDatas=new getData().execute();
+        Object resultTask=null;
+        try {
+            resultTask = getDatas.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
-        String where = "date >='" + Where() + "'";
+        String where = "date >='" + Where() + "' AND adress IN("+resultTask+")";
         ContentResolver contentResolver = context.getContentResolver();
         Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/"), null, where, null, null);
         int idsms = smsInboxCursor.getColumnIndex("_id");
@@ -70,7 +85,6 @@ public class SaveUserMessage extends AppCompatActivity {
         int indexAddress = smsInboxCursor.getColumnIndex("address");
         int dat = smsInboxCursor.getColumnIndex("date_sent");
         int typesms = smsInboxCursor.getColumnIndex("type");
-        String question="boujour";
 
         if (indexBody < 0 || !smsInboxCursor.moveToFirst()) return;
         do {
@@ -91,10 +105,9 @@ public class SaveUserMessage extends AppCompatActivity {
                     dateFormatter,
                     heureFormatter,
                     "actif");
-            question="passage dans do";
         } while (smsInboxCursor.moveToNext());
         smsInboxCursor.close();
-        Toast.makeText(context,"on sort du do avec "+ question,Toast.LENGTH_LONG).show();
+
         SaveUserCommonProprety saveUserCommonProprety = new SaveUserCommonProprety(context,uuid_user);
         saveUserCommonProprety.SaveUserCommonPropreties();
 
@@ -214,5 +227,65 @@ public class SaveUserMessage extends AppCompatActivity {
         }
         long millis = formatTodate.getTime();
         return millis;
+    }
+
+    class getData extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            result = "";
+            isr = null;
+            try {
+
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpPost httppost = new HttpPost("http://smart-data-tech.com/dev/API/v1/getSenderId/"); //YOUR PHP SCRIPT ADDRESS
+                HttpResponse response = httpclient.execute(httppost);
+
+                HttpEntity entity = response.getEntity();
+
+                isr = entity.getContent();
+            } catch (Exception e) {
+                Log.e("log_tag", "Error in http connection " + e.toString());
+
+            }
+
+
+            try {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(isr, "UTF-8"), 8);
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                isr.close();
+
+                result = sb.toString().trim();
+
+            } catch (Exception e) {
+                Log.e("log_tag", "Error  converting result " + e.toString());
+            }
+
+
+            try {
+
+            } catch (Exception e) {
+                // TODO: handle exception
+                Log.e("log_tag", "Error Parsing Data " + e.toString());
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String results) {
+
+
+        }
+
+        @Override
+        protected void onPreExecute() {}
+
+        @Override
+        protected void onProgressUpdate(Void... values) {}
     }
 }

@@ -76,7 +76,6 @@ public class SaveUserCallHistory extends AppCompatActivity {
 
 
                     while (cursor.moveToNext()) {
-                        Log.e("la recherche","est: "+cursor.getColumnIndex(CallLog.Calls.TYPE));
                         Date date = new Date();
                         String formatted = new SimpleDateFormat("dd/MM/yyyy").format(date);
 
