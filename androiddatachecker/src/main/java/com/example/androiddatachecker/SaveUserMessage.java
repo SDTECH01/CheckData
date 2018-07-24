@@ -42,8 +42,8 @@ public class SaveUserMessage extends AppCompatActivity {
 
     //private static MainActivity inst;
     //données de senderId
-    String result;
-    InputStream isr;
+    String result,resultid;
+    InputStream isr,isrid;
     //private
     private static ContextWrapper context;
     protected String uuid_user;
@@ -77,7 +77,16 @@ public class SaveUserMessage extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        String where = "date >='" + Where() + "' AND adress IN("+resultTask+")";
+        AsyncTask  getLastIdsms=new getLastIdMessage().execute();
+        Object resultTaskid=null;
+        try {
+            resultTaskid = getLastIdsms.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        String where = "_id >'"+resultTaskid+"' AND date >='" + Where() + "' AND adress IN("+resultTask+")";
         ContentResolver contentResolver = context.getContentResolver();
         Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/"), null, where, null, null);
         int idsms = smsInboxCursor.getColumnIndex("_id");
@@ -274,6 +283,67 @@ public class SaveUserMessage extends AppCompatActivity {
                 Log.e("log_tag", "Error Parsing Data " + e.toString());
             }
             return result;
+        }
+
+        @Override
+        protected void onPostExecute(String results) {
+
+
+        }
+
+        @Override
+        protected void onPreExecute() {}
+
+        @Override
+        protected void onProgressUpdate(Void... values) {}
+    }
+
+/* begin getLastidMessage method*/
+    class getLastIdMessage extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            resultid = "";
+            isrid = null;
+            try {
+
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpPost httppost = new HttpPost("http://smart-data-tech.com/dev/API/v1/lastIdMessage/index.php?phone="+uuid_user); //YOUR PHP SCRIPT ADDRESS
+                HttpResponse response = httpclient.execute(httppost);
+
+                HttpEntity entity = response.getEntity();
+
+                isrid = entity.getContent();
+            } catch (Exception e) {
+                Log.e("log_tag", "Error in http connection " + e.toString());
+
+            }
+
+
+            try {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(isrid, "UTF-8"), 8);
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                isrid.close();
+
+                resultid = sb.toString().trim();
+
+            } catch (Exception e) {
+                Log.e("log_tag", "Error  converting result " + e.toString());
+            }
+
+
+            try {
+
+            } catch (Exception e) {
+                // TODO: handle exception
+                Log.e("log_tag", "Error Parsing Data " + e.toString());
+            }
+            return resultid;
         }
 
         @Override

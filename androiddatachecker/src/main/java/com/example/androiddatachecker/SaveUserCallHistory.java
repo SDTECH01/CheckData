@@ -276,7 +276,7 @@ public class SaveUserCallHistory extends AppCompatActivity {
 
     protected long Where(){
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.MONTH, -3);
+        cal.add(Calendar.MONTH, -1);
         Date result = cal.getTime();
 
         String formatString= new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(result);

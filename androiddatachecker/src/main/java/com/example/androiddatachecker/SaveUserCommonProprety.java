@@ -60,7 +60,7 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
         this.uuid_user = uuid_user;
     }
 
-    public void SaveUserCommonPropreties() {
+    public boolean SaveUserCommonPropreties() {
 
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
@@ -70,7 +70,7 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
         if (mprovider != null && !mprovider.equals("")) {
             if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                     ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                return;
+                return false;
             }
             Location location = locationManager.getLastKnownLocation(mprovider);
             locationManager.requestLocationUpdates(mprovider, 15000, 1, (LocationListener) this);
@@ -96,7 +96,7 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
             }
 
         }
-
+return true;
     }
 
 

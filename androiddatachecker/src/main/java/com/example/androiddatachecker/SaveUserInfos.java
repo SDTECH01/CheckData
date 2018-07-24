@@ -17,11 +17,9 @@ public class SaveUserInfos extends AppCompatActivity {
 
 
 
-    public void SaveUserGlobalInfos() {
+    public void getStarter() {
 
         SaveUserCheckData saveUserCheckData = new SaveUserCheckData(context,uuid_user);
-
-
         try {
             saveUserCheckData.SaveUserCheckDatas();
 
