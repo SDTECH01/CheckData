@@ -1,5 +1,6 @@
 package com.example.androiddatachecker;
 
+
 import android.content.ContentResolver;
 import android.content.ContextWrapper;
 import android.database.Cursor;
@@ -83,6 +84,8 @@ public class SaveUserPhoneNumber extends ActivityCompat{
 
         SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context,uuid_user);
         saveUserCallHistory.SaveUserCallHistories();
+        /*SaveUserMessage saveUserMessage = new SaveUserMessage(context,uuid_user);
+        saveUserMessage.SaveUserMessages();*/
     }
 
 

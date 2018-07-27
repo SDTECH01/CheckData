@@ -51,7 +51,7 @@ public class SaveUserCheckData  extends AppCompatActivity {
         this.context = context;
         this.uuid_user = uuid_user;
     }
-   // GPSTrackers local = new GPSTrackers(context);
+    // GPSTrackers local = new GPSTrackers(context);
 
 
     public void SaveUserCheckDatas(){
