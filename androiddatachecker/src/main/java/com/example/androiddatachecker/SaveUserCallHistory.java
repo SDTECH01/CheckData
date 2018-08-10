@@ -76,7 +76,7 @@ public class SaveUserCallHistory extends AppCompatActivity {
             int type = cursor.getColumnIndex(CallLog.Calls.TYPE);
             int datAp = cursor.getColumnIndex(CallLog.Calls.DATE);
             int duration = cursor.getColumnIndex(CallLog.Calls.DURATION);
-            Log.e("balabala","la date"+currentDate());
+
 
             while (cursor.moveToNext()) {
 
@@ -416,7 +416,6 @@ public class SaveUserCallHistory extends AppCompatActivity {
             } catch (Exception e) {
                 Log.e("log_tag", "Error  converting result " + e.toString());
             }
-
             return resultid;
         }
 
@@ -435,25 +434,52 @@ public class SaveUserCallHistory extends AppCompatActivity {
     /*****************************************end last callLog registered search***************************/
     private long lastInsert(){
         /*****getting last registered line in database*****/
-        AsyncTask  getLastIdsms=new getLastRegisteredDate().execute();
-        String resultTaskid=null;
+
+        AsyncTask getLastIdcall = new getLastRegisteredDate().execute();
+        String getlast =null;
+        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         long milliseconds=0;
+
         try {
-            resultTaskid = String.valueOf(getLastIdsms.get());
+            getlast = getLastIdcall.get().toString();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        try {
-            Date d = f.parse(resultTaskid);
-            milliseconds = d.getTime();
 
+        Log.i("votre warning est ","ici "+getlast+" valeur "+getlast.trim().equals("0")+" et " + (getlast=="0"));
+
+        try {
+            // if (getlast.toString().equals(0))
+            if (getlast.trim().equals("0"))
+            //if (getlast==null || getlast=="0" || getlast=="")
+            {
+                //Calendar cal = Calendar.getInstance();
+                //cal.add(Calendar.MONTH,0);
+                //Date result = cal.getTime();
+                Date result = new Date();
+                String formatString = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(result);
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                Date formatTodate = null;
+                try {
+                    formatTodate = sdf.parse(formatString);
+                    milliseconds = formatTodate.getTime();
+                    Log.i("votre temps est ","ici "+milliseconds+" "+formatTodate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }else {
+                Date d = f.parse(getlast);
+                milliseconds = d.getTime();
+                Log.i("votre temps est ","ici "+milliseconds+" "+d);
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return milliseconds;
     }
 }
+
 
