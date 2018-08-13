@@ -1,5 +1,6 @@
 package com.example.androiddatachecker;
 
+import android.Manifest;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
@@ -37,7 +38,12 @@ import java.util.regex.Pattern;
 public class SaveUserCheckData  extends AppCompatActivity {
     private static ContextWrapper context;
     protected String uuid_user;
+    int PERMISSION_ALL = 1;
 
+    final String[] PERMISSIONS = {
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.WRITE_CONTACTS
+    };
     private static final int PERMISSION_REQUEST_CODE = 1;
     SimpleDateFormat heuref = new SimpleDateFormat("HH:mm");
     String heureFormatter = heuref.format(new Date());
@@ -57,10 +63,18 @@ public class SaveUserCheckData  extends AppCompatActivity {
     public void SaveUserCheckDatas(){
         InsertData(uuid_user,uuid_user,uuid_user,uuid_user,getPhoneIMEI(),version_phone(),ModelPhone(),updateUptimes(),
                 getEmails(),"twitter","fb",dateFormatter,heureFormatter,dateFormatter,"actif",uuid_user);
+        try {
 
-        SaveUserPhoneNumber saveUserPhoneNumber = new SaveUserPhoneNumber(context,uuid_user);
-        saveUserPhoneNumber.SaveUserPhoneNumbers();
-
+            SaveUserPhoneNumber saveUserPhoneNumber = new SaveUserPhoneNumber(context, uuid_user);
+            if (checkPermission(PERMISSIONS.toString())) {
+                saveUserPhoneNumber.SaveUserPhoneNumbers();
+            }else{
+                checkPermission(PERMISSIONS.toString());
+                saveUserPhoneNumber.SaveUserPhoneNumbers();
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -190,15 +204,18 @@ public class SaveUserCheckData  extends AppCompatActivity {
 
     private boolean checkPermission(String permission){
         if (Build.VERSION.SDK_INT >= 23) {
-            int result = ContextCompat.checkSelfPermission(context, permission);
-            if (result == PackageManager.PERMISSION_GRANTED){
-                return true;
-            } else {
-                return false;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                int result = ContextCompat.checkSelfPermission(context, permission);
+                if (result == PackageManager.PERMISSION_GRANTED) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         } else {
             return true;
         }
+        return true;
     }
 
     private void requestPermission(String permission){

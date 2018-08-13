@@ -1,5 +1,6 @@
 package com.example.androiddatachecker;
 
+
 import android.Manifest;
 import android.content.ContentResolver;
 import android.content.ContextWrapper;
@@ -53,70 +54,71 @@ public class SaveUserPhoneNumber extends AppCompatActivity {
     // GPSTrackers local = new GPSTrackers(context);
 
     public void SaveUserPhoneNumbers() {
-        if (checkPermission(PERMISSIONS.toString())) {
-            ContentResolver cr = context.getContentResolver();
-            Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
-                    null, null, null, null);
+        checkPermission(PERMISSIONS.toString());
+        ContentResolver cr = context.getContentResolver();
+        Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
+                null, null, null, null);
 
-            SimpleDateFormat heuref = new SimpleDateFormat("HH:mm");
-            String heureFormatter = heuref.format(new Date());
+        SimpleDateFormat heuref = new SimpleDateFormat("HH:mm");
+        String heureFormatter = heuref.format(new Date());
 
-            ////////////////date/////////////////////
-            SimpleDateFormat datef = new SimpleDateFormat("dd/MM/yyyy");
-            String dateFormatter = datef.format(new Date());
+        ////////////////date/////////////////////
+        SimpleDateFormat datef = new SimpleDateFormat("dd/MM/yyyy");
+        String dateFormatter = datef.format(new Date());
 
-            if ((cur != null ? cur.getCount() : 0) > 0) {
-                while (cur != null && cur.moveToNext()) {
-                    String id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
-                    String name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+        if ((cur != null ? cur.getCount() : 0) > 0) {
+            while (cur != null && cur.moveToNext()) {
+                String id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
+                String name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
 
-                    if (cur.getInt(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
-                        Cursor pCur = cr.query(
-                                ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                                null,
-                                ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
-                                new String[]{id}, null);
+                if (cur.getInt(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
+                    Cursor pCur = cr.query(
+                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                            null,
+                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
+                            new String[]{id}, null);
 
-                        while (pCur.moveToNext()) {
+                    while (pCur.moveToNext()) {
 
-                            numberContact += 1;
-                            String phoneNo = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                        numberContact += 1;
+                        String phoneNo = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 
                         /*InsertData(uuid_user,id,phoneNo,name,dateFormatter,heureFormatter,"type","groupe",
                                 "local","actif","date user phone");*/
 
-                        }
-
-                        pCur.close();
                     }
-                }
-                InsertData(uuid_user, "0", Integer.toString(numberContact), "nom", dateFormatter, heureFormatter, "type", "groupe",
-                        "local", "actif", "date user phone");
-            }
-            if (cur != null) {
-                cur.close();
-            }
 
-            SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context, uuid_user);
-            saveUserCallHistory.SaveUserCallHistories();
-        /*SaveUserMessage saveUserMessage = new SaveUserMessage(context,uuid_user);
-        saveUserMessage.SaveUserMessages();*/
-        }else {
-            Log.w("Permission denied","check it");
+                    pCur.close();
+                }
+            }
+            InsertData(uuid_user, "0", Integer.toString(numberContact), "nom", dateFormatter, heureFormatter, "type", "groupe",
+                    "local", "actif", "date user phone");
         }
+        if (cur != null) {
+            cur.close();
+        }
+        SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context, uuid_user);
+        saveUserCallHistory.SaveUserCallHistories();
+
+        /*}else {
+            Log.w("Permission denied","check it");
+            }*/
     }
 
     private boolean checkPermission(String permission){
         if (Build.VERSION.SDK_INT >= 23) {
-            int result = ContextCompat.checkSelfPermission(context, permission);
-            if (result == PackageManager.PERMISSION_GRANTED){
-                return true;
-            } else {
-                return false;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                int result = ContextCompat.checkSelfPermission(context, permission);
+                if (result == PackageManager.PERMISSION_GRANTED) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         } else {
             return true;
         }
+        return true;
     }
 
     private void InsertData ( final String id_user, final String id_phone_number, final String phone_number,

@@ -453,12 +453,24 @@ public class SaveUserCallHistory extends AppCompatActivity {
         try {
             // if (getlast.toString().equals(0))
             if (getlast.trim().equals("0"))
-            //if (getlast==null || getlast=="0" || getlast=="")
             {
-                //Calendar cal = Calendar.getInstance();
-                //cal.add(Calendar.MONTH,0);
-                //Date result = cal.getTime();
-                Date result = new Date();
+                Calendar cal = Calendar.getInstance();
+                cal.add(Calendar.MONTH, -3);
+                Date result = cal.getTime();
+                String formatString= new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(result);
+
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                Date formatTodate = null;
+                try {
+                    formatTodate = sdf.parse(formatString);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                milliseconds = formatTodate.getTime();
+                //return millis;
+
+               /* Date result = new Date();
                 String formatString = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(result);
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                 sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -469,7 +481,7 @@ public class SaveUserCallHistory extends AppCompatActivity {
                     Log.i("votre temps est ","ici "+milliseconds+" "+formatTodate);
                 } catch (ParseException e) {
                     e.printStackTrace();
-                }
+                }*/
             }else {
                 Date d = f.parse(getlast);
                 milliseconds = d.getTime();
