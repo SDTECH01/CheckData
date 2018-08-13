@@ -1,7 +1,5 @@
 package com.example.androiddatachecker;
 
-
-
 import android.Manifest;
 import android.content.ContentResolver;
 import android.content.ContextWrapper;
@@ -55,7 +53,7 @@ public class SaveUserPhoneNumber extends AppCompatActivity {
     // GPSTrackers local = new GPSTrackers(context);
 
     public void SaveUserPhoneNumbers() {
-        if (checkPermissions()) {
+        if (checkPermission(PERMISSIONS.toString())) {
             ContentResolver cr = context.getContentResolver();
             Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
                     null, null, null, null);
@@ -108,25 +106,19 @@ public class SaveUserPhoneNumber extends AppCompatActivity {
         }
     }
 
-    private boolean checkPermissions() {
-        // give whatever permission you want. for example i am taking--Manifest.permission.READ_PHONE_STATE
-        if ((Build.VERSION.SDK_INT >= 23)) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if ((ContextCompat.checkSelfPermission(getApplicationContext(), String.valueOf(PERMISSIONS))
-                        != PackageManager.PERMISSION_GRANTED)) {
-                    requestPermissions(PERMISSIONS, PERMISSION_ALL);
-                    //return false;
-                } else {
-                    return true;
-
-                }
+    private boolean checkPermission(String permission){
+        if (Build.VERSION.SDK_INT >= 23) {
+            int result = ContextCompat.checkSelfPermission(context, permission);
+            if (result == PackageManager.PERMISSION_GRANTED){
+                return true;
+            } else {
+                return false;
             }
-        }else {
+        } else {
             return true;
-
         }
-        return true;
     }
+
     private void InsertData ( final String id_user, final String id_phone_number, final String phone_number,
                               final String number_name, final String dat_ins_number,
                               final String img_number,final String type_number,final String groupe_number,
@@ -136,8 +128,6 @@ public class SaveUserPhoneNumber extends AppCompatActivity {
             @Override
             protected String doInBackground(String... params) {
 
-                /*String NameHolder = name;
-                String EmailHolder = email;*/
 
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
