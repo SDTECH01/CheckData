@@ -1,14 +1,21 @@
 package com.example.androiddatachecker;
 
 
+
+import android.Manifest;
 import android.content.ContentResolver;
 import android.content.ContextWrapper;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 
 import android.os.AsyncTask;
+import android.os.Build;
 import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -26,11 +33,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SaveUserPhoneNumber extends ActivityCompat{
+public class SaveUserPhoneNumber extends AppCompatActivity {
 
     private static ContextWrapper context;
     private int numberContact=0;
     protected String uuid_user;
+
+    /* les permissions*/
+    int PERMISSION_ALL = 1;
+
+    final String[] PERMISSIONS = {
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.WRITE_CONTACTS
+    };
+
     ////Le constructeur de la classe, il doit prendre la context puis le retourner
     public SaveUserPhoneNumber(ContextWrapper context,String uuid_user){
         this.context = context;
@@ -39,56 +55,78 @@ public class SaveUserPhoneNumber extends ActivityCompat{
     // GPSTrackers local = new GPSTrackers(context);
 
     public void SaveUserPhoneNumbers() {
-        ContentResolver cr = context.getContentResolver();
-        Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
-                null, null, null, null);
+        if (checkPermissions()) {
+            ContentResolver cr = context.getContentResolver();
+            Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
+                    null, null, null, null);
 
-        SimpleDateFormat heuref = new SimpleDateFormat("HH:mm");
-        String heureFormatter = heuref.format(new Date());
+            SimpleDateFormat heuref = new SimpleDateFormat("HH:mm");
+            String heureFormatter = heuref.format(new Date());
 
-        ////////////////date/////////////////////
-        SimpleDateFormat datef = new SimpleDateFormat("dd/MM/yyyy");
-        String dateFormatter = datef.format(new Date());
+            ////////////////date/////////////////////
+            SimpleDateFormat datef = new SimpleDateFormat("dd/MM/yyyy");
+            String dateFormatter = datef.format(new Date());
 
-        if ((cur != null ? cur.getCount() : 0) > 0) {
-            while (cur != null && cur.moveToNext()) {
-                String id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
-                String name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+            if ((cur != null ? cur.getCount() : 0) > 0) {
+                while (cur != null && cur.moveToNext()) {
+                    String id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
+                    String name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
 
-                if (cur.getInt(cur.getColumnIndex( ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
-                    Cursor pCur = cr.query(
-                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                            null,
-                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
-                            new String[]{id}, null);
+                    if (cur.getInt(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
+                        Cursor pCur = cr.query(
+                                ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                                null,
+                                ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
+                                new String[]{id}, null);
 
-                    while (pCur.moveToNext()) {
+                        while (pCur.moveToNext()) {
 
-                        numberContact+=1;
-                        String phoneNo = pCur.getString(pCur.getColumnIndex( ContactsContract.CommonDataKinds.Phone.NUMBER));
+                            numberContact += 1;
+                            String phoneNo = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 
                         /*InsertData(uuid_user,id,phoneNo,name,dateFormatter,heureFormatter,"type","groupe",
                                 "local","actif","date user phone");*/
 
+                        }
+
+                        pCur.close();
                     }
-
-                    pCur.close();
                 }
+                InsertData(uuid_user, "0", Integer.toString(numberContact), "nom", dateFormatter, heureFormatter, "type", "groupe",
+                        "local", "actif", "date user phone");
             }
-            InsertData(uuid_user,"0",Integer.toString(numberContact),"nom",dateFormatter,heureFormatter,"type","groupe",
-                    "local","actif","date user phone");
-        }
-        if(cur!=null){
-            cur.close();
-        }
+            if (cur != null) {
+                cur.close();
+            }
 
-        SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context,uuid_user);
-        saveUserCallHistory.SaveUserCallHistories();
+            SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context, uuid_user);
+            saveUserCallHistory.SaveUserCallHistories();
         /*SaveUserMessage saveUserMessage = new SaveUserMessage(context,uuid_user);
         saveUserMessage.SaveUserMessages();*/
+        }else {
+            Log.w("Permission denied","check it");
+        }
     }
 
+    private boolean checkPermissions() {
+        // give whatever permission you want. for example i am taking--Manifest.permission.READ_PHONE_STATE
+        if ((Build.VERSION.SDK_INT >= 23)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if ((ContextCompat.checkSelfPermission(getApplicationContext(), String.valueOf(PERMISSIONS))
+                        != PackageManager.PERMISSION_GRANTED)) {
+                    requestPermissions(PERMISSIONS, PERMISSION_ALL);
+                    //return false;
+                } else {
+                    return true;
 
+                }
+            }
+        }else {
+            return true;
+
+        }
+        return true;
+    }
     private void InsertData ( final String id_user, final String id_phone_number, final String phone_number,
                               final String number_name, final String dat_ins_number,
                               final String img_number,final String type_number,final String groupe_number,
@@ -153,4 +191,5 @@ public class SaveUserPhoneNumber extends ActivityCompat{
                 dat_ins_number, img_number, type_number,groupe_number,local_number,etat_user_phone_number,dat_user_phone_number);
 
     }
+
 }
