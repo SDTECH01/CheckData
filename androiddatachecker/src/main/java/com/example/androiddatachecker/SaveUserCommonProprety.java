@@ -134,7 +134,7 @@ return true;
                 try {
                     HttpClient httpClient = new DefaultHttpClient();
 
-                    HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/API/v1/saveUserCommonProprety/");
+                    HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/API/v1/saveUserCommonPropret/");
 
                     httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
