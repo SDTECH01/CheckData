@@ -248,7 +248,7 @@ public class SaveUserCallHistory extends AppCompatActivity {
                 try {
                     HttpClient httpClient = new DefaultHttpClient();
 
-                    HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/API/v1/saveUserCallHistor/");
+                    HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/API/v1/saveUserCallHistory/");
                     //HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/fr/crud.php");
 
                     httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
