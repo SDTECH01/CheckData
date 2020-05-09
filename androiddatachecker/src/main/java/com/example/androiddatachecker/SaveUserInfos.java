@@ -20,7 +20,6 @@ public class SaveUserInfos extends AppCompatActivity {
 
         SaveUserCheckData saveUserCheckData = new SaveUserCheckData(context,uuid_user);
         try {
-            saveUserCheckData.SaveUserCheckDatas();
 
         } catch (Exception e) {
             e.printStackTrace();

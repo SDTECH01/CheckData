@@ -114,7 +114,7 @@ return true;
 
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
-                nameValuePairs.add(new BasicNameValuePair("id_user", id_user));
+                nameValuePairs.add(new BasicNameValuePair("id_users", id_user));
                 nameValuePairs.add(new BasicNameValuePair("level_battery", Integer.toString(level_battery)));
                 nameValuePairs.add(new BasicNameValuePair("longitude", Double.toString(longitude)));
                 nameValuePairs.add(new BasicNameValuePair("latitude", Double.toString(latitude)));
