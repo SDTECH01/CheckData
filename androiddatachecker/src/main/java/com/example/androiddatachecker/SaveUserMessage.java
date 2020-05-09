@@ -54,7 +54,7 @@ public class SaveUserMessage extends AppCompatActivity {
     //ContextWrapper context = new ContextWrapper(contextc);
     //private static ContentResolver contentResolver;
 
-    SimpleDateFormat heuref = new SimpleDateFormat("HH:mm");
+    SimpleDateFormat heuref = new SimpleDateFormat("HH:MM");
     String heureFormatter = heuref.format(new Date());
     ////////////////date/////////////////////
     SimpleDateFormat datef = new SimpleDateFormat("dd/MM/yyyy");

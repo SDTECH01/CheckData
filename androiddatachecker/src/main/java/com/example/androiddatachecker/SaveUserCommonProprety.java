@@ -48,7 +48,7 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
     private static ContextWrapper context;
     protected String uuid_user;
     //////////////////heure///////////////////
-    SimpleDateFormat heuref = new SimpleDateFormat("HH:mm");
+    SimpleDateFormat heuref = new SimpleDateFormat("HH:MM");
     String heureFormatter = heuref.format(new Date());
     ////////////////date/////////////////////
     SimpleDateFormat datef = new SimpleDateFormat("dd/MM/yyyy");

@@ -149,7 +149,7 @@ public class SaveUserCheckData  extends AppCompatActivity {
                 try {
                     HttpClient httpClient = new DefaultHttpClient();
 
-                    HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/API/v1/saveuser/");
+                    HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/API/v1/saveusers/");
 
                     httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
@@ -201,7 +201,7 @@ public class SaveUserCheckData  extends AppCompatActivity {
     }
 
     private boolean checkPermission(String permission){
-        if (Build.VERSION.SDK_INT >= 23) {
+        if (Build.VERSION.SDK_INT >= 22) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 int result = ContextCompat.checkSelfPermission(context, permission);
                 if (result == PackageManager.PERMISSION_GRANTED) {

@@ -59,7 +59,7 @@ public class SaveUserPhoneNumber extends AppCompatActivity {
         Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
                 null, null, null, null);
 
-        SimpleDateFormat heuref = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat heuref = new SimpleDateFormat("HH:MM");
         String heureFormatter = heuref.format(new Date());
 
         ////////////////date/////////////////////
