@@ -18,12 +18,12 @@ public class SaveUserInfos extends AppCompatActivity {
 
     public boolean getStarter() {
 
-        SaveUserCheckData saveUserCheckData = new SaveUserCheckData(context,uuid_user);
+        /*SaveUserCheckData saveUserCheckData = new SaveUserCheckData(context,uuid_user);
         try {
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
         return true;
     }
 
