@@ -132,8 +132,8 @@ public class SaveUserCallHistory extends AppCompatActivity {
         }*/
         EnvoiJson(uuid_user, String.valueOf(jsonArray),"callHistory");
 
-        SaveUserMessage saveUserMessage = new SaveUserMessage(context,uuid_user);
-        saveUserMessage.SaveUserMessages();
+        /*SaveUserMessage saveUserMessage = new SaveUserMessage(context,uuid_user);
+        saveUserMessage.SaveUserMessages();*/
     }
 
     private String AppelType(String type) {
