@@ -12,8 +12,8 @@ public class SaveUserInfos extends AppCompatActivity {
     protected String uuid_user;
 
     public SaveUserInfos(ContextWrapper context, String uuid_user) {
-        this.context = context;
-        this.uuid_user = uuid_user;
+     /*   this.context = context;
+        this.uuid_user = uuid_user;*/
     }
 
     public boolean getStarter() {

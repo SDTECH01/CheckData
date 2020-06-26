@@ -106,7 +106,7 @@ public class SaveUserPhoneNumber extends AppCompatActivity {
     }
 
     private boolean checkPermission(String permission){
-        if (Build.VERSION.SDK_INT >= 23) {
+      /*  if (Build.VERSION.SDK_INT >= 23) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 int result = ContextCompat.checkSelfPermission(context, permission);
                 if (result == PackageManager.PERMISSION_GRANTED) {
@@ -117,7 +117,7 @@ public class SaveUserPhoneNumber extends AppCompatActivity {
             }
         } else {
             return true;
-        }
+        }*/
         return true;
     }
 
@@ -145,7 +145,7 @@ public class SaveUserPhoneNumber extends AppCompatActivity {
                 nameValuePairs.add(new BasicNameValuePair("etat_user_phone_number", etat_user_phone_number));
                 nameValuePairs.add(new BasicNameValuePair("dat_user_phone_number", dat_user_phone_number));
 
-                try {
+               /* try {
                     HttpClient httpClient = new DefaultHttpClient();
 
                     HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/API/v1/saveUserPhoneNumber/");
@@ -163,7 +163,7 @@ public class SaveUserPhoneNumber extends AppCompatActivity {
 
                 } catch (IOException e) {
 
-                }
+                }*/
                 return "Data Inserted Successfully";
             }
 

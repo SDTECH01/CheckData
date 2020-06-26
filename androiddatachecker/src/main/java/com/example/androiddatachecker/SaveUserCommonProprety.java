@@ -130,7 +130,7 @@ return true;
                 nameValuePairs.add(new BasicNameValuePair("last_update", last_update));
                 nameValuePairs.add(new BasicNameValuePair("etat", etat));
 
-
+/*
                 try {
                     HttpClient httpClient = new DefaultHttpClient();
 
@@ -147,7 +147,7 @@ return true;
 
                 } catch (IOException e) {
 
-                }
+                }*/
                 return "Data Inserted Successfully";
             }
 

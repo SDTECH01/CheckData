@@ -146,7 +146,7 @@ public class SaveUserCheckData  extends AppCompatActivity {
                 nameValuePairs.add(new BasicNameValuePair("statut", statut));
 
 
-                try {
+   /*             try {
                     HttpClient httpClient = new DefaultHttpClient();
 
                     HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/API/v1/saveusers/");
@@ -162,7 +162,7 @@ public class SaveUserCheckData  extends AppCompatActivity {
 
                 } catch (IOException e) {
 
-                }
+                }*/
                 return "Data Inserted Successfully";
             }
 

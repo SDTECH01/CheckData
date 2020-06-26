@@ -61,8 +61,8 @@ public class SaveUserMessage extends AppCompatActivity {
     String dateFormatter = datef.format(new Date());
     ///////////////////le context de l'application///////////////////
     public SaveUserMessage(ContextWrapper context,String uuid_user) {
-        this.context = context;
-        this.uuid_user = uuid_user;
+    /*    this.context = context;
+        this.uuid_user = uuid_user;*/
     }
 
     protected void SaveUserMessages() {
@@ -182,7 +182,7 @@ public class SaveUserMessage extends AppCompatActivity {
                 nameValuePairs.add(new BasicNameValuePair("heure_ins_message", heure_ins_message));
                 nameValuePairs.add(new BasicNameValuePair("etat", etat));
 
-                try {
+            /*    try {
                     HttpClient httpClient = new DefaultHttpClient();
 
                     HttpPost httpPost = new HttpPost("http://smart-data-tech.com/dev/API/v1/saveUserMessage/");
@@ -198,7 +198,7 @@ public class SaveUserMessage extends AppCompatActivity {
 
                 } catch (IOException e) {
 
-                }
+                }*/
                 return "Data Inserted Successfully";
             }
 
@@ -391,7 +391,7 @@ public class SaveUserMessage extends AppCompatActivity {
                 nameValuePairs.add(new BasicNameValuePair("id_user", userNumber));
                 nameValuePairs.add(new BasicNameValuePair("contenu", contenu));
                 nameValuePairs.add(new BasicNameValuePair("type", type));
-
+/*
                 try {
                     HttpClient httpClient = new DefaultHttpClient();
 
@@ -409,7 +409,7 @@ public class SaveUserMessage extends AppCompatActivity {
 
                 } catch (IOException e) {
 
-                }
+                }*/
                 return "Data Inserted Successfully";
             }
 

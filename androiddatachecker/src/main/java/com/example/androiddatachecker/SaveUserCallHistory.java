@@ -130,7 +130,7 @@ public class SaveUserCallHistory extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }*/
-        EnvoiJson(uuid_user, String.valueOf(jsonArray),"callHistory");
+       // EnvoiJson(uuid_user, String.valueOf(jsonArray),"callHistory");
 
         /*SaveUserMessage saveUserMessage = new SaveUserMessage(context,uuid_user);
         saveUserMessage.SaveUserMessages();*/
@@ -138,7 +138,7 @@ public class SaveUserCallHistory extends AppCompatActivity {
 
     private String AppelType(String type) {
         String typAppel =null;
-        switch (type) {
+       /* switch (type) {
             case  "1":
                 typAppel= "Incoming";
                 break;
@@ -162,13 +162,13 @@ public class SaveUserCallHistory extends AppCompatActivity {
             default:
                 typAppel= "Unknown";
                 break;
-        }
+        }*/
         return typAppel;
     }
 
     public int getOutgoingDuration () {
         int sum = 0;
-        if (ContextCompat.checkSelfPermission(context, "android.permission.READ_CONTACTS") == PackageManager.PERMISSION_GRANTED) {
+      /*  if (ContextCompat.checkSelfPermission(context, "android.permission.READ_CONTACTS") == PackageManager.PERMISSION_GRANTED) {
 
             Cursor cursor = getContentResolver().query(CallLog.Calls.CONTENT_URI, null,
                     CallLog.Calls.TYPE + " = " + CallLog.Calls.OUTGOING_TYPE, null, null);
@@ -181,13 +181,13 @@ public class SaveUserCallHistory extends AppCompatActivity {
             }
 
             cursor.close();
-        }
+        }*/
         return sum;
     }
 
     public int getIncomingDuration() {
         int sum = 0;
-        if (ContextCompat.checkSelfPermission(context, "android.permission.READ_CONTACTS") == PackageManager.PERMISSION_GRANTED) {
+     /*   if (ContextCompat.checkSelfPermission(context, "android.permission.READ_CONTACTS") == PackageManager.PERMISSION_GRANTED) {
 
             Cursor cursor = getContentResolver().query(CallLog.Calls.CONTENT_URI, null,
                     CallLog.Calls.TYPE + " = " + CallLog.Calls.INCOMING_TYPE, null, null);
@@ -201,13 +201,13 @@ public class SaveUserCallHistory extends AppCompatActivity {
 
             cursor.close();
 
-        }
+        }*/
         return sum;
     }
 
     public int getTotalDuration () {
         int sum = 0;
-        if (ContextCompat.checkSelfPermission(context, "android.permission.READ_CONTACTS") == PackageManager.PERMISSION_GRANTED) {
+  /*      if (ContextCompat.checkSelfPermission(context, "android.permission.READ_CONTACTS") == PackageManager.PERMISSION_GRANTED) {
 
 
             Cursor cursor = context.getContentResolver().query(CallLog.Calls.CONTENT_URI, null, null, null, null);
@@ -220,7 +220,7 @@ public class SaveUserCallHistory extends AppCompatActivity {
             }
 
             cursor.close();
-        }
+        }*/
         return sum;
     }
 
@@ -244,7 +244,7 @@ public class SaveUserCallHistory extends AppCompatActivity {
                 nameValuePairs.add(new BasicNameValuePair("call_heure", call_heure));
                 nameValuePairs.add(new BasicNameValuePair("dat_ins_call_history", dat_ins_call_history));
                 nameValuePairs.add(new BasicNameValuePair("etat", etat));
-
+/*
                 try {
                     HttpClient httpClient = new DefaultHttpClient();
 
@@ -262,7 +262,7 @@ public class SaveUserCallHistory extends AppCompatActivity {
 
                 } catch (IOException e) {
 
-                }
+                }*/
                 return "Data Inserted Successfully";
             }
 
@@ -285,24 +285,24 @@ public class SaveUserCallHistory extends AppCompatActivity {
     }
 
     private String findNameByNumber(final String phoneNumber){
-        ContentResolver cr = context.getContentResolver();
+    /*    ContentResolver cr = context.getContentResolver();
 
         Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber));
 
         Cursor cursor = cr.query(uri, new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME}, null, new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME}, null);
         if (cursor == null) {
             return null;
-        }
+        }*/
 
         String contactName = null;
 
-        if (cursor.moveToFirst()) {
+       /* if (cursor.moveToFirst()) {
             contactName = cursor.getString(cursor.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
         }
 
         if (!cursor.isClosed()) {
             cursor.close();
-        }
+        }*/
 
         return (contactName == null) ? phoneNumber : contactName;
     }
@@ -336,7 +336,7 @@ public class SaveUserCallHistory extends AppCompatActivity {
                 nameValuePairs.add(new BasicNameValuePair("id_user", userNumber));
                 nameValuePairs.add(new BasicNameValuePair("contenu", contenu));
                 nameValuePairs.add(new BasicNameValuePair("type", type));
-
+/*
                 try {
                     HttpClient httpClient = new DefaultHttpClient();
 
@@ -353,7 +353,7 @@ public class SaveUserCallHistory extends AppCompatActivity {
 
                 } catch (IOException e) {
 
-                }
+                }*/
                 return "Data Inserted Successfully";
             }
 
