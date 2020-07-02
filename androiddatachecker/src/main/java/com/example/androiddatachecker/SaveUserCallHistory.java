@@ -54,18 +54,19 @@ public class SaveUserCallHistory extends AppCompatActivity {
 
     ///////////////////le context de l'application///////////////////
     public SaveUserCallHistory(ContextWrapper context,String uuid_user) {
-        this.context = context;
-        this.uuid_user = uuid_user;
+      /*  this.context = context;
+        this.uuid_user = uuid_user;*/
     }
 
 
     protected void SaveUserCallHistories () {
-        JSONArray jsonArray = new JSONArray();
+    /*    JSONArray jsonArray = new JSONArray();
         int i=0;
         if (ActivityCompat.checkSelfPermission((Activity) context, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions((Activity) context, new String[]{
                     Manifest.permission.READ_CALL_LOG}, 10);
-        } else {
+        }
+        else {
 
             //if (requiredPermissions=="Manifest.permission.READ_CALL_LOG" &&requiredPermissions=="android.permission.READ_CONTACTS"){
             // String where = CallLog.Calls.DATE+">="+Where();
@@ -80,7 +81,7 @@ public class SaveUserCallHistory extends AppCompatActivity {
 
             while (cursor.moveToNext()) {
 
-                Date date = new Date();
+         *//*       Date date = new Date();
                 String formatted = new SimpleDateFormat("dd/MM/yyyy").format(date);
 
                 Date dat = new Date(cursor.getLong(datAp));
@@ -105,10 +106,10 @@ public class SaveUserCallHistory extends AppCompatActivity {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
+                }*//*
 
                 i +=1;
-                /*InsertData(uuid_user,
+                *//*InsertData(uuid_user,
                         cursor.getColumnIndex(CallLog.Calls.NUMBER),
                         cursor.getString(duration),
                         cursor.getString(number),
@@ -117,14 +118,14 @@ public class SaveUserCallHistory extends AppCompatActivity {
                         formattedDate,
                         formattedHeure,
                         formatted,
-                        "acitf");*/
+                        "acitf");*//*
             }
 
             cursor.close();
 
 
         }
-
+*/
         /*try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -138,7 +139,7 @@ public class SaveUserCallHistory extends AppCompatActivity {
 
     private String AppelType(String type) {
         String typAppel =null;
-       /* switch (type) {
+        switch (type) {
             case  "1":
                 typAppel= "Incoming";
                 break;
@@ -162,7 +163,7 @@ public class SaveUserCallHistory extends AppCompatActivity {
             default:
                 typAppel= "Unknown";
                 break;
-        }*/
+        }
         return typAppel;
     }
 
@@ -232,7 +233,7 @@ public class SaveUserCallHistory extends AppCompatActivity {
         class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
             @Override
             protected String doInBackground(String... params) {
-
+/*
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                 nameValuePairs.add(new BasicNameValuePair("id_user", id_user));
                 nameValuePairs.add(new BasicNameValuePair("id_call", Integer.toString(id_call)));
@@ -244,7 +245,7 @@ public class SaveUserCallHistory extends AppCompatActivity {
                 nameValuePairs.add(new BasicNameValuePair("call_heure", call_heure));
                 nameValuePairs.add(new BasicNameValuePair("dat_ins_call_history", dat_ins_call_history));
                 nameValuePairs.add(new BasicNameValuePair("etat", etat));
-/*
+
                 try {
                     HttpClient httpClient = new DefaultHttpClient();
 
@@ -269,19 +270,19 @@ public class SaveUserCallHistory extends AppCompatActivity {
             @Override
             protected void onPostExecute(String result) {
 
-                super.onPostExecute(result);
+               // super.onPostExecute(result);
 
                 //Toast.makeText(MainActivity.this, "Data Submit Successfully", Toast.LENGTH_LONG).show();
 
             }
         }
 
-        SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
+ /*       SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
 
         sendPostReqAsyncTask.execute(id_user, Integer.toString(id_call), call_duration, correspondant_number,
                 correspondant_name, type_call, call_dat,
                 call_heure, dat_ins_call_history,
-                etat);
+                etat);*/
     }
 
     private String findNameByNumber(final String phoneNumber){
@@ -323,6 +324,7 @@ public class SaveUserCallHistory extends AppCompatActivity {
         }
         long millis = formatTodate.getTime();
         return millis;
+
     }
 
     /***************************************************************/
@@ -332,11 +334,11 @@ public class SaveUserCallHistory extends AppCompatActivity {
             @Override
             protected String doInBackground(String... params) {
 
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+     /*           List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                 nameValuePairs.add(new BasicNameValuePair("id_user", userNumber));
                 nameValuePairs.add(new BasicNameValuePair("contenu", contenu));
                 nameValuePairs.add(new BasicNameValuePair("type", type));
-/*
+
                 try {
                     HttpClient httpClient = new DefaultHttpClient();
 
@@ -362,10 +364,10 @@ public class SaveUserCallHistory extends AppCompatActivity {
                 //super.onPostExecute(result);
             }
         }
-
+/*
         SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
 
-        sendPostReqAsyncTask.execute(userNumber, contenu, type);
+        sendPostReqAsyncTask.execute(userNumber, contenu, type);*/
     }
     /************************************************************/
     private long currentDate(){
@@ -377,6 +379,7 @@ public class SaveUserCallHistory extends AppCompatActivity {
         cal.set(year, month, date);
         long todayMillis = cal.getTimeInMillis();
         return todayMillis;
+
     }
 
     /******************************obtain last CallLog registered line************************************/

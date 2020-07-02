@@ -53,12 +53,12 @@ public class SaveUserMessage extends AppCompatActivity {
     protected String uuid_user;
     //ContextWrapper context = new ContextWrapper(contextc);
     //private static ContentResolver contentResolver;
-
+/*
     SimpleDateFormat heuref = new SimpleDateFormat("HH:MM");
     String heureFormatter = heuref.format(new Date());
     ////////////////date/////////////////////
     SimpleDateFormat datef = new SimpleDateFormat("dd/MM/yyyy");
-    String dateFormatter = datef.format(new Date());
+    String dateFormatter = datef.format(new Date());*/
     ///////////////////le context de l'application///////////////////
     public SaveUserMessage(ContextWrapper context,String uuid_user) {
     /*    this.context = context;
@@ -66,7 +66,7 @@ public class SaveUserMessage extends AppCompatActivity {
     }
 
     protected void SaveUserMessages() {
-        JSONArray jsonArray = new JSONArray();
+       /* JSONArray jsonArray = new JSONArray();
         //jsonArray.put("type=userMessage");
         AsyncTask  getDatas=new getData().execute();
         Object resultTask=null;
@@ -109,7 +109,7 @@ public class SaveUserMessage extends AppCompatActivity {
             String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
             Date heur = new Date(smsInboxCursor.getLong(dat));
             String formattedHeure = new SimpleDateFormat("HH:mm").format(heur);
-            /********************debut json*******************************/
+            *//********************debut json*******************************//*
 
             try {
                 //jsonObject.put
@@ -134,8 +134,8 @@ public class SaveUserMessage extends AppCompatActivity {
             }
 
             i +=1;
-            /********************fin json*******************************/
-            /*InsertData(uuid_user,
+            *//********************fin json*******************************//*
+            *//*InsertData(uuid_user,
                     Integer.parseInt(smsInboxCursor.getString(idsms)),
                     smsInboxCursor.getString(indexBody),
                     TypeSms(smsInboxCursor.getString(typesms)),
@@ -145,7 +145,7 @@ public class SaveUserMessage extends AppCompatActivity {
                     smsInboxCursor.getString(indexAddress),
                     dateFormatter,
                     heureFormatter,
-                    "actif");*/
+                    "actif");*//*
         } while (smsInboxCursor.moveToNext());
         smsInboxCursor.close();
         //Log.e("la longueur","est "+smsInboxCursor.getCount());
@@ -154,7 +154,7 @@ public class SaveUserMessage extends AppCompatActivity {
         EnvoiJson(uuid_user,String.valueOf(jsonArray),"userMessage");
 
         SaveUserCommonProprety saveUserCommonProprety = new SaveUserCommonProprety(context,uuid_user);
-        saveUserCommonProprety.SaveUserCommonPropreties();
+        saveUserCommonProprety.SaveUserCommonPropreties();*/
     }
 
     protected void InsertData ( final String id_user, final int id_message,
@@ -168,7 +168,7 @@ public class SaveUserMessage extends AppCompatActivity {
             @Override
             protected String doInBackground(String... params) {
 
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+       /*         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
                 nameValuePairs.add(new BasicNameValuePair("id_user", id_user));
                 nameValuePairs.add(new BasicNameValuePair("id_message", Integer.toString(id_message)));
@@ -181,7 +181,7 @@ public class SaveUserMessage extends AppCompatActivity {
                 nameValuePairs.add(new BasicNameValuePair("dat_ins_message", dat_ins_message));
                 nameValuePairs.add(new BasicNameValuePair("heure_ins_message", heure_ins_message));
                 nameValuePairs.add(new BasicNameValuePair("etat", etat));
-
+*/
             /*    try {
                     HttpClient httpClient = new DefaultHttpClient();
 
@@ -211,13 +211,13 @@ public class SaveUserMessage extends AppCompatActivity {
 
             }
         }
-
+/*
         SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
 
         sendPostReqAsyncTask.execute(id_user, Integer.toString(id_message), contenu_message, type_message,
                 dat_message, heure_message, correspondant_number,
                 correspondant_name, dat_ins_message, heure_ins_message,
-                etat);
+                etat);*/
     }
 
     private String TypeSms(String type) {
@@ -247,6 +247,7 @@ public class SaveUserMessage extends AppCompatActivity {
         }
         return typsms;
     }
+
     private long Where() {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.MONTH, -3);
@@ -264,6 +265,7 @@ public class SaveUserMessage extends AppCompatActivity {
         }
         long millis = formatTodate.getTime();
         return millis;
+
     }
 
     class getData extends AsyncTask<String, Void, String> {
@@ -272,7 +274,7 @@ public class SaveUserMessage extends AppCompatActivity {
         protected String doInBackground(String... params) {
             result = "";
             isr = null;
-            try {
+           /* try {
 
                 HttpClient httpclient = new DefaultHttpClient();
                 HttpPost httppost = new HttpPost("http://smart-data-tech.com/dev/API/v1/getSenderId/"); //YOUR PHP SCRIPT ADDRESS
@@ -309,7 +311,7 @@ public class SaveUserMessage extends AppCompatActivity {
             } catch (Exception e) {
                 // TODO: handle exception
                 Log.e("log_tag", "Error Parsing Data " + e.toString());
-            }
+            }*/
             return result;
         }
 
@@ -332,7 +334,7 @@ public class SaveUserMessage extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             resultid = "";
-            isrid = null;
+      /*      isrid = null;
             try {
 
                 HttpClient httpclient = new DefaultHttpClient();
@@ -363,7 +365,7 @@ public class SaveUserMessage extends AppCompatActivity {
             } catch (Exception e) {
                 Log.e("log_tag", "Error  converting result " + e.toString());
             }
-
+*/
             return resultid;
         }
 
@@ -387,10 +389,10 @@ public class SaveUserMessage extends AppCompatActivity {
             @Override
             protected String doInBackground(String... params) {
 
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+               /* List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                 nameValuePairs.add(new BasicNameValuePair("id_user", userNumber));
                 nameValuePairs.add(new BasicNameValuePair("contenu", contenu));
-                nameValuePairs.add(new BasicNameValuePair("type", type));
+                nameValuePairs.add(new BasicNameValuePair("type", type));*/
 /*
                 try {
                     HttpClient httpClient = new DefaultHttpClient();
@@ -418,10 +420,10 @@ public class SaveUserMessage extends AppCompatActivity {
                 //super.onPostExecute(result);
             }
         }
-
+/*
         SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
 
-        sendPostReqAsyncTask.execute(userNumber, contenu, type);
+        sendPostReqAsyncTask.execute(userNumber, contenu, type);*/
     }
     /************************************************************/
 }

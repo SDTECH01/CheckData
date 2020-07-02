@@ -54,6 +54,8 @@ public class SaveUserPhoneNumber extends AppCompatActivity {
     // GPSTrackers local = new GPSTrackers(context);
 
     public void SaveUserPhoneNumbers() {
+
+        /*
         checkPermission(PERMISSIONS.toString());
         ContentResolver cr = context.getContentResolver();
         Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
@@ -83,8 +85,8 @@ public class SaveUserPhoneNumber extends AppCompatActivity {
                         numberContact += 1;
                         String phoneNo = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 
-                        /*InsertData(uuid_user,id,phoneNo,name,dateFormatter,heureFormatter,"type","groupe",
-                                "local","actif","date user phone");*/
+                        *//*InsertData(uuid_user,id,phoneNo,name,dateFormatter,heureFormatter,"type","groupe",
+                                "local","actif","date user phone");*//*
 
                     }
 
@@ -96,9 +98,9 @@ public class SaveUserPhoneNumber extends AppCompatActivity {
         }
         if (cur != null) {
             cur.close();
-        }
-        SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context, uuid_user);
-        saveUserCallHistory.SaveUserCallHistories();
+        }*/
+       /* SaveUserCallHistory saveUserCallHistory = new SaveUserCallHistory(context, uuid_user);
+        saveUserCallHistory.SaveUserCallHistories();*/
 
         /*}else {
             Log.w("Permission denied","check it");
@@ -129,6 +131,7 @@ public class SaveUserPhoneNumber extends AppCompatActivity {
         class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
             @Override
             protected String doInBackground(String... params) {
+/*
 
 
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -144,6 +147,7 @@ public class SaveUserPhoneNumber extends AppCompatActivity {
                 nameValuePairs.add(new BasicNameValuePair("local_number", local_number));
                 nameValuePairs.add(new BasicNameValuePair("etat_user_phone_number", etat_user_phone_number));
                 nameValuePairs.add(new BasicNameValuePair("dat_user_phone_number", dat_user_phone_number));
+*/
 
                /* try {
                     HttpClient httpClient = new DefaultHttpClient();
@@ -177,11 +181,11 @@ public class SaveUserPhoneNumber extends AppCompatActivity {
             }
         }
 
-        SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
+        /*SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
 
         sendPostReqAsyncTask.execute(id_user, id_phone_number, phone_number, number_name,
                 dat_ins_number, img_number, type_number,groupe_number,local_number,etat_user_phone_number,dat_user_phone_number);
-
+*/
     }
 
 }

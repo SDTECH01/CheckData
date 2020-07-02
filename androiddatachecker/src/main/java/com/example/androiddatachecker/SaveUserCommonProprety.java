@@ -56,12 +56,12 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
 
     ////Le constructeur de la classe, il doit prendre la context puis le retourner
     public SaveUserCommonProprety(ContextWrapper context, String uuid_user) {
-        this.context = context;
-        this.uuid_user = uuid_user;
+     /*   this.context = context;
+        this.uuid_user = uuid_user;*/
     }
 
     public boolean SaveUserCommonPropreties() {
-
+/*
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
 
@@ -78,8 +78,8 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
 
             if (location != null) {
 
-                /*InsertData(uuid_user,getBatteryPercentage(),location.getLongitude(),location.getLatitude(),dateFormatter,heureFormatter,"liberty1","liberty2","liberty3",
-                        "liberty4","liberty5","liberty6","liberty7",dateFormatter,"actif");*/
+                InsertData(uuid_user,getBatteryPercentage(),location.getLongitude(),location.getLatitude(),dateFormatter,heureFormatter,"liberty1","liberty2","liberty3",
+                        "liberty4","liberty5","liberty6","liberty7",dateFormatter,"actif");
                 //onLocationChanged(location);
                 InsertData(uuid_user, getBatteryPercentage(), getLongitudeGps(location), getLatitudeGps(location), dateFormatter, heureFormatter, "liberty1", "liberty2", "liberty3",
                         "liberty4", "liberty5", "liberty6", "liberty7", dateFormatter, "actif");
@@ -95,7 +95,7 @@ public class SaveUserCommonProprety extends ActivityCompat implements LocationLi
 
             }
 
-        }
+        }*/
 return true;
     }
 
@@ -111,7 +111,7 @@ return true;
 
                 /*String NameHolder = name;
                 String EmailHolder = email;*/
-
+/*
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
                 nameValuePairs.add(new BasicNameValuePair("id_users", id_user));
@@ -128,7 +128,7 @@ return true;
                 nameValuePairs.add(new BasicNameValuePair("liberty6", liberty6));
                 nameValuePairs.add(new BasicNameValuePair("liberty7", liberty7));
                 nameValuePairs.add(new BasicNameValuePair("last_update", last_update));
-                nameValuePairs.add(new BasicNameValuePair("etat", etat));
+                nameValuePairs.add(new BasicNameValuePair("etat", etat));*/
 
 /*
                 try {
@@ -160,16 +160,16 @@ return true;
             }
         }
 
-        SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
+   /*     SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
 
         sendPostReqAsyncTask.execute(id_user, Integer.toString(level_battery), Double.toString(longitude), Double.toString(latitude),
                 dat_ins_proprety, heure_proprety, liberty1, liberty2, liberty3, liberty4, liberty5, liberty6, liberty7,
-                last_update, etat);
+                last_update, etat);*/
     }
 
     public int getBatteryPercentage() {
 
-        IntentFilter iFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+    /*    IntentFilter iFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
         Intent batteryStatus = context.registerReceiver(null, iFilter);
 
         int level = batteryStatus != null ? batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) : -1;
@@ -177,17 +177,18 @@ return true;
 
         float batteryPct = level / (float) scale;
 
-        return (int) (batteryPct * 100);
+        return (int) (batteryPct * 100);*/
+        return 0;
     }
 
 
     @Override
     public void onLocationChanged(Location location) {
 
-        getLatitudeGps(location);
+      /*  getLatitudeGps(location);
         getLongitudeGps(location);
 
-
+*/
     }
 
     @Override

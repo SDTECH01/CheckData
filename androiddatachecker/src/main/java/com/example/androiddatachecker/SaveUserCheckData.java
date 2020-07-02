@@ -36,7 +36,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 public class SaveUserCheckData  extends AppCompatActivity {
-    private static ContextWrapper context;
+    /*private static ContextWrapper context;
     protected String uuid_user;
     int PERMISSION_ALL = 1;
 
@@ -49,19 +49,19 @@ public class SaveUserCheckData  extends AppCompatActivity {
     String heureFormatter = heuref.format(new Date());
     ////////////////date/////////////////////
     SimpleDateFormat datef = new SimpleDateFormat("dd/MM/yyyy");
-    String dateFormatter = datef.format(new Date());
+    String dateFormatter = datef.format(new Date());*/
 
 
     ////Le constructeur de la classe, il doit prendre la context puis le retourner
     public SaveUserCheckData(ContextWrapper context,String uuid_user) {
-        this.context = context;
-        this.uuid_user = uuid_user;
+    /*    this.context = context;
+        this.uuid_user = uuid_user;*/
     }
     // GPSTrackers local = new GPSTrackers(context);
 
 
     public void SaveUserCheckDatas(){
-        InsertData(uuid_user,uuid_user,uuid_user,uuid_user,getPhoneIMEI(),version_phone(),ModelPhone(),updateUptimes(),
+        /*InsertData(uuid_user,uuid_user,uuid_user,uuid_user,getPhoneIMEI(),version_phone(),ModelPhone(),updateUptimes(),
                 getEmails(),"twitter","fb",dateFormatter,heureFormatter,dateFormatter,"actif",uuid_user);
         try {
 
@@ -74,27 +74,29 @@ public class SaveUserCheckData  extends AppCompatActivity {
             }
         }catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
 
     private String ModelPhone(){
         // TelephonyManager telemamanger = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         //String manufacturer = Build.MANUFACTURER;
-        String model_phone = Build.MODEL;
-        return model_phone;
+   /*     String model_phone = Build.MODEL;
+        return model_phone;*/
+   return null;
     }
     private String version_phone(){
-        StringBuilder strBuild = new StringBuilder();
+     /*   StringBuilder strBuild = new StringBuilder();
         strBuild.append(android.os.Build.VERSION.RELEASE.substring(0, 3));
         String version = strBuild.toString();
-        return version;
+        return version;*/
+     return null;
     }
 
     private String updateUptimes() {
 
         // Get the whole uptime
-        long uptimeMillis = SystemClock.elapsedRealtime();
+   /*     long uptimeMillis = SystemClock.elapsedRealtime();
         String uptimePhone = String.format(
                 "%02d:%02d:%02d",
                 TimeUnit.MILLISECONDS.toHours(uptimeMillis),
@@ -104,12 +106,14 @@ public class SaveUserCheckData  extends AppCompatActivity {
                 TimeUnit.MILLISECONDS.toSeconds(uptimeMillis)
                         - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS
                         .toMinutes(uptimeMillis)));
-        return uptimePhone;
+        return uptimePhone;*/
+   return null;
     }
 
     private String getPhoneIMEI() {
-        String serialNumber = Build.SERIAL;
-        return serialNumber;
+       /* String serialNumber = Build.SERIAL;
+        return serialNumber;*/
+       return null;
     }
 
     private void InsertData ( final String tel1, final String tel2, final String tel3, final String tel4, final String imei,
@@ -126,7 +130,7 @@ public class SaveUserCheckData  extends AppCompatActivity {
                 /*String NameHolder = name;
                 String EmailHolder = email;*/
 
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+  /*              List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
                 nameValuePairs.add(new BasicNameValuePair("tel1",tel1));
                 nameValuePairs.add(new BasicNameValuePair("tel2",tel2));
@@ -145,7 +149,7 @@ public class SaveUserCheckData  extends AppCompatActivity {
                 nameValuePairs.add(new BasicNameValuePair("etat", etat));
                 nameValuePairs.add(new BasicNameValuePair("statut", statut));
 
-
+*/
    /*             try {
                     HttpClient httpClient = new DefaultHttpClient();
 
@@ -169,22 +173,22 @@ public class SaveUserCheckData  extends AppCompatActivity {
             @Override
             protected void onPostExecute(String result) {
 
-                super.onPostExecute(result);
+                //super.onPostExecute(result);
 
                 //Toast.makeText(MainActivity.this, "Data Submit Successfully", Toast.LENGTH_LONG).show();
 
             }
         }
 
-        SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
+      /*  SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
 
         sendPostReqAsyncTask.execute(tel1, tel2, tel3, tel4, imei, version, model,duree_activite,gmail,twitter,fb,dat_ins,heure_ins,last_update,
-                etat, statut);
+                etat, statut);*/
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private String getEmails() {
-        Pattern emailPattern = Patterns.EMAIL_ADDRESS;
+ /*       Pattern emailPattern = Patterns.EMAIL_ADDRESS;
         String mail= null;
         // Getting all registered Google Accounts;
         // Account[] accounts = AccountManager.get(this).getAccountsByType("com.google");
@@ -197,11 +201,12 @@ public class SaveUserCheckData  extends AppCompatActivity {
                 mail=account.name;
             }
         }
-        return mail;
+        return mail;*/
+ return null;
     }
 
     private boolean checkPermission(String permission){
-        if (Build.VERSION.SDK_INT >= 22) {
+    /*    if (Build.VERSION.SDK_INT >= 22) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 int result = ContextCompat.checkSelfPermission(context, permission);
                 if (result == PackageManager.PERMISSION_GRANTED) {
@@ -212,15 +217,15 @@ public class SaveUserCheckData  extends AppCompatActivity {
             }
         } else {
             return true;
-        }
+        }*/
         return true;
     }
 
     private void requestPermission(String permission){
-        if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, permission)){
+    /*    if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, permission)){
             return;
 
         }
         ActivityCompat.requestPermissions((Activity) context, new String[]{permission}, PERMISSION_REQUEST_CODE);
-    }
+    */}
 }
